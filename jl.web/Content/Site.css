@@ -20,3 +20,4 @@
 .nav > li:hover a:after{opacity: 1;}
 .nav > li >a span{padding:8px 15px; line-height: 50px;}
 .nav > li >a{ padding:0; }
+.nav > li > a {color: rgb(1, 1, 1);font-size: 14px;    }
