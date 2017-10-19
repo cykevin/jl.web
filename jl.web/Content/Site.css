@@ -9,7 +9,7 @@
 
 .nav > li {
     height: inherit;
-    display: inline-block;
+    /*display: inline-block;*/
     position: relative;
     padding: 0 !important;
     vertical-align: top;
@@ -21,3 +21,7 @@
 .nav > li >a span{padding:8px 15px; line-height: 50px;}
 .nav > li >a{ padding:0; }
 .nav > li > a {color: rgb(1, 1, 1);font-size: 14px;    }
+
+.logo-btn-qq {
+    background: transparent url(/Images/other_logos.jpg) no-repeat scroll -140px -20px;
+}
