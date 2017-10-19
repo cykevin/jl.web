@@ -1,3 +1,22 @@
-﻿.qrcodes img{
+﻿/*header*/
+.qrcodes img{
     height:80px;
 }
+.nav-line {
+    border-top: 1px solid #d9d9d9;
+    border-bottom: 1px solid #d9d9d9;
+}
+
+.nav > li {
+    height: inherit;
+    display: inline-block;
+    position: relative;
+    padding: 0 !important;
+    vertical-align: top;
+}
+
+.nav > li >a:after{content: "";height: 2px;width: 100%;background-color: #2BA1F3;display: block;opacity: 0;transition:all 0.3s;}
+.nav > li.active >a:after{opacity: 1;}
+.nav > li:hover a:after{opacity: 1;}
+.nav > li >a span{padding:8px 15px; line-height: 50px;}
+.nav > li >a{ padding:0; }
