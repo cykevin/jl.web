@@ -22,6 +22,36 @@
 .nav > li >a{ padding:0; }
 .nav > li > a {color: rgb(1, 1, 1);font-size: 14px;    }
 
-.logo-btn-qq {
-    background: transparent url(/Images/other_logos.jpg) no-repeat scroll -140px -20px;
+.icon-modal {
+    display: inline-block;
+    vertical-align: top;
+    background-image: url(/images/login-icons.png);
+    background-size: 200px 200px;
+    background-repeat: no-repeat;
+}
+.icon-login-qq {
+    background-position: 4px -39px;
+}
+.icon-login-wx {
+    background-position: -2px -97px;
+}
+.icon-login-wb {
+    background-position: -2px -147px;
+}
+.icon-login-zfb {
+    background-position: -67px -40px;
+}
+.third-box {
+    margin:20px 5px;
+}
+.third-box i {
+    width: 46px;
+    height: 38px;
+}
+.third-box a {
+    margin-right:40px;
+}
+
+.footer {
+    border-top: 1px solid #d9d9d9;
 }
