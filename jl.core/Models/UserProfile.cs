@@ -15,15 +15,15 @@
 *└──────────────────────────────────┘
 */
 using System;
-namespace Maticsoft.Model
+namespace JL.Core.Models
 {
 	/// <summary>
 	/// jl_user:实体类(属性说明自动提取数据库字段的描述信息)
 	/// </summary>
 	[Serializable]
-	public partial class jl_user
+	public partial class UserProfile
 	{
-		public jl_user()
+		public UserProfile()
 		{}
 		#region Model
 		private int _userid;
