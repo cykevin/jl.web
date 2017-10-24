@@ -14,12 +14,17 @@ namespace jl.core.Common
         public int TotalSize { get; set; }
     }
 
-    public class PageReq<T>
+    public class PageReq
     {
         public int PageIndex { get; set; }
 
         public int PageSize { get; set; }
 
+        public string OrderBy { get; set; }
+    }
+
+    public class PageReq<T> : PageReq
+    {
         public T Data { get; set; }
     }
 
@@ -29,6 +34,6 @@ namespace jl.core.Common
         public int PageSize { get; set; }
         public int TotalPage { get; set; }
 
-        public T Data { get; set; }
+        public IEnumerable<T> Data { get; set; }
     }
 }

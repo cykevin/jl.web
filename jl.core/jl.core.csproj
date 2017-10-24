@@ -31,6 +31,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -41,10 +42,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Common\Attributes\EnumDisplayAttribute.cs" />
-    <Compile Include="Common\Filters\UserProfileFilterOptions.cs" />
     <Compile Include="Common\PagingSetting.cs" />
     <Compile Include="Common\Utils.cs" />
     <Compile Include="Consts.cs" />
+    <Compile Include="Filters\ArticleFilter.cs" />
+    <Compile Include="Filters\UserFilter.cs" />
     <Compile Include="Models\Article.cs" />
     <Compile Include="Models\Franchisee.cs" />
     <Compile Include="Models\Material.cs" />
@@ -52,6 +54,7 @@
     <Compile Include="Models\UserProfile.cs" />
     <Compile Include="Models\Product.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Providers\JLService.cs" />
     <Compile Include="Repositories\IArticleRepository.cs" />
     <Compile Include="Repositories\IUserRepository.cs" />
   </ItemGroup>

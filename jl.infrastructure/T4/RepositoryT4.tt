@@ -1,0 +1,123 @@
+﻿<#@ template language="C#" debug="true" hostspecific="true"#>  
+<#@ template language="C#" #>
+<#@ assembly name="System" #>
+<#@ assembly name="System.Configuration" #>
+<#@ assembly name="System.Data" #>
+<#@ assembly name="System.Core" #>
+<#@ assembly name="MySql.Data" #>
+<#@ import namespace="System.Data" #>
+<#@ import namespace="System.Data.SqlClient" #>
+<#@ import namespace="System.Data.Common" #>
+<#@ import namespace="System.Configuration" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="MySql.Data.MySqlClient" #>
+<#@ import namespace="System.Linq" #>
+<#@ include file=".\T4Include.ttinclude" #>
+<#@ output extension=".cs"  #>
+<# 
+    var tableName="jl_user";
+	var modelName="UserProfile";
+
+	var table=TableInfo.Init(tableName);
+#>
+using System.Linq;
+using JL.Core.Models;
+using Dapper;
+
+namespace jl.infrastructure.DapperRepository
+{
+	public partial class UserRepository
+	{
+		public void Add(<#=modelName#> model)
+		{
+			<#
+				var sqlBuilder=new StringBuilder();
+				sqlBuilder.Append("Insert into Users(");
+				foreach (var col in table.Columns)
+				{
+					if(!table.PrimaryKey.Contains(col)){
+						sqlBuilder.Append(col);
+						sqlBuilder.Append(",");
+					}		
+				}
+				sqlBuilder.Remove(sqlBuilder.Length-1,1);
+				sqlBuilder.Append(")");
+				sqlBuilder.AppendLine();
+				sqlBuilder.Append("values (");
+				foreach (var col in table.Columns)
+				{
+					if(!table.PrimaryKey.Contains(col)){
+						sqlBuilder.Append("@");
+						sqlBuilder.Append(col);
+						sqlBuilder.Append(",");
+					}		
+				}
+				sqlBuilder.Remove(sqlBuilder.Length-1,1);
+				sqlBuilder.Append(")");
+
+				// value builder
+
+			#>var connection = DbConnectionFactory.CreateConnection();
+			connection.Execute(@"<#=sqlBuilder.ToString()#>",
+				model);
+		}
+
+	    public <#=modelName#> GetModel(int id)
+		{
+			var query="select * from <#=tableName#> where <#= table.PrimaryKey.First() #>=id";
+
+			var conn = DbConnectionFactory.CreateConnection();
+            return conn.Query<<#= modelName #>>(query, new { <#= table.PrimaryKey.First() #> = id }).FirstOrDefault();
+
+		}
+
+		public void Update(<#=modelName#> model)
+		{
+			<#
+				sqlBuilder=new StringBuilder();
+				foreach (var col in table.Columns)
+				{
+					if(!table.PrimaryKey.Contains(col)){
+						sqlBuilder.Append(col);
+						sqlBuilder.Append("=");
+						sqlBuilder.Append("@"+col);
+						sqlBuilder.Append(",");
+					}
+				}
+				sqlBuilder.Remove(sqlBuilder.Length-1,1);
+
+				sqlBuilder.Append(" where ");
+                foreach (var key in table.PrimaryKey)
+                {
+					sqlBuilder.AppendFormat("{0}=@{0}",key);
+					sqlBuilder.Append(" and ");					
+                }
+				sqlBuilder.Remove(sqlBuilder.Length-5,5);
+				
+			#>var sql="update <#=tableName#> set <#=sqlBuilder.ToString()#>";
+			var conn = DbConnectionFactory.CreateConnection();
+            conn.Execute(sql, model);
+		}
+
+		public void Delete(<#=modelName#> model)
+		{
+			<#
+				sqlBuilder=new StringBuilder();
+				sqlBuilder.Append("where ");
+                foreach (var key in table.PrimaryKey)
+                {
+					sqlBuilder.AppendFormat("{0}=@{0}",key);
+					sqlBuilder.Append(" and ");					
+                }
+				sqlBuilder.Remove(sqlBuilder.Length-5,5);
+			#>var sql="delete from <#=tableName#> <#=sqlBuilder.ToString()#>";
+			var conn = DbConnectionFactory.CreateConnection();
+            conn.Execute(sql, model);
+		}
+
+
+
+
+	}
+}

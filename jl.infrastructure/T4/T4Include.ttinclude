@@ -1,0 +1,77 @@
+﻿<#@ template language="C#" debug="true" hostspecific="True" #>
+<#@ template language="C#" #>
+<#@ assembly name="System" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Data" #>
+<#@ import namespace="System.Data.SqlClient" #>
+<#@ import namespace="System.Data.Common" #>
+<#@ import namespace="System.Configuration" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="MySql.Data.MySqlClient" #>
+<#@ import namespace="System.Linq" #>
+
+<#+
+public class TableInfo
+{
+	private static string connectionString="Data Source=localhost;port=3306;Initial Catalog=jldb;user id=chenye;password=123!@#;charset=gbk;";
+
+	public System.Data.DataTable table{get;set;}
+	public IEnumerable<string> Columns{get;set;}
+	public IEnumerable<string> PrimaryKey{get;set;}	
+
+	public static TableInfo Init(string tableName)
+    {
+		TableInfo ti=new TableInfo();
+
+		ti.table=GetTableInfo(tableName);
+		ti.Columns=GetColumns(ti.table);
+		ti.PrimaryKey=GetPrimaryKey(ti.table);
+
+		return ti;
+    }
+
+	public static MySqlConnection CreateConnection()
+	{
+		return new MySqlConnection(connectionString);
+	}
+	
+	private static DataTable GetTableInfo(string tableName)
+	{
+		var sql="desc "+tableName;
+		using (var connection = CreateConnection())
+		{
+			DataSet ds = new DataSet();
+			try
+			{
+				connection.Open();
+				MySqlDataAdapter command = new MySqlDataAdapter(sql, connection);
+				command.Fill(ds, "ds");
+			}
+			catch
+			{
+				throw;
+			}
+			return ds.Tables[0];
+		}
+	}
+
+	private static IEnumerable<string> GetColumns(DataTable table)
+	{
+		if(table!=null){
+			return table.Rows.OfType<System.Data.DataRow>().Select(r=>r["Field"].ToString()).ToArray();
+        }
+		return null;
+	}
+
+	private static IEnumerable<string> GetPrimaryKey(DataTable table)
+	{
+		if(table!=null){
+			var primaryKey = table.Select("Key='PRI'").Select(r => r["Field"].ToString());
+			return primaryKey.ToArray();
+		}
+		return null;
+	}
+}
+
+#>

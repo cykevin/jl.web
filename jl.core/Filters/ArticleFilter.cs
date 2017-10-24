@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace jl.core.Common.Filters
+namespace JL.Core.Filters
 {
-    public class UserProfileFilterOptions
+    public class ArticleFilter
     {
 
     }

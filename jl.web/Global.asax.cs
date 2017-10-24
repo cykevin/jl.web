@@ -1,9 +1,12 @@
 ﻿using jl.core;
+using Microsoft.Practices.Unity.Configuration;
 using System;
+using System.Configuration;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
 using System.Web.Security;
+using Unity;
 using WebMatrix.WebData;
 
 namespace jl.web
@@ -43,6 +46,14 @@ namespace jl.web
                     }   
                 }
             }
+        }
+
+        private void RegContainer()
+        {
+            IUnityContainer container = new UnityContainer();
+            UnityConfigurationSection configuration = ConfigurationManager.GetSection(UnityConfigurationSection.SectionName)
+                        as UnityConfigurationSection;
+            configuration.Configure(container, "defaultContainer");
         }
     }
 }
