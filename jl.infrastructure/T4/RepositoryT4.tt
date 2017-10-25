@@ -25,7 +25,7 @@ using System.Linq;
 using JL.Core.Models;
 using Dapper;
 
-namespace jl.infrastructure.DapperRepository
+namespace JL.Infrastructure.DapperRepository
 {
 	public partial class UserRepository
 	{

@@ -7,7 +7,7 @@
     <ProjectGuid>{208C9F8D-B9EE-4BBB-B4A8-454CAF09BD95}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>jl.infrastructure</RootNamespace>
+    <RootNamespace>JL.Infrastructure</RootNamespace>
     <AssemblyName>jl.infrastructure</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
@@ -16,7 +16,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
+    <OutputPath>..\jl.web\bin\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -108,6 +108,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DapperRepository\ArticleRepository.cs" />
     <Compile Include="DapperRepository\UserRepository.cs" />
     <Compile Include="DbConnectionFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

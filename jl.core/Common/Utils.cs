@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace jl.core.Common
+namespace JL.Core.Common
 {
-    using jl.core.Common.Attributes;
+    using JL.Core.Common.Attributes;
     using System.Reflection;
     public static class Utils
     {

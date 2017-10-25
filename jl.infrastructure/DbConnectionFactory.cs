@@ -3,7 +3,7 @@ using System.Configuration.Provider;
 using System.Data;
 using System.Data.Common;
 
-namespace jl.infrastructure
+namespace JL.Infrastructure
 {
     public class DbConnectionFactory
     {

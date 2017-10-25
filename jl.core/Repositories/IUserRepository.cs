@@ -1,10 +1,10 @@
-﻿using jl.core.Common;
+﻿using JL.Core.Common;
 using JL.Core.Filters;
 using JL.Core.Models;
 using System;
 using System.Collections.Generic;
 
-namespace jl.core.Repositories
+namespace JL.Core.Repositories
 {
     public interface IUserRepository
     {
@@ -12,6 +12,8 @@ namespace jl.core.Repositories
         UserProfile GetById(int id);
         PageData<UserProfile> UserPage(PageReq<UserFilter> pageReq);
         PageData<UserProfile> UserPage(PageReq pageReq);
-        void Save(UserProfile userProfile);
+        void Add(UserProfile userProfile);
+        void Delete(UserProfile userProfile);
+        void Update(UserProfile userProfile);
     }
 }

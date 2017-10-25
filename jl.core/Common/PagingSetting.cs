@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace jl.core.Common
+namespace JL.Core.Common
 {
     public class PagingSetting
     {

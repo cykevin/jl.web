@@ -1,13 +1,24 @@
-﻿using System;
+﻿using JL.Core;
+using JL.Core.Providers;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Security;
+using WebMatrix.WebData;
 
 namespace jl.web.Areas.backend.Controllers
 {
     public class UserController : Controller
     {
+        private readonly IJLService jlService;
+
+        public UserController(IJLService jlService)
+        {
+            this.jlService = jlService;
+        }
+
         // GET: backend/User
         public ActionResult Index()
         {
@@ -21,9 +32,22 @@ namespace jl.web.Areas.backend.Controllers
         }
 
         // GET: backend/User/Create
-        public ActionResult Create()
+        public string Create()
         {
-            return View();
+            var username = "user001";
+            var password = "666666";
+            int number = 100;
+            while (WebSecurity.UserExists(username))
+            {
+                number++;
+                username = string.Format("user{0}", number);
+            }
+            WebSecurity.CreateUserAndAccount(username, password);
+            Roles.AddUserToRole(username, Consts.Role_User);
+
+            var user = jlService.GetUser(username);
+
+            return user.ToString();
         }
 
         // POST: backend/User/Create

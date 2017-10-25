@@ -52,6 +52,9 @@
       <HintPath>..\packages\Unity.5.0.1\lib\net45\CommonServiceLocator.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebHelpers.3.2.0\lib\net45\Microsoft.Web.Helpers.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Unity.5.0.1\lib\net45\Microsoft.Web.Infrastructure.dll</HintPath>
       <Private>True</Private>
@@ -146,17 +149,18 @@
       <HintPath>..\packages\WebGrease.1.6.0\lib\WebGrease.dll</HintPath>
     </Reference>
     <Reference Include="WebMatrix.Data, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.AspNet.WebPages.Data.3.2.3\lib\net45\WebMatrix.Data.dll</HintPath>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.Data.3.0.0\lib\net45\WebMatrix.Data.dll</HintPath>
     </Reference>
-    <Reference Include="WebMatrix.WebData, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Microsoft.AspNet.WebPages.WebData.3.2.3\lib\net45\WebMatrix.WebData.dll</HintPath>
+    <Reference Include="WebMatrix.WebData, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.WebData.3.2.0\lib\net45\WebMatrix.WebData.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="App_Start\UnityConfig.cs" />
+    <Compile Include="App_Start\UnityMvcActivator.cs" />
     <Compile Include="Areas\agent\agentAreaRegistration.cs" />
     <Compile Include="Areas\backend\backendAreaRegistration.cs" />
     <Compile Include="Areas\backend\Controllers\UserController.cs" />
@@ -189,7 +193,9 @@
     <Content Include="Areas\backend\Views\web.config">
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="Areas\agent\Views\web.config" />
+    <Content Include="Areas\agent\Views\web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />

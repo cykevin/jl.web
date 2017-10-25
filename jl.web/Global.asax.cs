@@ -1,12 +1,8 @@
-﻿using jl.core;
-using Microsoft.Practices.Unity.Configuration;
-using System;
-using System.Configuration;
+﻿using JL.Core;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
 using System.Web.Security;
-using Unity;
 using WebMatrix.WebData;
 
 namespace jl.web
@@ -19,10 +15,11 @@ namespace jl.web
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
-            
+
+
             if (!WebSecurity.Initialized)
             {
-                WebSecurity.InitializeDatabaseConnection("DefaultConnection", "jl_user", "UserId", "UserName", true);
+                WebSecurity.InitializeDatabaseConnection("MySqlConnection", "jl_user", "UserId", "UserName", true);
 
                 var provider = Membership.Provider;
                 
@@ -46,14 +43,6 @@ namespace jl.web
                     }   
                 }
             }
-        }
-
-        private void RegContainer()
-        {
-            IUnityContainer container = new UnityContainer();
-            UnityConfigurationSection configuration = ConfigurationManager.GetSection(UnityConfigurationSection.SectionName)
-                        as UnityConfigurationSection;
-            configuration.Configure(container, "defaultContainer");
         }
     }
 }

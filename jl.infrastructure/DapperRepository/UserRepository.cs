@@ -1,15 +1,12 @@
-﻿using jl.core.Repositories;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using jl.core.Common;
-using JL.Core.Models;
+﻿using Dapper;
+using JL.Core.Common;
 using JL.Core.Filters;
-using Dapper;
+using JL.Core.Models;
+using JL.Core.Repositories;
+using System;
+using System.Linq;
 
-namespace jl.infrastructure.DapperRepository
+namespace JL.Infrastructure.DapperRepository
 {
     public class UserRepository : IUserRepository
     {

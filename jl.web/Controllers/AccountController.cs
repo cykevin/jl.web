@@ -1,8 +1,4 @@
 ﻿using jl.web.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
 using WebMatrix.WebData;
@@ -71,7 +67,7 @@ namespace jl.web.Controllers
                 if (ModelState.IsValid)
                 {
                     var token = WebSecurity.CreateUserAndAccount(model.UserName, model.Password, requireConfirmationToken: true);
-                    Roles.AddUserToRole(model.UserName, jl.core.Consts.Role_Admin);
+                    Roles.AddUserToRole(model.UserName, JL.Core.Consts.Role_Admin);
                 }
 
                 return RedirectToAction("Index");

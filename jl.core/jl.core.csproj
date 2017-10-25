@@ -47,6 +47,7 @@
     <Compile Include="Consts.cs" />
     <Compile Include="Filters\ArticleFilter.cs" />
     <Compile Include="Filters\UserFilter.cs" />
+    <Compile Include="IJLService.cs" />
     <Compile Include="Models\Article.cs" />
     <Compile Include="Models\Franchisee.cs" />
     <Compile Include="Models\Material.cs" />

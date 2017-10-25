@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace jl.core.Common.Attributes
+namespace JL.Core.Common.Attributes
 {
     public class EnumDisplayAttribute : Attribute
     {
