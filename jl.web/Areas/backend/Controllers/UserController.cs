@@ -44,11 +44,11 @@ namespace jl.web.Areas.backend.Controllers
                 var userTmp=Membership.GetUser(username);                
                 if (userTmp == null)
                 {
-                    username = string.Format("user{0}", number);
+                    break;
                 }
                 else
                 {
-                    break;
+                    username = string.Format("user{0}", number);
                 }
             }
             WebSecurity.CreateUserAndAccount(username, password);

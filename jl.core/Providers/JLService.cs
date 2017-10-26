@@ -42,7 +42,7 @@ namespace JL.Core.Providers
 
         public UserProfile GetUser(string username)
         {
-            throw new NotImplementedException();
+            return userRepository.GetByUsername(username);
         }
 
         #endregion

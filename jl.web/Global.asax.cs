@@ -16,7 +16,6 @@ namespace jl.web
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
 
-
             if (!WebSecurity.Initialized)
             {
                 WebSecurity.InitializeDatabaseConnection("MySqlConnection", "jl_user", "UserId", "UserName", true);
