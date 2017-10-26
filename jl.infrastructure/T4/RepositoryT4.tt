@@ -16,8 +16,8 @@
 <#@ include file=".\T4Include.ttinclude" #>
 <#@ output extension=".cs"  #>
 <# 
-    var tableName="jl_user";
-	var modelName="UserProfile";
+    var tableName="Product";
+	var modelName="Product";
 
 	var table=TableInfo.Init(tableName);
 #>
@@ -27,13 +27,13 @@ using Dapper;
 
 namespace JL.Infrastructure.DapperRepository
 {
-	public partial class UserRepository
+	public partial class <#=modelName#>Repository
 	{
 		public void Add(<#=modelName#> model)
 		{
 			<#
 				var sqlBuilder=new StringBuilder();
-				sqlBuilder.Append("Insert into Users(");
+				sqlBuilder.Append("Insert into "+tableName+"(");
 				foreach (var col in table.Columns)
 				{
 					if(!table.PrimaryKey.Contains(col)){
@@ -63,12 +63,12 @@ namespace JL.Infrastructure.DapperRepository
 				model);
 		}
 
-	    public <#=modelName#> GetModel(int id)
+	    public <#=modelName#> GetById(int id)
 		{
-			var query="select * from <#=tableName#> where <#= table.PrimaryKey.First() #>=id";
+			var query="select * from <#=tableName#> where <#= table.PrimaryKey.First() #>=@id";
 
 			var conn = DbConnectionFactory.CreateConnection();
-            return conn.Query<<#= modelName #>>(query, new { <#= table.PrimaryKey.First() #> = id }).FirstOrDefault();
+            return conn.Query<<#= modelName #>>(query, new { id = id }).FirstOrDefault();
 
 		}
 
@@ -116,8 +116,20 @@ namespace JL.Infrastructure.DapperRepository
             conn.Execute(sql, model);
 		}
 
-
-
-
+		public void Delete(int id)
+		{
+			<#
+				sqlBuilder=new StringBuilder();
+				sqlBuilder.Append("where ");
+                foreach (var key in table.PrimaryKey)
+                {
+					sqlBuilder.AppendFormat("{0}=@{0}",key);
+					sqlBuilder.Append(" and ");					
+                }
+				sqlBuilder.Remove(sqlBuilder.Length-5,5);
+			#>var sql="delete from <#=tableName#> <#=sqlBuilder.ToString()#>";
+			var conn = DbConnectionFactory.CreateConnection();
+            conn.Execute(sql, new{<#=table.PrimaryKey.First()#> = id});
+		}
 	}
 }

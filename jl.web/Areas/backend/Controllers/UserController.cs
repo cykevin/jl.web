@@ -37,7 +37,6 @@ namespace jl.web.Areas.backend.Controllers
             var username = "user001";
             var password = "666666";
             int number = 100;
-
             
             while (true)
             {
@@ -50,14 +49,23 @@ namespace jl.web.Areas.backend.Controllers
                 {
                     username = string.Format("user{0}", number);
                 }
+
+                number++;
             }
-            WebSecurity.CreateUserAndAccount(username, password);
+            var token = WebSecurity.CreateUserAndAccount(username, password, requireConfirmationToken: true);
             Roles.AddUserToRole(username, Consts.Role_User);
 
             var user = jlService.GetUser(username);
 
-            return user.ToString();
+            return user.ToString() + " token:" + token;
         }
+
+        public string Confirm(string username)
+        {
+            var confirmed = WebSecurity.IsConfirmed(username);
+            return string.Format("{0} {1} confirmed.", username, confirmed ? "is" : "is not");
+        }
+
 
         // POST: backend/User/Create
         [HttpPost]

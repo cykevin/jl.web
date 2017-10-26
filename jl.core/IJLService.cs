@@ -9,6 +9,7 @@ namespace JL.Core
         void InsertArticle(Article article);
         PageData<Article> ArticlePage(PageReq pageReq);
         void DeleteArticle(Article article);
+        Article GetArticle(int id);
 
         // material
         void InsertMaterial(Material model);
@@ -16,9 +17,9 @@ namespace JL.Core
         PageData<Material> MaterialPage(PageReq pageReq);
 
         // member
-        void InsertMember(Member member);
-        void DeleteMember(Member member);
-        PageData<Member> MemberPage(PageReq pageReq);
+        void InsertMember(Product member);
+        void DeleteMember(Product member);
+        PageData<Product> MemberPage(PageReq pageReq);
 
         // product
         void InsertProduct(Product model);

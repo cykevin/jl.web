@@ -15,8 +15,10 @@ namespace JL.Core.Models
         public int AutoId { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }
+        public string Picture { get; set; }
 
         public string FileName { get; set; }
+        public string Url { get; set; }// 网络地址
         public string MaterialType { get; set; }
 
         public int PageViews { get; set; }

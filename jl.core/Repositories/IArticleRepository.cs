@@ -9,9 +9,11 @@ namespace JL.Core.Repositories
 {
     public interface IArticleRepository
     {
-        JL.Core.Common.PageData<Models.Article> QueryArticles(JL.Core.Common.PageReq<ArticleFilter> pageReq);
-        Models.Article GetArticle(int id);
-        void UpdateArticle(Models.Article model);
-        void DeleteArticle(int id);
+        void Add(Models.Article model);
+        JL.Core.Common.PageData<Models.Article> ArticlePage(JL.Core.Common.PageReq<ArticleFilter> pageReq);
+        Models.Article GetById(int id);
+        void Update(Models.Article model);
+        void Delete(int id);
+        void Delete(Models.Article model);
     }
 }

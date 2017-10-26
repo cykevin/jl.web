@@ -47,6 +47,8 @@ namespace JL.Core.Providers
 
         #endregion
 
+        #region article
+
         public PageData<Article> ArticlePage(PageReq pageReq)
         {
             throw new NotImplementedException();
@@ -54,8 +56,21 @@ namespace JL.Core.Providers
 
         public void DeleteArticle(Article article)
         {
-            throw new NotImplementedException();
+            articleRepository.Delete(article);
         }
+
+        public void InsertArticle(Article article)
+        {
+            articleRepository.Add(article);
+        }
+        
+        public Article GetArticle(int id)
+        {
+            return articleRepository.GetById(id);
+        }
+        #endregion
+
+
 
         public void DeleteFranchisee(Franchisee model)
         {
@@ -67,7 +82,7 @@ namespace JL.Core.Providers
             throw new NotImplementedException();
         }
 
-        public void DeleteMember(Member member)
+        public void DeleteMember(Product member)
         {
             throw new NotImplementedException();
         }
@@ -78,17 +93,13 @@ namespace JL.Core.Providers
         }
 
 
-        public void InsertArticle(Article article)
-        {
-            throw new NotImplementedException();
-        }
 
         public void InsertMaterial(Material model)
         {
             throw new NotImplementedException();
         }
 
-        public void InsertMember(Member member)
+        public void InsertMember(Product member)
         {
             throw new NotImplementedException();
         }
@@ -103,7 +114,7 @@ namespace JL.Core.Providers
             throw new NotImplementedException();
         }
 
-        public PageData<Member> MemberPage(PageReq pageReq)
+        public PageData<Product> MemberPage(PageReq pageReq)
         {
             throw new NotImplementedException();
         }
@@ -112,9 +123,5 @@ namespace JL.Core.Providers
         {
             throw new NotImplementedException();
         }
-
-
-
-        
     }
 }

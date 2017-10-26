@@ -22,5 +22,17 @@ namespace JL.Core.Models
         public int PageViews { get; set; }
         public int SortIndex { get; set; }
         public int Status { get; set; }
+
+        public override string ToString()
+        {
+            StringBuilder sb = new StringBuilder();
+            var properties = this.GetType().GetProperties();
+            foreach (var p in properties)
+            {
+                var value = p.GetValue(this);
+                sb.AppendFormat("{0}:{1},", p.Name, value);
+            }
+            return sb.ToString();
+        }
     }
 }

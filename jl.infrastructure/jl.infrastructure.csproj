@@ -45,6 +45,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DapperRepository\ArticleRepository.cs" />
+    <Compile Include="DapperRepository\FranchiseeRepository.cs" />
+    <Compile Include="DapperRepository\MaterialRepository.cs" />
+    <Compile Include="DapperRepository\MemberRepository.cs" />
+    <Compile Include="DapperRepository\ProductRepository.cs" />
     <Compile Include="DapperRepository\UserRepository.cs" />
     <Compile Include="DbConnectionFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

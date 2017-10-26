@@ -15,7 +15,7 @@ namespace JL.Core.Models
     public class Product
     {
         public int AutoId { get; set; }
-        public string ProductName { get; set; }
+        public string Name { get; set; }
         public string Alias { get; set; }
         public string Description { get; set; }
         public string Picture { get; set; }
@@ -31,11 +31,11 @@ namespace JL.Core.Models
     public class ProductCategory
     {
         public int AutoId { get; set; }
-        public string CategoryName { get; set; }
+        public string Name { get; set; }
         public string Alias { get; set; }
         public string Picture { get; set; }
         
-        public string CategoryPath { get; set; }
+        public string Path { get; set; }
         public int Depth { get; set; }
         public int ParentId { get; set; }
 
