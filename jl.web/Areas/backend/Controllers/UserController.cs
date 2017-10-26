@@ -37,10 +37,19 @@ namespace jl.web.Areas.backend.Controllers
             var username = "user001";
             var password = "666666";
             int number = 100;
-            while (WebSecurity.UserExists(username))
+
+            
+            while (true)
             {
-                number++;
-                username = string.Format("user{0}", number);
+                var userTmp=Membership.GetUser(username);                
+                if (userTmp == null)
+                {
+                    username = string.Format("user{0}", number);
+                }
+                else
+                {
+                    break;
+                }
             }
             WebSecurity.CreateUserAndAccount(username, password);
             Roles.AddUserToRole(username, Consts.Role_User);
