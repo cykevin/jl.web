@@ -17,7 +17,7 @@ namespace jl.web.Areas.backend
             context.MapRoute(
                 "backend_default",
                 "backend/{controller}/{action}/{id}",
-                new { action = "Index", id = UrlParameter.Optional }
+                new { controller = "Home", action = "Index", id = UrlParameter.Optional }
             );
         }
     }

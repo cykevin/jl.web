@@ -1,40 +1,185 @@
 ﻿<!DOCTYPE html>
-<html>
+<html lang="zh">
 <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - My ASP.NET Application</title>
-    @Styles.Render("~/Content/css")
-    @Scripts.Render("~/bundles/modernizr")
+    <title>@ViewBag.Title - chenye</title>
+    <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+    <meta name="viewport" content="width=device-width" />
+
+    @*@Styles.Render("~/Content/sbadmin2/bower_components/bootstrap/dist/css/bootstrap.min.css")*@
+    @Styles.Render("~/Content/bootstrap.css")
+    @Styles.Render("~/Content/metisMenu/dist/metisMenu.min.css")
+    @Styles.Render("~/Content/sbadmin2/css/sb-admin-2.css")
+    @Styles.Render("~/Content/morrisjs/morris.css")
+    @Styles.Render("~/Content/sbadmin2/bower_components/font-awesome/css/font-awesome.min.css")   
+    @RenderSection("styles", required: false)
 </head>
+
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
+
+    <div id="wrapper">
+        <!-- Navigation -->
+        <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                <a class="navbar-brand" href="/backend">青色拾光</a>
             </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                </ul>
+            <!-- /.navbar-header -->
+            <ul class="nav navbar-top-links navbar-right">
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                        <i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
+                    </a>
+                    <ul class="dropdown-menu dropdown-user">
+                        <li>
+                            <a href="@Url.Action("Setting","Backend")"><i class="fa fa-user fa-fw"></i> 人个设置</a>
+                        </li>
+                        <li>
+                            <a href="@Url.Action("ChangePassword","Backend")"><i class="fa fa-gear fa-fw"></i> 修改密码</a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a href="@Url.Action("Logoff", "Backend")"><i class="fa fa-sign-out fa-fw"></i> 退出</a>
+                        </li>
+                    </ul>
+                    <!-- /.dropdown-user -->
+                </li>
+                <!-- /.dropdown -->
+            </ul>
+            <!-- /.navbar-top-links -->
+            <div class="navbar-default sidebar" role="navigation">
+                <div class="sidebar-nav navbar-collapse">
+                    <ul class="nav" id="side-menu">
+                        <li class="sidebar-search">
+                            <div class="input-group custom-search-form">
+                                <input type="text" class="form-control" placeholder="Search...">
+                                <span class="input-group-btn">
+                                    <button class="btn btn-default" type="button">
+                                        <i class="fa fa-search"></i>
+                                    </button>
+                                </span>
+                            </div>
+                            <!-- /input-group -->
+                        </li>
+                        <li>
+                            <a href="@Url.Action("Index","Home")"><i class="fa fa-home fa-fw"></i> 首页</a>
+                        </li>
+                        <li>
+                            <a href="#"><i class="glyphicon glyphicon-edit fa-fw"></i> 文章<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                <li>
+                                    <a href="@Url.Action("List","Article")">文章列表</a>
+                                </li>
+                                <li>
+                                    <a href="@Url.Action("Publish", "Article")">发表文章</a>
+                                </li>
+                            </ul>
+                            <!-- /.nav-second-level -->
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa fa-archive fa-fw"></i> 产品中心<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                <li>
+                                    <a href="@Url.Action("List", "Product")">产品列表</a>
+                                </li>
+                                <li>
+                                    <a href="@Url.Action("New", "Product")">新产品</a>
+                                </li>
+                            </ul>
+                            <!-- /.nav-second-level -->
+                        </li>
+
+                        <li>
+                            <a href="javascript:;"><i class="fa fa-wechat fa-fw"></i> 微商加盟<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                <li>
+                                    <a href="@Url.Action("List","Franchisee")">加盟商列表</a>
+                                </li>
+                                <li>
+                                    <a href="@Url.Action("Req", "Franchisee")">加盟申请</a>
+                                </li>
+                                <li>
+                                    <a href="@Url.Action("Req", "Franchisee")">添加加盟商</a>
+                                </li>
+                            </ul>
+                        </li>
+
+                        <li>
+                            <a href="javascript:;"><i class="fa fa-image fa-fw"></i> 素材管理<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                <li>
+                                    <a href="@Url.Action("List","Material")">素材列表</a>
+                                </li>
+                                <li>
+                                    <a href="@Url.Action("New", "Material")">添加素材</a>
+                                </li>
+                            </ul>
+                        </li>
+
+                        <li>
+                            <a href="javascript:;"><i class="fa fa-users fa-fw"></i> 团队中心<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                <li>
+                                    <a href="@Url.Action("List","Member")">人员列表</a>
+                                </li>
+                                <li>
+                                    <a href="@Url.Action("New", "Member")">添加人员</a>
+                                </li>
+                            </ul>
+                        </li>
+
+                        <li>
+                            <a href="javascript:;"><i class="fa fa-cog fa-fw"></i> 网站设置<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                <li>
+                                    <a href="javascript:;">Banner设置<span class="fa arrow"></span></a>
+                                    <ul class="nav nav-third-level">
+                                        <li>
+                                            <a href="@Url.Action("Banners","Banner")">Banner列表</a>
+                                        </li>
+                                        <li>
+                                            <a href="@Url.Action("AddBanner", "Banner")">新Banner</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <a href="@Url.Action("About","Setting")">关于我们</a>
+                                </li>
+                                <li>
+                                    <a href="@Url.Action("Contact", "Setting")">联系我们</a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+                <!-- /.sidebar-collapse -->
             </div>
+            <!-- /.navbar-static-side -->
+        </nav>
+
+
+        <div id="page-wrapper">
+
+            @RenderBody()
+
         </div>
+        <!-- /#page-wrapper -->
     </div>
 
-    <div class="container body-content">
-        @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
-        </footer>
-    </div>
+    <!-- jQuery -->
+    @Scripts.Render("~/Content/sbadmin2/js/jquery.js")
+    @Scripts.Render("~/Content/sbadmin2/bower_components/bootstrap/dist/js/bootstrap.min.js")
+    @Scripts.Render("~/Content/sbadmin2/bower_components/metisMenu/dist/metisMenu.min.js")
 
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/Content/sbadmin2/js/sb-admin-2.js")
+
     @RenderSection("scripts", required: false)
 </body>
+
 </html>
