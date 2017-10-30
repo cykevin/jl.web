@@ -70,6 +70,11 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\libs\MySql.Web.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Newtonsoft.Json.10.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -801,6 +806,7 @@
     <Content Include="Content\font-awesome\scss\_spinning.scss" />
     <Content Include="Content\font-awesome\scss\_stacked.scss" />
     <Content Include="Content\font-awesome\scss\_variables.scss" />
+    <Content Include="Areas\backend\Views\Product\New.cshtml" />
     <None Include="Scripts\jquery-3.2.1.intellisense.js" />
     <Content Include="Images\search1.png" />
     <Content Include="Images\tick1.png" />
@@ -853,7 +859,6 @@
     <Folder Include="Areas\backend\Views\Article\" />
     <Folder Include="Areas\backend\Views\Franchisee\" />
     <Folder Include="Areas\backend\Views\Material\" />
-    <Folder Include="Areas\backend\Views\Product\" />
     <Folder Include="Areas\backend\Views\Setting\" />
     <Folder Include="Views\Article\" />
     <Folder Include="Views\Hi\" />

@@ -13,5 +13,10 @@ namespace jl.web.Areas.backend.Controllers
         {
             return View();
         }
+
+        public ActionResult New()
+        {
+            return View();
+        }
     }
 }

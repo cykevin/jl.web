@@ -9,10 +9,10 @@
 
     @*@Styles.Render("~/Content/sbadmin2/bower_components/bootstrap/dist/css/bootstrap.min.css")*@
     @Styles.Render("~/Content/bootstrap.css")
-    @Styles.Render("~/Content/metisMenu/dist/metisMenu.min.css")
+    @Styles.Render("~/Content/metisMenu/metisMenu.css")
     @Styles.Render("~/Content/sbadmin2/css/sb-admin-2.css")
     @Styles.Render("~/Content/morrisjs/morris.css")
-    @Styles.Render("~/Content/sbadmin2/bower_components/font-awesome/css/font-awesome.min.css")   
+    @Styles.Render("~/Content/font-awesome/css/font-awesome.min.css")   
     @RenderSection("styles", required: false)
 </head>
 
@@ -89,7 +89,7 @@
                                     <a href="@Url.Action("List", "Product")">产品列表</a>
                                 </li>
                                 <li>
-                                    <a href="@Url.Action("New", "Product")">新产品</a>
+                                    <a href="@Url.Action("New", "Product")">新品上架</a>
                                 </li>
                             </ul>
                             <!-- /.nav-second-level -->
@@ -173,12 +173,10 @@
     </div>
 
     <!-- jQuery -->
-    @Scripts.Render("~/Content/sbadmin2/js/jquery.js")
-    @Scripts.Render("~/Content/sbadmin2/bower_components/bootstrap/dist/js/bootstrap.min.js")
-    @Scripts.Render("~/Content/sbadmin2/bower_components/metisMenu/dist/metisMenu.min.js")
-
+    @Scripts.Render("~/Content/jquery/jquery.js")
+    @Scripts.Render("~/Content/sbadmin2/js/bootstrap.js")
+    @Scripts.Render("~/Content/metisMenu/metisMenu.js")
     @Scripts.Render("~/Content/sbadmin2/js/sb-admin-2.js")
-
     @RenderSection("scripts", required: false)
 </body>
 
