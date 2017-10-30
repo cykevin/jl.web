@@ -29,7 +29,7 @@ namespace jl.web
                 if (!Roles.RoleExists(Consts.Role_User))
                 {
                     Roles.CreateRole(Consts.Role_User);
-                }
+                }                
 
                 // 创建管理员账号
                 var adminUsers = Roles.GetUsersInRole(Consts.Role_Admin);

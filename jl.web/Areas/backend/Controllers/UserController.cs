@@ -126,5 +126,17 @@ namespace jl.web.Areas.backend.Controllers
                 return View();
             }
         }
+
+        public ActionResult List(int id)
+        {
+            JL.Core.Common.PageReq req = new JL.Core.Common.PageReq();
+            req.PageIndex = 1;
+            req.PageSize = 5;
+            req.OrderBy = "addtime asc";
+
+            var pages = jlService.UserPage(req);
+
+            return View(pages);
+        }
     }
 }

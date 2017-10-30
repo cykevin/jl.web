@@ -1,0 +1,19 @@
+﻿@model JL.Core.Common.PageData<JL.Core.Models.UserProfile>
+
+@{
+    ViewBag.Title = "List";
+}
+
+<h2>List</h2>
+@if (Model != null)
+{
+    <ul>
+        @foreach (var user in Model.Data)
+        {
+            <li>@user.ToString()</li>
+        }        
+    </ul>
+}
+
+page:@Model.PageIndex/@Model.PageSize
+

@@ -192,6 +192,9 @@
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="Content\bootstrap-theme.min.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
+    <Content Include="Areas\backend\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\backend\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\backend\Views\User\List.cshtml" />
     <None Include="Scripts\jquery-3.2.1.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -236,8 +239,6 @@
     <Folder Include="Areas\agent\Models\" />
     <Folder Include="Areas\agent\Views\Shared\" />
     <Folder Include="Areas\backend\Models\" />
-    <Folder Include="Areas\backend\Views\Shared\" />
-    <Folder Include="Areas\backend\Views\User\" />
     <Folder Include="Views\Article\" />
     <Folder Include="Views\Hi\" />
     <Folder Include="Views\Product\" />

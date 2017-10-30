@@ -35,5 +35,16 @@ namespace JL.Core.Common
         public int TotalPage { get; set; }
 
         public IEnumerable<T> Data { get; set; }
+
+        public static PageData<T> Create(int page,int size,int total,IEnumerable<T> data)
+        {
+            PageData<T> pageData = new PageData<T>();
+            pageData.PageIndex = page;
+            pageData.PageSize = size;
+            pageData.TotalPage = total;
+            pageData.Data = data;
+
+            return pageData;
+        }
     }
 }

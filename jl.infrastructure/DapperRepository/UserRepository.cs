@@ -4,6 +4,8 @@ using JL.Core.Filters;
 using JL.Core.Models;
 using JL.Core.Repositories;
 using System;
+using System.Data;
+using System.Data.SqlClient;
 using System.Linq;
 
 namespace JL.Infrastructure.DapperRepository
@@ -13,7 +15,7 @@ namespace JL.Infrastructure.DapperRepository
         public UserProfile GetById(int id)
         {
             var query = "select * from jl_user where userid=@id";
-
+                
             var conn = DbConnectionFactory.CreateConnection();
             return conn.Query<UserProfile>(query, new { id = id }).FirstOrDefault();
         }
@@ -30,19 +32,7 @@ namespace JL.Infrastructure.DapperRepository
         {
             this.Add(userProfile);
         }
-
-        public PageData<UserProfile> UserPage(PageReq pageReq)
-        {
-            throw new NotImplementedException();
-        }
-
-        public PageData<UserProfile> UserPage(PageReq<UserFilter> pageReq)
-        {
-            var conn = DbConnectionFactory.CreateConnection();
-            var cmd = conn.CreateCommand();
-            
-            throw new NotImplementedException();
-        }
+               
 
         #region methods from t4
 
@@ -77,6 +67,33 @@ values (@UserName,@Cellphone,@IsCellphoneConfirmed,@Email,@IsEmailConfirmed,@Rea
             conn.Execute(sql, model);
         }
 
+        public PageData<UserProfile> UserPage(PageReq pageReq)
+        {
+            var conn = DbConnectionFactory.CreateConnection();
+            
+            var dParas = new DynamicParameters();
+            dParas.Add("@page", pageReq.PageIndex);
+            dParas.Add("@pagesize", pageReq.PageSize);
+            dParas.Add("@fields", "*");
+            dParas.Add("@tablename", "jl_user");
+            dParas.Add("@filter", "");
+            dParas.Add("@orderby", pageReq.OrderBy);
+            dParas.Add("@primarykey", "userid");
+            dParas.Add("@total", direction: ParameterDirection.Output);
+
+            var data = conn.Query<UserProfile>("procPageQuery", param: dParas, commandType: CommandType.StoredProcedure);
+
+            var total = dParas.Get<int>("@total");
+
+            var pages = (int)Math.Ceiling((double)total / pageReq.PageSize);
+
+            return PageData<UserProfile>.Create(pageReq.PageIndex, pageReq.PageSize, pages, data);
+        }
+
+        public PageData<UserProfile> UserPage(PageReq<UserFilter> pageReq)
+        {
+            throw new NotImplementedException();
+        }
         #endregion
     }
 }
