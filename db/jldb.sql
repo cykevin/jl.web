@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50719
 File Encoding         : 65001
 
-Date: 2017-10-27 17:58:36
+Date: 2017-10-30 14:40:34
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -314,7 +314,7 @@ CREATE DEFINER=`chenye`@`%` PROCEDURE `procPageQuery`(in page int,
  in pagesize int,
  in fields varchar(1000),
  in tablename varchar(512),
- in filter varchar(512) ,in orderby varchar(128),in primarykey varchar(32))
+ in filter varchar(512) ,in orderby varchar(128),in primarykey varchar(32),out total int)
     COMMENT '分页存储过程'
 BEGIN
  if pagesize<=1 then
@@ -327,23 +327,30 @@ BEGIN
  if(length(trim(filter))>0) then
   set filter=concat(' where ',filter);
  end if;
+ 
+ if(length(trim(orderby))>0) then
+  set orderby=concat(' , ',orderby);
+ end if;
 
- set @sqlTmp=concat('select @startid:=',primarykey		
+ set @strsqlcount=concat('select count(*) into @total from ',tablename,' ',filter);
+ prepare stmtsqlcount from @strsqlcount;
+ execute stmtsqlcount;
+ deallocate prepare stmtsqlcount;
+
+ set total=@total;
+ 
+ set @sqlTmp=concat('select ',primarykey		
+    ,' into @startid'
 		,' from '
 		,tablename,' '
 		,filter,
 		' order by '
 		,primarykey
 		,' asc limit '
-		,(page-1)*pagesize,',1');
-
+		,(page-1)*pagesize,',1'); 
  prepare stmsql from @sqlTmp;
  execute stmsql ;
  deallocate prepare stmsql;
- 
- if(length(trim(orderby))>0) then
-  set orderby=concat(' , ',orderby);
- end if;
 
  set @strsql = concat('select '
 		,`fields`
@@ -363,10 +370,6 @@ BEGIN
  execute stmtsql;
  deallocate prepare stmtsql;
 
- set @strsqlcount=concat('select count(1) as count from ',tablename,' ',filter);
- prepare stmtsqlcount from @strsqlcount;
- execute stmtsqlcount;
- deallocate prepare stmtsqlcount;
 END
 ;;
 DELIMITER ;
