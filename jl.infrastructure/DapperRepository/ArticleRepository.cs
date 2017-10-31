@@ -4,6 +4,7 @@ using JL.Core.Filters;
 using JL.Core.Models;
 using JL.Core.Repositories;
 using System;
+using System.Data;
 using System.Linq;
 
 namespace JL.Infrastructure.DapperRepository
@@ -12,7 +13,7 @@ namespace JL.Infrastructure.DapperRepository
     {        
         #region methodes from t4
 
-        public void Add(Article model)
+        public void Insert(Article model)
         {
             var connection = DbConnectionFactory.CreateConnection();
             connection.Execute(@"Insert into Article(Title,Content,Picture,AddTime,Tags,PageViews,SortIndex,Status)
@@ -49,10 +50,28 @@ values (@Title,@Content,@Picture,@AddTime,@Tags,@PageViews,@SortIndex,@Status)",
             var conn = DbConnectionFactory.CreateConnection();
             conn.Execute(sql, new { AutoId = id });
         }
-        
-        public PageData<Article> ArticlePage(PageReq<ArticleFilter> pageReq)
+
+        public PageData<Article> ArticlePage(PageReq pageReq)
         {
-            throw new NotImplementedException();
+            var conn = DbConnectionFactory.CreateConnection();
+
+            var dParas = new DynamicParameters();
+            dParas.Add("@page", pageReq.PageIndex);
+            dParas.Add("@pagesize", pageReq.PageSize);
+            dParas.Add("@fields", "*");
+            dParas.Add("@tablename", "Article");
+            dParas.Add("@filter", "");
+            dParas.Add("@orderby", pageReq.OrderBy);
+            dParas.Add("@primarykey", "AutoId");
+            dParas.Add("@total", direction: ParameterDirection.Output);
+
+            var data = conn.Query<Article>("procPageQuery", param: dParas, commandType: CommandType.StoredProcedure);
+
+            var total = dParas.Get<int>("@total");
+
+            var pages = (int)Math.Ceiling((double)total / pageReq.PageSize);
+
+            return PageData<Article>.Create(pageReq.PageIndex, pageReq.PageSize, pages, data);
         }
 
         #endregion

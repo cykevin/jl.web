@@ -3,14 +3,13 @@
     ViewBag.Title = "新品上架";
 }
 @section styles{
-    @Styles.Render("~/Content/bootstrap-datepicker/css/bootstrap-datepicker.css")
+    @Styles.Render("~/Content/datepicker")    
+    @Styles.Render("~/Content/fileinput")
 }
 @section scripts{
-    @Scripts.Render("~/Content/ueditor/ueditor.config.js")
-    @Scripts.Render("~/Content/ueditor/ueditor.all.min.js")
-    @Scripts.Render("~/Content/ueditor/lang/zh-cn/zh-cn.js")
-    @Scripts.Render("~/Content/bootstrap-datepicker/js/bootstrap-datepicker.js")
-    @Scripts.Render("~/Content/bootstrap-datepicker/locales/bootstrap-datepicker.zh-CN.min.js")
+    @Scripts.Render("~/bundles/ueditor/")
+    @Scripts.Render("~/bundles/datepicker/")
+    @Scripts.Render("~/bundles/fileinput")
 
     <script type="text/javascript">
         var ue = UE.getEditor('Description');
@@ -19,8 +18,18 @@
             language: 'zh-CN',
             autoclose: true,
             todayBtn: true,
-            //pickerPosition: "bottom-left",
+            pickerPosition: "bottom-left",
             todayHighlight:true
+        });
+
+        $('#file-image').fileinput({
+            language: 'zh', //设置语言
+            allowedFileExtensions: ['jpg', 'png', 'gif'],
+
+            showUpload: false,
+            showCaption: false,
+            browseClass: "btn btn-primary",
+            previewFileIcon: "<i class='glyphicon glyphicon-king'></i>"
         });
     </script>
 }
@@ -67,6 +76,10 @@
                     <label for="datetimepicker">排序</label>
 
                     <input type="text" value="1" placeholder="请输入序号" name="Sort" id="Sort" data-val-required="Sort 字段是必需的。" data-val-number="字段 Sort 必须是一个数字。" data-val="true" class="input-validation-error form-control">
+                </div>
+
+                <div class="form-group">
+                    <input id="file-image" name="file-image" type="file" class="file-loading" accept="image/*">
                 </div>
             </div>
         </div>

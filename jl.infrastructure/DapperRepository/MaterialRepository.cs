@@ -3,20 +3,39 @@ using JL.Core.Common;
 using JL.Core.Models;
 using JL.Core.Repositories;
 using System;
+using System.Data;
 using System.Linq;
 
 namespace JL.Infrastructure.DapperRepository
 {
     public class MaterialRepository : IMaterialRepository
     {
-        public PageData<Material> FranchiseePage(PageReq pageReq)
+        public PageData<Material> MaterialPage(PageReq pageReq)
         {
-            throw new NotImplementedException();
+            var conn = DbConnectionFactory.CreateConnection();
+
+            var dParas = new DynamicParameters();
+            dParas.Add("@page", pageReq.PageIndex);
+            dParas.Add("@pagesize", pageReq.PageSize);
+            dParas.Add("@fields", "*");
+            dParas.Add("@tablename", "Material");
+            dParas.Add("@filter", "");
+            dParas.Add("@orderby", pageReq.OrderBy);
+            dParas.Add("@primarykey", "AutoId");
+            dParas.Add("@total", direction: ParameterDirection.Output);
+
+            var data = conn.Query<Material>("procPageQuery", param: dParas, commandType: CommandType.StoredProcedure);
+
+            var total = dParas.Get<int>("@total");
+
+            var pages = (int)Math.Ceiling((double)total / pageReq.PageSize);
+
+            return PageData<Material>.Create(pageReq.PageIndex, pageReq.PageSize, pages, data);
         }
 
         #region methods from t4
 
-        public void Add(Material model)
+        public void Insert(Material model)
         {
             var connection = DbConnectionFactory.CreateConnection();
             connection.Execute(@"Insert into Material(Title,Description,Picture,FileName,MaterialType,PageViews,SortIndex,Status,Url)

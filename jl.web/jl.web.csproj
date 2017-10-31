@@ -156,12 +156,14 @@
     <Compile Include="Areas\agent\agentAreaRegistration.cs" />
     <Compile Include="Areas\backend\backendAreaRegistration.cs" />
     <Compile Include="Areas\backend\Controllers\ArticleController.cs" />
+    <Compile Include="Areas\backend\Controllers\CategoryController.cs" />
     <Compile Include="Areas\backend\Controllers\FranchiseeController.cs" />
     <Compile Include="Areas\backend\Controllers\HomeController.cs" />
     <Compile Include="Areas\backend\Controllers\MaterialController.cs" />
     <Compile Include="Areas\backend\Controllers\ProductController.cs" />
     <Compile Include="Areas\backend\Controllers\SettingController.cs" />
     <Compile Include="Areas\backend\Controllers\UserController.cs" />
+    <Compile Include="Areas\backend\Models\CategoryModel.cs" />
     <Compile Include="Content\ueditor\net\App_Code\Config.cs" />
     <Compile Include="Content\ueditor\net\App_Code\ConfigHandler.cs" />
     <Compile Include="Content\ueditor\net\App_Code\CrawlerHandler.cs" />
@@ -807,6 +809,8 @@
     <Content Include="Content\font-awesome\scss\_stacked.scss" />
     <Content Include="Content\font-awesome\scss\_variables.scss" />
     <Content Include="Areas\backend\Views\Product\New.cshtml" />
+    <Content Include="Areas\backend\Views\Product\Categories.cshtml" />
+    <Content Include="Areas\backend\Views\Category\Index.cshtml" />
     <None Include="Scripts\jquery-3.2.1.intellisense.js" />
     <Content Include="Images\search1.png" />
     <Content Include="Images\tick1.png" />
@@ -855,7 +859,6 @@
     <Folder Include="Areas\agent\Controllers\" />
     <Folder Include="Areas\agent\Models\" />
     <Folder Include="Areas\agent\Views\Shared\" />
-    <Folder Include="Areas\backend\Models\" />
     <Folder Include="Areas\backend\Views\Article\" />
     <Folder Include="Areas\backend\Views\Franchisee\" />
     <Folder Include="Areas\backend\Views\Material\" />

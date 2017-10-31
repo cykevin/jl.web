@@ -26,6 +26,31 @@ namespace jl.web
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
                       "~/Content/site.css"));
+
+            // bootstrap-fileinput
+            bundles.Add(new StyleBundle("~/Content/fileinput").Include(
+                "~/Content/bootstrap-fileinput/fileinput.css"));
+            bundles.Add(new ScriptBundle("~/bundles/fileinput").Include(
+                "~/Content/bootstrap-fileinput/fileinput.min.js",
+                "~/Content/bootstrap-fileinput/fileinput_locale_zh.js"
+                ));
+
+            // uedit
+            bundles.Add(new ScriptBundle("~/bundles/ueditor/").Include(
+                "~/Content/ueditor/ueditor.config.js",
+                "~/Content/ueditor/ueditor.all.min.js",
+                "~/Content/ueditor/lang/zh-cn/zh-cn.js"
+                ));
+
+            // datapicker
+            bundles.Add(new StyleBundle("~/Content/datepicker").Include(
+                "~/Content/bootstrap-datepicker/css/bootstrap-datepicker.css"));
+            
+            bundles.Add(new ScriptBundle("~/bundles/datepicker/").Include(
+                "~/Content/bootstrap-datepicker/js/bootstrap-datepicker.js",
+                "~/Content/bootstrap-datepicker/locales/bootstrap-datepicker.zh-CN.min.js"
+                ));
+            
         }
     }
 }

@@ -44,4 +44,10 @@ namespace JL.Core.Models
         public int Status { get; set; }
     }
 
+    public class ProductCategoryLink
+    {
+        public int ProductId { get; set; }
+        public int CategoryId { get; set; }
+    }
+
 }

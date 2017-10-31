@@ -16,8 +16,8 @@
 <#@ include file=".\T4Include.ttinclude" #>
 <#@ output extension=".cs"  #>
 <# 
-    var tableName="Product";
-	var modelName="Product";
+    var tableName="jl_user";
+	var modelName="UserProfile";
 
 	var table=TableInfo.Init(tableName);
 #>
@@ -29,7 +29,7 @@ namespace JL.Infrastructure.DapperRepository
 {
 	public partial class <#=modelName#>Repository
 	{
-		public void Add(<#=modelName#> model)
+		public void Insert(<#=modelName#> model)
 		{
 			<#
 				var sqlBuilder=new StringBuilder();
@@ -131,5 +131,28 @@ namespace JL.Infrastructure.DapperRepository
 			var conn = DbConnectionFactory.CreateConnection();
             conn.Execute(sql, new{<#=table.PrimaryKey.First()#> = id});
 		}
+
+		public PageData<<#=modelName#>> <#=modelName#>Page(PageReq pageReq)
+        {
+            var conn = DbConnectionFactory.CreateConnection();
+            
+            var dParas = new DynamicParameters();
+            dParas.Add("@page", pageReq.PageIndex);
+            dParas.Add("@pagesize", pageReq.PageSize);
+            dParas.Add("@fields", "*");
+            dParas.Add("@tablename", "<#=tableName#>");
+            dParas.Add("@filter", "");
+            dParas.Add("@orderby", pageReq.OrderBy);
+            dParas.Add("@primarykey", "<#=table.PrimaryKey.First()#>");
+            dParas.Add("@total", direction: ParameterDirection.Output);
+
+            var data = conn.Query<<#=modelName#>>("procPageQuery", param: dParas, commandType: CommandType.StoredProcedure);
+
+            var total = dParas.Get<int>("@total");
+
+            var pages = (int)Math.Ceiling((double)total / pageReq.PageSize);
+
+            return PageData<<#=modelName#>>.Create(pageReq.PageIndex, pageReq.PageSize, pages, data);
+        }
 	}
 }

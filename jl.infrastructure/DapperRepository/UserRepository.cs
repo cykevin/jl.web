@@ -67,10 +67,15 @@ values (@UserName,@Cellphone,@IsCellphoneConfirmed,@Email,@IsEmailConfirmed,@Rea
             conn.Execute(sql, model);
         }
 
+        public PageData<UserProfile> UserPage(PageReq<UserFilter> pageReq)
+        {
+            throw new NotImplementedException();
+        }
+
         public PageData<UserProfile> UserPage(PageReq pageReq)
         {
             var conn = DbConnectionFactory.CreateConnection();
-            
+
             var dParas = new DynamicParameters();
             dParas.Add("@page", pageReq.PageIndex);
             dParas.Add("@pagesize", pageReq.PageSize);
@@ -78,7 +83,7 @@ values (@UserName,@Cellphone,@IsCellphoneConfirmed,@Email,@IsEmailConfirmed,@Rea
             dParas.Add("@tablename", "jl_user");
             dParas.Add("@filter", "");
             dParas.Add("@orderby", pageReq.OrderBy);
-            dParas.Add("@primarykey", "userid");
+            dParas.Add("@primarykey", "UserId");
             dParas.Add("@total", direction: ParameterDirection.Output);
 
             var data = conn.Query<UserProfile>("procPageQuery", param: dParas, commandType: CommandType.StoredProcedure);
@@ -88,11 +93,6 @@ values (@UserName,@Cellphone,@IsCellphoneConfirmed,@Email,@IsEmailConfirmed,@Rea
             var pages = (int)Math.Ceiling((double)total / pageReq.PageSize);
 
             return PageData<UserProfile>.Create(pageReq.PageIndex, pageReq.PageSize, pages, data);
-        }
-
-        public PageData<UserProfile> UserPage(PageReq<UserFilter> pageReq)
-        {
-            throw new NotImplementedException();
         }
         #endregion
     }

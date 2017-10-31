@@ -10,7 +10,7 @@ namespace JL.Core.Repositories
 {
     public interface IFranchiseeRepository
     {
-        void Add(Franchisee model);
+        void Insert(Franchisee model);
         void Update(Franchisee model);
         Franchisee GetById(int id);
         PageData<Franchisee> FranchiseePage(PageReq pageReq);

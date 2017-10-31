@@ -5,17 +5,28 @@ using System;
 
 namespace JL.Core.Providers
 {
-
     public class JLService : IJLService
     {
-        readonly IUserRepository userRepository;
-        readonly IArticleRepository articleRepository;
+        private readonly IUserRepository userRepository;
+        private readonly IArticleRepository articleRepository;
+        private readonly IProductRepository productRepository;
+        private readonly IMemberRepository memberRepository;
+        private readonly IFranchiseeRepository franchiseeRepository;
+        private readonly IMaterialRepository materialRepository;
 
         public JLService(IUserRepository userRepository,
-            IArticleRepository articleRepository)
+            IArticleRepository articleRepository,
+            IProductRepository productRepository,
+            IMemberRepository memberRepository,
+            IFranchiseeRepository franchiseeRepository,
+            IMaterialRepository materialRepository)
         {
             this.userRepository = userRepository;
             this.articleRepository = articleRepository;
+            this.productRepository = productRepository;
+            this.memberRepository = memberRepository;
+            this.franchiseeRepository = franchiseeRepository;
+            this.materialRepository = materialRepository;
         }
 
         #region userprofile
@@ -37,7 +48,7 @@ namespace JL.Core.Providers
 
         public UserProfile GetUser(int id)
         {
-            throw new NotImplementedException();
+            return userRepository.GetById(id);
         }
 
         public UserProfile GetUser(string username)
@@ -49,9 +60,14 @@ namespace JL.Core.Providers
 
         #region article
 
+        public void UpdateArticle(Article model)
+        {
+            articleRepository.Update(model);
+        }
+
         public PageData<Article> ArticlePage(PageReq pageReq)
         {
-            throw new NotImplementedException();
+            return articleRepository.ArticlePage(pageReq);
         }
 
         public void DeleteArticle(Article article)
@@ -61,67 +77,131 @@ namespace JL.Core.Providers
 
         public void InsertArticle(Article article)
         {
-            articleRepository.Add(article);
+            articleRepository.Insert(article);
         }
-        
+
         public Article GetArticle(int id)
         {
             return articleRepository.GetById(id);
         }
+
         #endregion
 
+        #region material
 
+        public void InsertMaterial(Material model)
+        {
+            materialRepository.Insert(model);
+        }
+
+        public void DeleteMaterial(Material model)
+        {
+            materialRepository.Delete(model);
+        }
+
+        public PageData<Material> MaterialPage(PageReq pageReq)
+        {
+            return materialRepository.MaterialPage(pageReq);
+        }
+
+        public void UpdateMaterial(Material model)
+        {
+            materialRepository.Update(model);
+        }
+
+        #endregion
+
+        #region franchisee
+
+        public void InsertFranchisee(Franchisee model)
+        {
+            franchiseeRepository.Insert(model);
+        }
 
         public void DeleteFranchisee(Franchisee model)
         {
             throw new NotImplementedException();
         }
 
-        public void DeleteMaterial(Material model)
+        public void FranchiseePage(PageReq pageReq)
         {
-            throw new NotImplementedException();
+            franchiseeRepository.FranchiseePage(pageReq);
         }
-
-        public void DeleteMember(Product member)
+        public void UpdateFranchisee(Franchisee model)
         {
-            throw new NotImplementedException();
+            franchiseeRepository.Update(model);
+        }
+        #endregion
+
+        #region product
+
+        public PageData<Product> ProductPage(PageReq pageReq)
+        {
+            return productRepository.ProductPage(pageReq);
         }
 
         public void DeleteProduct(Product model)
         {
-            throw new NotImplementedException();
-        }
-
-
-
-        public void InsertMaterial(Material model)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void InsertMember(Product member)
-        {
-            throw new NotImplementedException();
+            productRepository.Delete(model);
         }
 
         public void InsertProduct(Product model)
         {
-            throw new NotImplementedException();
+            productRepository.Insert(model);
         }
 
-        public PageData<Material> MaterialPage(PageReq pageReq)
+        public void UpdateProduct(Product model)
         {
-            throw new NotImplementedException();
+            productRepository.Update(model);
         }
 
-        public PageData<Product> MemberPage(PageReq pageReq)
+
+        public void InsertProductCategory(ProductCategory model)
         {
-            throw new NotImplementedException();
+            productRepository.UpdateProductCategory(model);
         }
 
-        public PageData<Product> ProductPage(PageReq pageReq)
+        public void DeleteProductCategory(ProductCategory model)
         {
-            throw new NotImplementedException();
+            productRepository.DeleteProductCategory(model);
         }
+
+        public void UpdateProductCategory(ProductCategory model)
+        {
+            productRepository.UpdateProductCategory(model);
+        }
+
+        public PageData<ProductCategory> ProductCategoryPage(PageReq pageReq)
+        {
+            return productRepository.ProductCategoryPage(pageReq);
+        }
+
+        #endregion
+
+        #region member
+
+        public void DeleteMember(Member member)
+        {
+            memberRepository.Delete(member);
+        }
+
+        public void UpdateMember(Member model)
+        {
+            memberRepository.Update(model);
+        }
+
+        public void InsertMember(Member model)
+        {
+            memberRepository.Insert(model);
+        }
+
+        public PageData<Member> MemberPage(PageReq pageReq)
+        {
+            return memberRepository.MemberPage(pageReq);
+        }
+
+
+        #endregion
+
     }
 }

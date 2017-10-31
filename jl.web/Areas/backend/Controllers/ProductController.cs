@@ -14,7 +14,14 @@ namespace jl.web.Areas.backend.Controllers
             return View();
         }
 
+        //新品上架
         public ActionResult New()
+        {
+            return View();
+        }
+
+        //产品类别
+        public ActionResult Categories()
         {
             return View();
         }
