@@ -75,7 +75,7 @@ namespace JL.Core.Providers
             articleRepository.Delete(article);
         }
 
-        public void InsertArticle(Article article)
+        public void AddArticle(Article article)
         {
             articleRepository.Insert(article);
         }
@@ -89,7 +89,7 @@ namespace JL.Core.Providers
 
         #region material
 
-        public void InsertMaterial(Material model)
+        public void AddMaterial(Material model)
         {
             materialRepository.Insert(model);
         }
@@ -113,7 +113,7 @@ namespace JL.Core.Providers
 
         #region franchisee
 
-        public void InsertFranchisee(Franchisee model)
+        public void AddFranchisee(Franchisee model)
         {
             franchiseeRepository.Insert(model);
         }
@@ -145,7 +145,7 @@ namespace JL.Core.Providers
             productRepository.Delete(model);
         }
 
-        public void InsertProduct(Product model)
+        public void AddProduct(Product model)
         {
             productRepository.Insert(model);
         }
@@ -156,7 +156,7 @@ namespace JL.Core.Providers
         }
 
 
-        public void InsertProductCategory(ProductCategory model)
+        public void AddProductCategory(ProductCategory model)
         {
             productRepository.UpdateProductCategory(model);
         }
@@ -190,7 +190,7 @@ namespace JL.Core.Providers
             memberRepository.Update(model);
         }
 
-        public void InsertMember(Member model)
+        public void AddMember(Member model)
         {
             memberRepository.Insert(model);
         }

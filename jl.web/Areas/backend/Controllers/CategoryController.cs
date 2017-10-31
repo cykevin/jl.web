@@ -1,5 +1,6 @@
 ﻿using jl.web.Areas.backend.Models;
 using JL.Core;
+using JL.Core.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -27,7 +28,13 @@ namespace jl.web.Areas.backend.Controllers
         {
             if(ModelState.IsValid)
             {
-                //jlService.add
+                var pCategory = new ProductCategory();
+                pCategory.Name = model.Name;
+                pCategory.SortIndex = model.Sort;                
+                pCategory.Alias = model.Alias;
+                pCategory.Status = 1;
+
+                jlService.AddProductCategory(pCategory);
             }
 
             return View();

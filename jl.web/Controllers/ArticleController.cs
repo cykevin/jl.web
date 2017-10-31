@@ -29,7 +29,7 @@ namespace jl.web.Controllers
             article.AddTime = DateTime.Now;
             article.Title = "join us now!";
             article.Content = "welcome to wechat business";
-            jlService.InsertArticle(article);
+            jlService.AddArticle(article);
 
             return article.ToString();
         }

@@ -53,11 +53,6 @@
     <Compile Include="DbConnectionFactory.cs" />
     <Compile Include="IDbCommandExt.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="T4\RepositoryT4.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>RepositoryT4.tt</DependentUpon>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Content Include="T4\RepositoryT4.tt">

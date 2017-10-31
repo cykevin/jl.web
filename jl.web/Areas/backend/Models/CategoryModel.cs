@@ -8,6 +8,7 @@ namespace jl.web.Areas.backend.Models
     public class CategoryModel
     {
         public string Name { get; set; }
+        public string Alias { get; set; }
         public int Sort { get; set; }
     }
 }
