@@ -38,12 +38,13 @@ namespace JL.Infrastructure.DapperRepository
 
         #region methods from t4
 
-        public void Insert(Product model)
+        public int Insert(Product model)
         {
             var connection = DbConnectionFactory.CreateConnection();
-            connection.Execute(@"Insert into Product(Name,Alias,Description,Picture,RetailPrice,MarketPrice,PageViews,SortIndex,Status)
-values (@Name,@Alias,@Description,@Picture,@RetailPrice,@MarketPrice,@PageViews,@SortIndex,@Status)",
-                model);
+            var id=connection.Query<int>(@"Insert into Product(Name,Alias,Description,Picture,RetailPrice,MarketPrice,PageViews,SortIndex,Status)
+values (@Name,@Alias,@Description,@Picture,@RetailPrice,@MarketPrice,@PageViews,@SortIndex,@Status);SELECT LAST_INSERT_ID()",
+                model).FirstOrDefault();
+            return id;
         }
 
         public Product GetById(int id)
@@ -76,19 +77,43 @@ values (@Name,@Alias,@Description,@Picture,@RetailPrice,@MarketPrice,@PageViews,
             conn.Execute(sql, new { AutoId = id });
         }
 
-        public void InsertProductCategory(ProductCategory model)
+        public int InsertProductCategory(ProductCategory model)
         {
-            throw new NotImplementedException();
+            var connection = DbConnectionFactory.CreateConnection();
+            var id=connection.Query<int>(@"Insert into productcategory(Name,Alias,Picture,Path,Depth,ParentId,PageViews,SortIndex,Status)
+values (@Name,@Alias,@Picture,@Path,@Depth,@ParentId,@PageViews,@SortIndex,@Status);SELECT LAST_INSERT_ID()",
+                model).FirstOrDefault();
+            return id;
         }
 
-        public void DeleteProductCategory(ProductCategory model)
+        public ProductCategory GetProductCategoryById(int id)
         {
-            throw new NotImplementedException();
+            var query = "select * from productcategory where AutoId=@id";
+
+            var conn = DbConnectionFactory.CreateConnection();
+            return conn.Query<ProductCategory>(query, new { id = id }).FirstOrDefault();
+
         }
 
         public void UpdateProductCategory(ProductCategory model)
         {
-            throw new NotImplementedException();
+            var sql = "update productcategory set Name=@Name,Alias=@Alias,Picture=@Picture,Path=@Path,Depth=@Depth,ParentId=@ParentId,PageViews=@PageViews,SortIndex=@SortIndex,Status=@Status where AutoId=@AutoId";
+            var conn = DbConnectionFactory.CreateConnection();
+            conn.Execute(sql, model);
+        }
+
+        public void DeleteProductCategory(ProductCategory model)
+        {
+            var sql = "delete from productcategory where AutoId=@AutoId";
+            var conn = DbConnectionFactory.CreateConnection();
+            conn.Execute(sql, model);
+        }
+
+        public void DeleteProductCategory(int id)
+        {
+            var sql = "delete from productcategory where AutoId=@AutoId";
+            var conn = DbConnectionFactory.CreateConnection();
+            conn.Execute(sql, new { AutoId = id });
         }
 
         public PageData<ProductCategory> ProductCategoryPage(PageReq pageReq)
@@ -99,7 +124,7 @@ values (@Name,@Alias,@Description,@Picture,@RetailPrice,@MarketPrice,@PageViews,
             dParas.Add("@page", pageReq.PageIndex);
             dParas.Add("@pagesize", pageReq.PageSize);
             dParas.Add("@fields", "*");
-            dParas.Add("@tablename", "ProductCategory");
+            dParas.Add("@tablename", "productcategory");
             dParas.Add("@filter", "");
             dParas.Add("@orderby", pageReq.OrderBy);
             dParas.Add("@primarykey", "AutoId");

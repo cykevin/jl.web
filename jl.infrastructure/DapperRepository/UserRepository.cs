@@ -26,22 +26,18 @@ namespace JL.Infrastructure.DapperRepository
 
             var conn = DbConnectionFactory.CreateConnection();
             return conn.Query<UserProfile>(query, new { username = username }).FirstOrDefault();
-        }
-
-        public void Save(UserProfile userProfile)
-        {
-            this.Add(userProfile);
-        }
+        }        
                
 
         #region methods from t4
 
-        public void Add(UserProfile model)
+        public int Insert(UserProfile model)
         {
             var connection = DbConnectionFactory.CreateConnection();
-            connection.Execute(@"Insert into Users(UserName,Cellphone,IsCellphoneConfirmed,Email,IsEmailConfirmed,RealName,NickName,Telephone,Birthday,Gender,QQ,Address,AddTime,RegUrl)
-values (@UserName,@Cellphone,@IsCellphoneConfirmed,@Email,@IsEmailConfirmed,@RealName,@NickName,@Telephone,@Birthday,@Gender,@QQ,@Address,@AddTime,@RegUrl)",
-                model);
+            var id = connection.Query<int>(@"Insert into Users(UserName,Cellphone,IsCellphoneConfirmed,Email,IsEmailConfirmed,RealName,NickName,Telephone,Birthday,Gender,QQ,Address,AddTime,RegUrl)
+values (@UserName,@Cellphone,@IsCellphoneConfirmed,@Email,@IsEmailConfirmed,@RealName,@NickName,@Telephone,@Birthday,@Gender,@QQ,@Address,@AddTime,@RegUrl);SELECT LAST_INSERT_ID()",
+                model).FirstOrDefault();
+            return id;
         }
 
         public UserProfile GetModel(int id)

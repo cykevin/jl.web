@@ -35,12 +35,13 @@ namespace JL.Infrastructure.DapperRepository
 
         #region methods from t4
 
-        public void Insert(Franchisee model)
+        public int Insert(Franchisee model)
         {
             var connection = DbConnectionFactory.CreateConnection();
-            connection.Execute(@"Insert into Franchisee(Name,Email,Weixin,Phone,Address,Remark,ApplyTime,ProcessTime,Status)
-values (@Name,@Email,@Weixin,@Phone,@Address,@Remark,@ApplyTime,@ProcessTime,@Status)",
-                model);
+            var id=connection.Query<int>(@"Insert into Franchisee(Name,Email,Weixin,Phone,Address,Remark,ApplyTime,ProcessTime,Status)
+values (@Name,@Email,@Weixin,@Phone,@Address,@Remark,@ApplyTime,@ProcessTime,@Status);SELECT LAST_INSERT_ID()",
+                model).FirstOrDefault();
+            return id;
         }
 
         public Franchisee GetById(int id)

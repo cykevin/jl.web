@@ -10,7 +10,7 @@ namespace JL.Core.Repositories
 {
     public interface IMemberRepository
     {
-        void Insert(Member model);
+        int Insert(Member model);
         void Update(Member model);
         Member GetById(int id);
         PageData<Member> MemberPage(PageReq pageReq);

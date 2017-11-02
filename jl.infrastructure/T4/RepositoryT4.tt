@@ -16,8 +16,8 @@
 <#@ include file=".\T4Include.ttinclude" #>
 <#@ output extension=".cs"  #>
 <# 
-    var tableName="jl_user";
-	var modelName="UserProfile";
+    var tableName="productcategory";
+	var modelName="ProductCategory";
 
 	var table=TableInfo.Init(tableName);
 #>

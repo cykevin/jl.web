@@ -31,9 +31,9 @@ namespace JL.Core.Providers
 
         #region userprofile
 
-        public void AddUser(UserProfile user)
+        public int AddUser(UserProfile user)
         {
-            userRepository.Add(user);
+            return userRepository.Insert(user);
         }
 
         public void UpdateUser(UserProfile user)
@@ -75,9 +75,9 @@ namespace JL.Core.Providers
             articleRepository.Delete(article);
         }
 
-        public void AddArticle(Article article)
+        public int AddArticle(Article article)
         {
-            articleRepository.Insert(article);
+            return articleRepository.Insert(article);
         }
 
         public Article GetArticle(int id)
@@ -89,9 +89,9 @@ namespace JL.Core.Providers
 
         #region material
 
-        public void AddMaterial(Material model)
+        public int AddMaterial(Material model)
         {
-            materialRepository.Insert(model);
+            return materialRepository.Insert(model);
         }
 
         public void DeleteMaterial(Material model)
@@ -113,9 +113,9 @@ namespace JL.Core.Providers
 
         #region franchisee
 
-        public void AddFranchisee(Franchisee model)
+        public int AddFranchisee(Franchisee model)
         {
-            franchiseeRepository.Insert(model);
+            return franchiseeRepository.Insert(model);
         }
 
         public void DeleteFranchisee(Franchisee model)
@@ -145,9 +145,9 @@ namespace JL.Core.Providers
             productRepository.Delete(model);
         }
 
-        public void AddProduct(Product model)
+        public int AddProduct(Product model)
         {
-            productRepository.Insert(model);
+            return productRepository.Insert(model);
         }
 
         public void UpdateProduct(Product model)
@@ -156,9 +156,11 @@ namespace JL.Core.Providers
         }
 
 
-        public void AddProductCategory(ProductCategory model)
+        public int AddProductCategory(ProductCategory model)
         {
-            productRepository.UpdateProductCategory(model);
+            var id=productRepository.InsertProductCategory(model);
+
+            return id;                
         }
 
         public void DeleteProductCategory(ProductCategory model)
@@ -190,9 +192,9 @@ namespace JL.Core.Providers
             memberRepository.Update(model);
         }
 
-        public void AddMember(Member model)
+        public int AddMember(Member model)
         {
-            memberRepository.Insert(model);
+            return memberRepository.Insert(model);
         }
 
         public PageData<Member> MemberPage(PageReq pageReq)

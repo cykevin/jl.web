@@ -12,7 +12,7 @@ namespace JL.Core.Repositories
         UserProfile GetById(int id);
         PageData<UserProfile> UserPage(PageReq<UserFilter> pageReq);
         PageData<UserProfile> UserPage(PageReq pageReq);
-        void Add(UserProfile userProfile);
+        int Insert(UserProfile userProfile);
         void Delete(UserProfile userProfile);
         void Update(UserProfile userProfile);
     }

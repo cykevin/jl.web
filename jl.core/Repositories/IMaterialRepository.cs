@@ -10,7 +10,7 @@ namespace JL.Core.Repositories
 {
     public interface IMaterialRepository
     {
-        void Insert(Material model);
+        int Insert(Material model);
         void Update(Material model);
         Material GetById(int id);
         PageData<Material> MaterialPage(PageReq pageReq);

@@ -127,7 +127,6 @@
                         <h4 class="modal-title">新类别</h4>
                     </div>
                     <div class="modal-body">
-
                         <div class="form-group">
                             <label for="categoryname" class="control-label">名称:</label>
                             <input type="text" class="form-control" id="categoryname" name="categoryname" />
@@ -140,11 +139,10 @@
                             <label for="categorysort" class="control-label">排序:</label>
                             <input type="text" class="form-control" id="categorysort" name="categorysort" />
                         </div>
-
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                        <button type="submit" class="btn btn-primary">保存</button>
+                        <button type="button" class="btn btn-primary">保存</button>
                     </div>
                 </div>
             </form>
@@ -152,14 +150,36 @@
 </div>
 
 @section scripts{
-    @Scripts.Render("~/bundles/jqueryval");
+    @Scripts.Render("~/bundles/jqueryval")
     @*@Scripts.Render("~/scripts/jquery.validate.js")*@
+    @Scripts.Render("~/Content/arttemplate/template-web.js")
+
+    <script id="tpl-category" type="text/html">
+        <div class="col-lg-4">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    {{}}<a href="#" data-toggle="modal" data-target="#myModal02"><i class="pull-right fa fa-trash-o m-r-5" title="删除"></i></a>
+                </div>
+                <div class="panel-body">
+                    <div class="list-group">
+                        {{each products product index}}
+                            <a href="{{#}}" class="list-group-item"><span class="badge">{{product.count}}</span>{{product.name}}</a>
+                        {{/each}}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </script>
+
     <script type="text/javascript">
         $(document).ready(function(){
             $('#newCategoryForm').validate({
                 rules:{
                     categoryname:"required",
-                    categorysort:"number"
+                    categorysort:{
+                        required:true,
+                        number:true
+                    }
                 },
                 messages: {
                     categoryname:"请输入分类名称",
@@ -169,21 +189,66 @@
 				errorPlacement: function ( error, element ) {
 					// Add the `help-block` class to the error element
 					error.addClass( "help-block" );
-
 					if ( element.prop( "type" ) === "checkbox" ) {
 						error.insertAfter( element.parent( "label" ) );
 					} else {
 						error.insertAfter( element );
 					}
 				},
-				highlight: function ( element, errorClass, validClass ) {
-					$( element ).parents( ".col-sm-5" ).addClass( "has-error" ).removeClass( "has-success" );
+				highlight: function (element, errorClass, validClass) {
+					$(element).parents(".form-group").addClass("has-error").removeClass("has-success");
 				},
 				unhighlight: function (element, errorClass, validClass) {
-					$( element ).parents( ".col-sm-5" ).addClass( "has-success" ).removeClass( "has-error" );
+					$(element).parents(".form-group").addClass("has-success").removeClass("has-error");
 				}
 
             });
+
+            // attach event
+            $('#modalNewCategory button .btn-primary').click(function(){
+                var flag = $("#newCategoryForm").valid();
+                if(!flag){
+                    return;
+                }
+                var url=$('#newCategoryForm').prop('action');
+                var data={
+                    name:$('#categoryname').val(),
+                    alias:$('#categoryalias').val(),
+                    sort:$('#categorysort').val()
+                };
+                $.post(url,data,function(resp){
+                    var category=resp.data;
+                    loadCategory(category);
+                });
+            });
         });
+
+        function loadCategory(category){
+            var tplHtml=template('tpl-category',category);
+
+            if($('#page-wrapper .row').length>1){
+                var lastRow=$('#page-wrapper .row:last');
+                if(lastRow.children('.col-lg-4').length<3){
+                    // append
+                    lastRow.append(tplHtml);
+                }else{
+                    // append new row
+                    var colDiv=$('<div></div>');
+                    colDiv.addClass('col-lg-4');
+                    colDiv.append(tplHtml);
+                    colDiv.appendTo('#page-wrapper');
+                }
+            }else{
+                // append new row
+                var colDiv=$('<div></div>');
+                colDiv.addClass('col-lg-4');
+                colDiv.append(tplHtml);
+                colDiv.appendTo('#page-wrapper');
+            }
+        }
+        function removeCategory(){
+
+        }
+
     </script>
 }

@@ -185,6 +185,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\arttemplate\template-web.js" />
     <Content Include="Content\bootstrap-datepicker\css\bootstrap-datepicker.css" />
     <Content Include="Content\bootstrap-datepicker\css\bootstrap-datepicker.min.css" />
     <Content Include="Content\bootstrap-datepicker\css\bootstrap-datepicker.standalone.css" />

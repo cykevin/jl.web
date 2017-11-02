@@ -35,12 +35,13 @@ namespace JL.Infrastructure.DapperRepository
 
         #region methods from t4
 
-        public void Insert(Member model)
+        public int Insert(Member model)
         {
             var connection = DbConnectionFactory.CreateConnection();
-            connection.Execute(@"Insert into Member(NickName,RealName,Description,Phone,Weixin,QQ,Email,Address,JoinTime,Picture,Words,SortIndex,Status)
-values (@NickName,@RealName,@Description,@Phone,@Weixin,@QQ,@Email,@Address,@JoinTime,@Picture,@Words,@SortIndex,@Status)",
-                model);
+            var id=connection.Query<int>(@"Insert into Member(NickName,RealName,Description,Phone,Weixin,QQ,Email,Address,JoinTime,Picture,Words,SortIndex,Status)
+values (@NickName,@RealName,@Description,@Phone,@Weixin,@QQ,@Email,@Address,@JoinTime,@Picture,@Words,@SortIndex,@Status);SELECT LAST_INSERT_ID()",
+                model).FirstOrDefault();
+            return id;
         }
 
         public Member GetById(int id)

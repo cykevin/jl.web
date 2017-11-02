@@ -9,7 +9,7 @@ namespace JL.Core.Repositories
 {
     public interface IArticleRepository
     {
-        void Insert(Models.Article model);
+        int Insert(Models.Article model);
         JL.Core.Common.PageData<Models.Article> ArticlePage(JL.Core.Common.PageReq pageReq);
         Models.Article GetById(int id);
         void Update(Models.Article model);

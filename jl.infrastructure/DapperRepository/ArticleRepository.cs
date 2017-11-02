@@ -13,12 +13,13 @@ namespace JL.Infrastructure.DapperRepository
     {        
         #region methodes from t4
 
-        public void Insert(Article model)
+        public int Insert(Article model)
         {
             var connection = DbConnectionFactory.CreateConnection();
-            connection.Execute(@"Insert into Article(Title,Content,Picture,AddTime,Tags,PageViews,SortIndex,Status)
-values (@Title,@Content,@Picture,@AddTime,@Tags,@PageViews,@SortIndex,@Status)",
-                model);
+            var id=connection.Query<int>(@"Insert into Article(Title,Content,Picture,AddTime,Tags,PageViews,SortIndex,Status)
+values (@Title,@Content,@Picture,@AddTime,@Tags,@PageViews,@SortIndex,@Status);SELECT LAST_INSERT_ID()",
+                model).FirstOrDefault();
+            return id;
         }
 
         public Article GetById(int id)
