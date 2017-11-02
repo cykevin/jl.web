@@ -21,6 +21,12 @@ namespace JL.Core.Common
         public int PageSize { get; set; }
 
         public string OrderBy { get; set; }
+
+        public PageReq()
+        {
+            PageIndex = 1;
+            PageSize = 20;
+        }
     }
 
     public class PageReq<T> : PageReq
@@ -36,7 +42,7 @@ namespace JL.Core.Common
 
         public IEnumerable<T> Data { get; set; }
 
-        public static PageData<T> Create(int page,int size,int total,IEnumerable<T> data)
+        public static PageData<T> Create(int page,int size,int total, IEnumerable<T> data)
         {
             PageData<T> pageData = new PageData<T>();
             pageData.PageIndex = page;

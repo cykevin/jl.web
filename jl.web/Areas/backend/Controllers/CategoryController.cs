@@ -1,5 +1,6 @@
 ﻿using jl.web.Areas.backend.Models;
 using JL.Core;
+using JL.Core.Common;
 using JL.Core.Models;
 using System;
 using System.Collections.Generic;
@@ -21,7 +22,10 @@ namespace jl.web.Areas.backend.Controllers
         // GET: backend/Category
         public ActionResult Index()
         {
-            return View();
+            // search category within product
+            PageReq pager = new PageReq();
+            var pageData=jlService.ProductCategoryPage(pager);
+            return View(pageData);
         }
 
         public ActionResult New(CategoryModel model)
@@ -34,10 +38,13 @@ namespace jl.web.Areas.backend.Controllers
                 pCategory.Alias = model.Alias;
                 pCategory.Status = 1;
 
-                jlService.AddProductCategory(pCategory);
+                var id = jlService.AddProductCategory(pCategory);
+                model.Id = id;
+
+                return Json(model);
             }
 
-            return View();
+            return Json(ModelState);
         }
     }
 }

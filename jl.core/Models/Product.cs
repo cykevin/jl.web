@@ -26,6 +26,8 @@ namespace JL.Core.Models
         public int PageViews { get; set; }
         public int SortIndex { get; set; }
         public int Status { get; set; }
+
+        public virtual ICollection<ProductCategory> Categories { get; set; }
     }
 
     public class ProductCategory
@@ -42,6 +44,8 @@ namespace JL.Core.Models
         public int PageViews { get; set; }
         public int SortIndex { get; set; }
         public int Status { get; set; }
+
+        public virtual ICollection<Product> Products { get; set; }
     }
 
     public class ProductCategoryLink
