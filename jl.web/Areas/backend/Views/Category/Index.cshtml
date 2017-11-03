@@ -16,44 +16,35 @@
         </div>
     </div>
 </div>
-
-@if (Model != null && Model.Data != null)
-{
-    var data = Model.Data.ToArray();
-    for (int i = 0; i < Math.Ceiling(data.Length / 3d); i++)
+<div class="row">
+    @if (Model != null && Model.Data != null)
     {
-        <div class="row">
+        var data = Model.Data.ToArray();
 
-            @for (int j = 0; j < 3; j++)
-            {
-                if (!((i * 3 + j) < data.Length))
-                {
-                    break;
-                }
-
-                var category = data[i * 3 + j];
-
-                <div class="col-lg-4" id="category-@category.AutoId">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            @category.Name<small> - <i>@category.Alias</i></small><a href="#" data-toggle="modal" data-id="@category.AutoId" data-target="#modalRemove"><i class="pull-right fa fa-trash-o m-r-5" title="删除"></i></a>
-                        </div>
-                        <div class="panel-body">
-                            <div class="list-group">
-                                @foreach (var product in category.Products)
-                                {
-                                    <a href="#" class="list-group-item">
-                                        <span class="badge">@product.PageViews</span>@product.Name
-                                    </a>
-                                }
-                            </div>
+        for (int i = 0; i < data.Length; i++)
+        {
+            var category = data[i];
+            <div class="col-lg-4" id="category-@category.AutoId">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        @category.Name<small> - <i>@category.Alias</i></small><a href="#" data-toggle="modal" data-id="@category.AutoId" data-target="#modalRemove"><i class="pull-right fa fa-trash-o m-r-5" title="删除"></i></a>
+                    </div>
+                    <div class="panel-body">
+                        <div class="list-group">
+                            @foreach (var product in category.Products)
+                            {
+                                <a href="#" class="list-group-item">
+                                    <span class="badge">@product.PageViews</span>@product.Name
+                                </a>
+                            }
                         </div>
                     </div>
                 </div>
-            }
-        </div>
+            </div>
+        }
     }
-}
+</div>
+
 <div class="modal fade" id="modalRemove" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -114,10 +105,10 @@
     @Scripts.Render("~/Content/arttemplate/template-web.js")
 
     <script id="tpl-category" type="text/html">
-        <div class="col-lg-4" id="category-{{product.AutoId}}">
+        <div class="col-lg-4" id="category-{{Id}}">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    {{}}<a href="#" data-toggle="modal" data-target="#modalRemove"><i class="pull-right fa fa-trash-o m-r-5" title="删除"></i></a>
+                    {{Name}}<small> - <i>{{Alias}}</i></small><a href="#" data-toggle="modal" data-id="{{Id}}" data-target="#modalRemove"><i class="pull-right fa fa-trash-o m-r-5" title="删除"></i></a>
                 </div>
                 <div class="panel-body">
                     <div class="list-group">
@@ -176,10 +167,13 @@
                     alias:$('#categoryalias').val(),
                     sort:$('#categorysort').val()
                 };
-                $.post(url,data,function(resp){
-                    var category=resp.data;
-                    console.log(category);
-                    loadCategory(category);
+                $.post(url, data, function (resp) {
+                    if (resp.Success) {
+                        var category = resp.Data;
+                        var tplHtml = template('tpl-category', category);
+                        $('#page-wrapper .row:eq(1)').append(tplHtml);
+                        $('#modalNewCategory').modal('hide');
+                    }
                 });
             });
 
@@ -200,30 +194,5 @@
                 });
             });
         });
-
-        function loadCategory(category){
-            var tplHtml=template('tpl-category',category);
-
-            if($('#page-wrapper .row').length>1){
-                var lastRow=$('#page-wrapper .row:last');
-                if(lastRow.children('.col-lg-4').length<3){
-                    // append
-                    lastRow.append(tplHtml);
-                }else{
-                    // append new row
-                    var colDiv=$('<div></div>');
-                    colDiv.addClass('col-lg-4');
-                    colDiv.append(tplHtml);
-                    colDiv.appendTo('#page-wrapper');
-                }
-            }else{
-                // append new row
-                var colDiv=$('<div></div>');
-                colDiv.addClass('col-lg-4');
-                colDiv.append(tplHtml);
-                colDiv.appendTo('#page-wrapper');
-            }
-        }        
-
     </script>
 }

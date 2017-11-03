@@ -10,15 +10,25 @@ namespace jl.web.Common
         public bool Success { get; set; }
         public string Message { get; set; }
         public T Data { get; set; }
-
+        
         public static ResultObject<T>  Create(bool success=true,string message = "ok")
         {
-            ResultObject<T> obj = default(ResultObject<T>);
+            ResultObject<T> obj = new ResultObject<T>();
             obj.Success = success;
             obj.Message = message;
             return obj;
         }
-             
+
+        public static ResultObject<T> Succeed(T t,string message = "ok")
+        {
+            ResultObject<T> obj = new ResultObject<T>();
+            obj.Success = true;
+            obj.Message = message;
+            obj.Data = t;
+                
+            return obj;
+        }
+        
     }
 
     public class ResultObject

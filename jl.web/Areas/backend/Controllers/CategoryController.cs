@@ -42,7 +42,7 @@ namespace jl.web.Areas.backend.Controllers
                 var id = jlService.AddProductCategory(pCategory);
                 model.Id = id;
 
-                return Json(model);
+                return Json(ResultObject<CategoryModel>.Succeed(model));
             }
 
             return Json(ModelState);
