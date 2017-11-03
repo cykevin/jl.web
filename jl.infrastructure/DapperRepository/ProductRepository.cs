@@ -99,14 +99,14 @@ values (@Name,@Alias,@Picture,@Path,@Depth,@ParentId,@PageViews,@SortIndex,@Stat
 
         public ProductCategory GetProductCategoryById(int id)
         {
-            var query = "select pc.*,p.* from productcategory pc left join productcategorylink pcl on pc.AutoId = pcl.categoryid left join product p on pcl.productid = p.autoid where AutoId=@id";
+            var query = "select pc.*,p.* from productcategory pc left join productcategorylink pcl on pc.AutoId = pcl.categoryid left join product p on pcl.productid = p.autoid where pc.AutoId=@id";
 
             var conn = DbConnectionFactory.CreateConnection();
             return conn.Query<ProductCategory, Product, ProductCategory>(query, (pc, p) =>
             {
                 pc.Products.Add(p);
                 return pc;
-            }, new { id = id }).FirstOrDefault();
+            }, new { id = id },splitOn: "Name").FirstOrDefault();
         }
 
         public void UpdateProductCategory(ProductCategory model)
@@ -144,7 +144,16 @@ values (@Name,@Alias,@Picture,@Path,@Depth,@ParentId,@PageViews,@SortIndex,@Stat
             dParas.Add("@primarykey", "pc.AutoId");
             dParas.Add("@total", direction: ParameterDirection.Output);
 
-            var data = conn.Query<ProductCategory>("procPageQuery", param: dParas, commandType: CommandType.StoredProcedure);
+            var data = conn.Query<ProductCategory, Product, ProductCategory>("procPageQuery",
+                (pc, p) =>
+                {
+                    if (p != null)
+                    {
+                        pc.Products.Add(p);
+                    }                    
+                    return pc;
+                },
+                param: dParas, splitOn: "Name", commandType: CommandType.StoredProcedure);
 
             var total = dParas.Get<int>("@total");
 

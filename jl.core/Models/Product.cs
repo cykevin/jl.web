@@ -28,6 +28,11 @@ namespace JL.Core.Models
         public int Status { get; set; }
 
         public virtual ICollection<ProductCategory> Categories { get; set; }
+
+        public Product()
+        {
+            this.Categories = new List<ProductCategory>();
+        }
     }
 
     public class ProductCategory
@@ -46,6 +51,11 @@ namespace JL.Core.Models
         public int Status { get; set; }
 
         public virtual ICollection<Product> Products { get; set; }
+
+        public ProductCategory()
+        {
+            this.Products = new List<Product>();
+        }
     }
 
     public class ProductCategoryLink

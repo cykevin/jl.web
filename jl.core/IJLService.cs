@@ -26,11 +26,13 @@ namespace JL.Core
 
         // product
         int AddProduct(Product model);
+        Product GetProduct(int id);
         void DeleteProduct(Product model);
         void UpdateProduct(Product model);
         PageData<Product> ProductPage(PageReq pageReq);
 
         int AddProductCategory(ProductCategory model);
+        ProductCategory GetProductCategory(int id);
         void DeleteProductCategory(ProductCategory model);
         void UpdateProductCategory(ProductCategory model);
         PageData<ProductCategory> ProductCategoryPage(PageReq pageReq);

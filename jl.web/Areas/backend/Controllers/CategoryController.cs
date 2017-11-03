@@ -1,4 +1,5 @@
 ﻿using jl.web.Areas.backend.Models;
+using jl.web.Common;
 using JL.Core;
 using JL.Core.Common;
 using JL.Core.Models;
@@ -45,6 +46,19 @@ namespace jl.web.Areas.backend.Controllers
             }
 
             return Json(ModelState);
+        }
+
+        [HttpPost]
+        public ActionResult Delete(int id)
+        {
+            var category = jlService.GetProductCategory(id);
+            if (category != null)
+            {
+                jlService.DeleteProductCategory(category);
+                return Json(ResultObject.Succeed());
+            }
+
+            return Json(ResultObject.Failed());
         }
     }
 }

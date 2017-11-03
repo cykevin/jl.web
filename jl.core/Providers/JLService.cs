@@ -202,6 +202,16 @@ namespace JL.Core.Providers
             return memberRepository.MemberPage(pageReq);
         }
 
+        public Product GetProduct(int id)
+        {
+            return productRepository.GetById(id);
+        }
+
+        public ProductCategory GetProductCategory(int id)
+        {
+            return productRepository.GetProductCategoryById(id);
+        }
+
 
         #endregion
 
