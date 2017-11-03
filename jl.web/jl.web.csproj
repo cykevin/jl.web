@@ -183,6 +183,14 @@
     </Compile>
     <Compile Include="Models\LoginModel.cs" />
     <Compile Include="Models\UserRegViewModel.cs" />
+    <Compile Include="MVCPaging\IPagedList.cs" />
+    <Compile Include="MVCPaging\PagedList.cs" />
+    <Compile Include="MVCPaging\Pager.cs" />
+    <Compile Include="MVCPaging\PagerOptions.cs" />
+    <Compile Include="MVCPaging\PagerOptionsBuilder.cs" />
+    <Compile Include="MVCPaging\PaginationModel.cs" />
+    <Compile Include="MVCPaging\PagingExtensions.cs" />
+    <Compile Include="MVCPaging\RouteValueDictionaryExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -939,6 +947,7 @@
     <Content Include="Areas\backend\Views\Product\New.cshtml" />
     <Content Include="Areas\backend\Views\Product\Categories.cshtml" />
     <Content Include="Areas\backend\Views\Category\Index.cshtml" />
+    <Content Include="Areas\backend\Views\Product\Index.cshtml" />
     <None Include="Scripts\jquery-3.2.1.intellisense.js" />
     <Content Include="Images\search1.png" />
     <Content Include="Images\tick1.png" />
