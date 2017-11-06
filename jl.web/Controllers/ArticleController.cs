@@ -6,7 +6,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-namespace jl.web.Controllers
+namespace JL.Web.Controllers
 {
     public class ArticleController : Controller
     {

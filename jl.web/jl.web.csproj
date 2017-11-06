@@ -13,7 +13,7 @@
     <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>jl.web</RootNamespace>
+    <RootNamespace>JL.Web</RootNamespace>
     <AssemblyName>jl.web</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
@@ -182,6 +182,8 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\TimeHelper.cs" />
+    <Compile Include="Helpers\ViewDataHelper.cs" />
     <Compile Include="Models\LoginModel.cs" />
     <Compile Include="Models\UserRegViewModel.cs" />
     <Compile Include="MVCPaging\IPagedList.cs" />

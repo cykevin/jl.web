@@ -5,7 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
 
-namespace jl.web
+namespace JL.Web
 {
     public class RouteConfig
     {
@@ -17,7 +17,7 @@ namespace jl.web
                 name: "Default",
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional },
-                namespaces: new string[] { "jl.web.Controllers" }
+                namespaces: new string[] { "JL.Web.Controllers" }
             );
         }
     }

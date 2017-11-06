@@ -8,7 +8,7 @@ using System.Web.Mvc;
 using System.Web.Security;
 using WebMatrix.WebData;
 
-namespace jl.web.Areas.backend.Controllers
+namespace JL.Web.Areas.backend.Controllers
 {
     public class UserController : Controller
     {

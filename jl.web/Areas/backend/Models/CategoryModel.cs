@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace jl.web.Areas.backend.Models
+namespace JL.Web.Areas.backend.Models
 {
     public class CategoryModel
     {

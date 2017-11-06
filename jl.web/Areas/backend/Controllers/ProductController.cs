@@ -1,4 +1,4 @@
-﻿using jl.web.Areas.backend.Models;
+﻿using JL.Web.Areas.backend.Models;
 using JL.Core;
 using JL.Core.Models;
 using System;
@@ -6,8 +6,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using JL.Web.Helpers;
 
-namespace jl.web.Areas.backend.Controllers
+namespace JL.Web.Areas.backend.Controllers
 {
     public class ProductController : Controller
     {
@@ -24,9 +25,18 @@ namespace jl.web.Areas.backend.Controllers
             return View();
         }
 
+        [HttpGet]
+        public ActionResult New()
+        {
+            new ViewDataHelper(jlService).InitializeCategories(ViewData, 0);
+            return View();
+        }
+
         //新品上架
+        [HttpPost]
         public ActionResult New(ProductModel model)
         {
+
             if(ModelState.IsValid)
             {
                 Product product = new Product();
@@ -34,13 +44,14 @@ namespace jl.web.Areas.backend.Controllers
                 product.Description = model.Description;
                 product.MarketPrice = model.MarketPrice;
                 product.RetailPrice = model.RetailPrice;
+                product.MarketPrice = model.MarketPrice;
+                product.RetailPrice = model.RetailPrice;
+                product.Picture = model.Picture;
 
                 jlService.AddProduct(product);
 
-
             }
-            
-
+            new ViewDataHelper(jlService).InitializeCategories(ViewData, 0);
             return View();
         }
 

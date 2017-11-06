@@ -3,7 +3,7 @@ using System;
 
 using Unity;
 
-namespace jl.web
+namespace JL.Web
 {
     /// <summary>
     /// Specifies the Unity configuration for the main container.

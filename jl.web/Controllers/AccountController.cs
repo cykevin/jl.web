@@ -1,9 +1,9 @@
-﻿using jl.web.Models;
+﻿using JL.Web.Models;
 using System.Web.Mvc;
 using System.Web.Security;
 using WebMatrix.WebData;
 
-namespace jl.web.Controllers
+namespace JL.Web.Controllers
 {
     public class AccountController : Controller
     {

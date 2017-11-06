@@ -1,5 +1,5 @@
-﻿using jl.web.Areas.backend.Models;
-using jl.web.Common;
+﻿using JL.Web.Areas.backend.Models;
+using JL.Web.Common;
 using JL.Core;
 using JL.Core.Common;
 using JL.Core.Models;
@@ -9,7 +9,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-namespace jl.web.Areas.backend.Controllers
+namespace JL.Web.Areas.backend.Controllers
 {
     public class CategoryController : Controller
     {

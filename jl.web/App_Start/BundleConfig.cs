@@ -1,7 +1,7 @@
 ﻿using System.Web;
 using System.Web.Optimization;
 
-namespace jl.web
+namespace JL.Web
 {
     public class BundleConfig
     {

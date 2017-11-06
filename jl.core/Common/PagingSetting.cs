@@ -27,6 +27,14 @@ namespace JL.Core.Common
             PageIndex = 1;
             PageSize = 20;
         }
+
+        public static PageReq Create(int pageIndex = 1, int pageSize = 20)
+        {
+            PageReq pager = new PageReq();
+            pager.PageIndex = pageIndex;
+            pager.PageSize = pageSize;
+            return pager;
+        }
     }
 
     public class PageReq<T> : PageReq
