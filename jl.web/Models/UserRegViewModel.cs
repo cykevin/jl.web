@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace jl.web.Models
+namespace JL.Web.Models
 {
     public class UserRegViewModel
     {

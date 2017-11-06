@@ -36,7 +36,7 @@ namespace JL.Core
         void DeleteProductCategory(ProductCategory model);
         void UpdateProductCategory(ProductCategory model);
         PageData<ProductCategory> ProductCategoryPage(PageReq pageReq);
-        
+        void ProductToCategory(int productId, System.Collections.Generic.IEnumerable<int> categoryIds);
 
         // franchisee
         void DeleteFranchisee(Franchisee model);

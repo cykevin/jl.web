@@ -2,6 +2,8 @@
 using JL.Core.Repositories;
 using JL.Core.Models;
 using System;
+using System.Linq;
+using System.Collections.Generic;
 
 namespace JL.Core.Providers
 {
@@ -210,6 +212,14 @@ namespace JL.Core.Providers
         public ProductCategory GetProductCategory(int id)
         {
             return productRepository.GetProductCategoryById(id);
+        }
+
+        public void ProductToCategory(int productId, IEnumerable<int> categoryIds)
+        {
+            if (productId > 0 && categoryIds != null && categoryIds.Any())
+            {
+                productRepository.ProductToCategory(productId, categoryIds);
+            }
         }
 
 

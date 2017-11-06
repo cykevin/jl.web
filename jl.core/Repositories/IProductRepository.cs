@@ -18,5 +18,8 @@ namespace JL.Core.Repositories
         void DeleteProductCategory(ProductCategory model);
         void UpdateProductCategory(ProductCategory model);
         PageData<ProductCategory> ProductCategoryPage(PageReq pageReq);
+
+        void ProductToCategory(int productId, int categoryId);
+        void ProductToCategory(int productId, System.Collections.Generic.IEnumerable<int> categoryId);
     }
 }

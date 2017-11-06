@@ -55,10 +55,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="T4\RepositoryT4.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>RepositoryT4.cs</LastGenOutput>
-    </Content>
     <None Include="App.config" />
     <None Include="packages.config" />
     <None Include="T4\T4Include.ttinclude">

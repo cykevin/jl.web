@@ -162,6 +162,31 @@ values (@Name,@Alias,@Picture,@Path,@Depth,@ParentId,@PageViews,@SortIndex,@Stat
             return PageData<ProductCategory>.Create(pageReq.PageIndex, pageReq.PageSize, pages, data);
         }
 
+
+        public void ProductToCategory(int productId, int categoryId)
+        {
+            var connection = DbConnectionFactory.CreateConnection();
+            connection.Execute(@"Insert into productcategorylink(productId,categoryId)
+values(@productId,@categoryId)",
+                new { productId = productId, categoryId = categoryId });
+        }
+
+        public void ProductToCategory(int productId, IEnumerable<int> categoryIds)
+        {
+            var sqlBuilder = new StringBuilder();
+            sqlBuilder.Append(" Insert into productcategorylink(productId,categoryId) ");
+            sqlBuilder.Append(" Values ");
+            foreach (var cateid in categoryIds)
+            {
+                sqlBuilder.AppendFormat(" ({0},{1}),", productId, cateid);
+            }
+            sqlBuilder.Remove(sqlBuilder.Length - 1, 1);
+            sqlBuilder.Append(";");
+
+            var connection = DbConnectionFactory.CreateConnection();
+            connection.Execute(sqlBuilder.ToString());
+        }
+
         #endregion
     }
 }
