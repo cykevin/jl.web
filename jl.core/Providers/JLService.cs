@@ -4,6 +4,7 @@ using JL.Core.Models;
 using System;
 using System.Linq;
 using System.Collections.Generic;
+using JL.Core.Filters;
 
 namespace JL.Core.Providers
 {
@@ -218,8 +219,18 @@ namespace JL.Core.Providers
         {
             if (productId > 0 && categoryIds != null && categoryIds.Any())
             {
-                productRepository.ProductToCategory(productId, categoryIds);
+                productRepository.SetProductToCategory(productId, categoryIds);
             }
+        }
+
+        public IEnumerable<ProductCategory> GetProductCategoryList()
+        {
+            return productRepository.GetProductCategoryList();
+        }
+
+        public PageData<Product> ProductPage(PageReq<ProductFilter> pageReq)
+        {
+            return productRepository.ProductPage(pageReq);
         }
 
 

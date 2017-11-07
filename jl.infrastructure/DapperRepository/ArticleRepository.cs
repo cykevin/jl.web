@@ -72,7 +72,7 @@ values (@Title,@Content,@Picture,@AddTime,@Tags,@PageViews,@SortIndex,@Status);S
 
             var pages = (int)Math.Ceiling((double)total / pageReq.PageSize);
 
-            return PageData<Article>.Create(pageReq.PageIndex, pageReq.PageSize, pages, data);
+            return PageData<Article>.Create(pageReq.PageIndex, pageReq.PageSize, pages, total, data);
         }
 
         #endregion

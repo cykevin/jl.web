@@ -88,7 +88,7 @@ values (@UserName,@Cellphone,@IsCellphoneConfirmed,@Email,@IsEmailConfirmed,@Rea
 
             var pages = (int)Math.Ceiling((double)total / pageReq.PageSize);
 
-            return PageData<UserProfile>.Create(pageReq.PageIndex, pageReq.PageSize, pages, data);
+            return PageData<UserProfile>.Create(pageReq.PageIndex, pageReq.PageSize, pages, total, data);
         }
         #endregion
     }

@@ -1,6 +1,6 @@
 ﻿using System.Web.Mvc;
 
-namespace jl.web.Areas.backend
+namespace JL.Web.Areas.backend
 {
     public class backendAreaRegistration : AreaRegistration 
     {

@@ -1,6 +1,6 @@
 ﻿using System.Web.Mvc;
 
-namespace jl.web.Areas.agent
+namespace JL.Web.Areas.agent
 {
     public class agentAreaRegistration : AreaRegistration 
     {

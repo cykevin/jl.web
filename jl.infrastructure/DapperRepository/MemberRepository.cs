@@ -30,7 +30,7 @@ namespace JL.Infrastructure.DapperRepository
 
             var pages = (int)Math.Ceiling((double)total / pageReq.PageSize);
 
-            return PageData<Member>.Create(pageReq.PageIndex, pageReq.PageSize, pages, data);
+            return PageData<Member>.Create(pageReq.PageIndex, pageReq.PageSize, pages, total, data);
         }
 
         #region methods from t4

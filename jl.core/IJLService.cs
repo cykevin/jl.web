@@ -1,5 +1,7 @@
 ﻿using JL.Core.Common;
+using JL.Core.Filters;
 using JL.Core.Models;
+using System.Collections.Generic;
 
 namespace JL.Core
 {
@@ -30,6 +32,7 @@ namespace JL.Core
         void DeleteProduct(Product model);
         void UpdateProduct(Product model);
         PageData<Product> ProductPage(PageReq pageReq);
+        PageData<Product> ProductPage(PageReq<ProductFilter> pageReq);
 
         int AddProductCategory(ProductCategory model);
         ProductCategory GetProductCategory(int id);
@@ -37,6 +40,7 @@ namespace JL.Core
         void UpdateProductCategory(ProductCategory model);
         PageData<ProductCategory> ProductCategoryPage(PageReq pageReq);
         void ProductToCategory(int productId, System.Collections.Generic.IEnumerable<int> categoryIds);
+        IEnumerable<ProductCategory> GetProductCategoryList();
 
         // franchisee
         void DeleteFranchisee(Franchisee model);

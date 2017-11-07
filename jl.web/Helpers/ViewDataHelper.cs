@@ -51,9 +51,7 @@ namespace JL.Web.Helpers
             var categories = jlService.ProductCategoryPage(pager);
 
             if(categories!=null)
-            {
-                Core.Models.ProductCategory selected = null;
-                
+            {                
                 viewData[key ?? "categories"] = new SelectList(categories.Data,"AutoId","Name", category);
             }            
         }

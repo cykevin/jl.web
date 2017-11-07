@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using JL.Web.Helpers;
 using JL.Web.Common;
+using JL.Core.Common;
 
 namespace JL.Web.Areas.backend.Controllers
 {
@@ -21,9 +22,19 @@ namespace JL.Web.Areas.backend.Controllers
         }
 
         // GET: backend/Product
-        public ActionResult Index()
+
+        public ActionResult Index(ProductSearchModel searchTo, int id = 0)
         {
-            return View();
+            var filter = new JL.Core.Filters.ProductFilter();
+            filter.CategoryId = searchTo.CategoryId;
+            filter.Title = searchTo.Title;
+            var pager = PageReq<JL.Core.Filters.ProductFilter>.Create(filter, id);
+
+            // search page 
+            var data = jlService.ProductPage(pager);
+            new ViewDataHelper(jlService).InitializeCategories(ViewData, 0, "categoryid");
+            ViewBag.productQuery = searchTo;
+            return View(data);
         }
 
         [HttpGet]

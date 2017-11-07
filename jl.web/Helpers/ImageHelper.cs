@@ -82,5 +82,24 @@ namespace JL.Web.Helpers
                 g.Dispose();
             }
         }
+
+
+        public static string GenPictureUrlSmall(string path)
+        {
+            if (string.IsNullOrEmpty(path))
+                return null;
+
+            if (path[0] == '~')
+            {
+                path = path.Substring(1);
+                var extIndex = path.LastIndexOf('.');
+                var pre = path.Substring(0, extIndex);
+                var ext = path.Substring(extIndex);
+
+                return pre + "50x50" + ext;
+            }
+
+            return path;
+        }
     }
 }

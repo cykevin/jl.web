@@ -40,6 +40,15 @@ namespace JL.Core.Common
     public class PageReq<T> : PageReq
     {
         public T Data { get; set; }
+
+        public static PageReq<T> Create(T t,int pageIndex = 1, int pageSize = 20)
+        {
+            PageReq<T> pager = new PageReq<T>();
+            pager.PageIndex = pageIndex;
+            pager.PageSize = pageSize;
+            pager.Data = t;
+            return pager;
+        }
     }
 
     public class PageData<T>
@@ -47,15 +56,17 @@ namespace JL.Core.Common
         public int PageIndex { get; set; }
         public int PageSize { get; set; }
         public int TotalPage { get; set; }
+        public int TotalCount { get; set; }
 
         public IEnumerable<T> Data { get; set; }
 
-        public static PageData<T> Create(int page,int size,int total, IEnumerable<T> data)
+        public static PageData<T> Create(int page,int size,int totalPage,int totalCount, IEnumerable<T> data)
         {
             PageData<T> pageData = new PageData<T>();
             pageData.PageIndex = page;
             pageData.PageSize = size;
-            pageData.TotalPage = total;
+            pageData.TotalPage = totalPage;
+            pageData.TotalCount = totalCount;
             pageData.Data = data;
 
             return pageData;
