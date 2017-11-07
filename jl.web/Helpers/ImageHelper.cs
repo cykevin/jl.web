@@ -96,7 +96,7 @@ namespace JL.Web.Helpers
                 var pre = path.Substring(0, extIndex);
                 var ext = path.Substring(extIndex);
 
-                return pre + "50x50" + ext;
+                return pre + "80x80" + ext;
             }
 
             return path;

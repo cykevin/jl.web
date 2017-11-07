@@ -23,12 +23,12 @@ namespace JL.Web.Areas.backend.Controllers
 
         // GET: backend/Product
 
-        public ActionResult Index(ProductSearchModel searchTo, int id = 0)
+        public ActionResult Index(ProductSearchModel searchTo, int page = 0)
         {
             var filter = new JL.Core.Filters.ProductFilter();
             filter.CategoryId = searchTo.CategoryId;
             filter.Title = searchTo.Title;
-            var pager = PageReq<JL.Core.Filters.ProductFilter>.Create(filter, id);
+            var pager = PageReq<JL.Core.Filters.ProductFilter>.Create(filter, page);
 
             // search page 
             var data = jlService.ProductPage(pager);
