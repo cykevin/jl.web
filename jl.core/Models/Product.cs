@@ -19,6 +19,7 @@ namespace JL.Core.Models
         public string Alias { get; set; }
         public string Description { get; set; }
         public string Picture { get; set; }
+        public DateTime AddTime { get; set; }
 
         public float RetailPrice { get; set; }
         public float MarketPrice { get; set; }

@@ -954,6 +954,7 @@
     <Content Include="Areas\backend\Views\Product\Categories.cshtml" />
     <Content Include="Areas\backend\Views\Category\Index.cshtml" />
     <Content Include="Areas\backend\Views\Product\Index.cshtml" />
+    <Content Include="Areas\backend\Views\Product\Edit.cshtml" />
     <None Include="Scripts\jquery-3.2.1.intellisense.js" />
     <Content Include="Images\search1.png" />
     <Content Include="Images\tick1.png" />

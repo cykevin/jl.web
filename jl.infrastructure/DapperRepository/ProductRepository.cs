@@ -247,7 +247,7 @@ values(@productId,@categoryId)",
                 }
                 if(!string.IsNullOrEmpty(filter.Title))
                 {
-                    sb.Append("p.title like '%" + filter.Title + "%'");
+                    sb.Append("p.name like '%" + filter.Title + "%'");
                     sb.Append(" and ");
                 }
 

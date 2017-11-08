@@ -31,10 +31,10 @@
 <div class="row">
     <div class="col-lg-12">
         <div class="query-part">
-            <form class="form-inline">
+            <form class="form-inline" method="post" action="@Url.Action("index","product")">
                 <div class="form-group">
                     <label for="productName">名称：</label>
-                    <input type="text" class="form-control" id="productName" placeholder="输入名称查询">
+                    <input type="text" class="form-control" name="title" placeholder="输入名称查询">
                 </div>
                 <div class="form-group">
                     <label for="categories">类别：</label>
@@ -54,11 +54,12 @@
                     <th class="col-lg-1">图片</th>
                     <th class="col-lg-2">名称</th>
                     <th class="col-lg-1">简称</th>
-                    <th class="col-lg-4">宝贝描述</th>
+                    <th class="col-lg-3">宝贝描述</th>
                     <th class="col-lg-1">零售价</th>
                     <th class="col-lg-1">市场价</th>
                     <th class="col-lg-1">排序</th>
                     <th class="col-lg-1">状态</th>
+                    <th class="col-lg-1">操作</th>
                 </tr>
             </thead>
             <tbody>
@@ -77,6 +78,9 @@
                         <td>@product.MarketPrice</td>
                         <td class="center">@product.SortIndex</td>
                         <td class="center">@product.Status</td>
+                        <th class="center">
+                            <a href="@Url.Action("edit","product",new { id = product.AutoId })">编辑</a>
+                        </th>
                     </tr>
                 }                
             </tbody>

@@ -83,11 +83,12 @@ namespace JL.Web.Helpers
             }
         }
 
+        #region 图片地址展示 
 
         public static string GenPictureUrlSmall(string path)
         {
             if (string.IsNullOrEmpty(path))
-                return null;
+                return "/images/products/default!50x50.jpg";
 
             if (path[0] == '~')
             {
@@ -101,5 +102,53 @@ namespace JL.Web.Helpers
 
             return path;
         }
+        public static string GenPictureUrlMiddle(string path)
+        {
+            if (string.IsNullOrEmpty(path))
+                return "/images/products/default!250x250.jpg";
+
+            if (path[0] == '~')
+            {
+                path = path.Substring(1);
+                var extIndex = path.LastIndexOf('.');
+                var pre = path.Substring(0, extIndex);
+                var ext = path.Substring(extIndex);
+
+                return pre + "250x250" + ext;
+            }
+
+            return path;
+        }
+        public static string GenPictureUrlBig(string path)
+        {
+            if (string.IsNullOrEmpty(path))
+                return "/images/products/default!430x430.jpg";
+
+            if (path[0] == '~')
+            {
+                path = path.Substring(1);
+                var extIndex = path.LastIndexOf('.');
+                var pre = path.Substring(0, extIndex);
+                var ext = path.Substring(extIndex);
+
+                return pre + "430x430" + ext;
+            }
+
+            return path;
+        }
+        public static string GenPictureUrlSource(string path)
+        {
+            if (string.IsNullOrEmpty(path))
+                return null;
+
+            if (path[0] == '~')
+            {
+                return path.Substring(1);
+            }
+
+            return path;
+        }
+
+        #endregion
     }
 }

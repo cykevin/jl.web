@@ -79,6 +79,55 @@ namespace JL.Web.Areas.backend.Controllers
             return View();
         }
 
+        [HttpGet]
+        public ActionResult Edit(int id)
+        {
+            var model = jlService.GetProduct(id);
+            ProductModel vo = new ProductModel();
+            vo.Name = model.Name;
+            vo.Picture = model.Picture;
+            vo.MarketPrice = model.MarketPrice;
+            vo.RetailPrice = model.RetailPrice;
+            vo.SortIndex = model.SortIndex;
+            vo.Description = model.Description;
+            vo.CategoryId = 0;
+            vo.AddTime = model.AddTime;
+
+            new ViewDataHelper(jlService).InitializeCategories(ViewData, 0, "categoryid");
+            return View(vo);
+        }
+
+        [ValidateInput(false)]
+        public ActionResult Edit(ProductModel model,int id)
+        {
+            if(ModelState.IsValid)
+            {
+                var product = jlService.GetProduct(id);
+                product.Alias = model.Alias;
+                product.Name = model.Name;
+                product.Description = model.Description;
+                product.MarketPrice = model.MarketPrice??0;
+                product.RetailPrice = model.RetailPrice??0;
+                product.SortIndex = model.SortIndex?? product.SortIndex;
+                // picture
+                if (Request.Files != null &&
+            Request.Files.Count > 0)
+                {
+                    var imgLink = FileHelper.SaveProductImage(Request.Files[0]);
+                    product.Picture = imgLink;
+                }
+
+                jlService.UpdateProduct(product);
+
+                ResultObject rutObj = ResultObject.Succeed();
+                ViewData.Add("ResultObject", rutObj);
+
+            }
+
+            new ViewDataHelper(jlService).InitializeCategories(ViewData, 0, "categoryid");
+            return View(model);
+        }
+
         [HttpPost]
         public ActionResult Upload()
         {
