@@ -21,6 +21,9 @@ namespace JL.Core.Models
 
         public int PageViews { get; set; }
         public int SortIndex { get; set; }
+        /// <summary>
+        /// 0（对外发布），1（未发布）
+        /// </summary>
         public int Status { get; set; }
 
         public override string ToString()

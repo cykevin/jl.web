@@ -10,6 +10,8 @@ namespace JL.Web.Areas.backend.Models
         public string Title { get; set; }
         public string Content { get; set; }
         public string Picture { get; set; }
-        public DateTime? AddTime { get; set; }        
+        public DateTime? AddTime { get; set; }
+
+        public bool IsPublished { get; set; }
     }
 }

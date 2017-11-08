@@ -81,7 +81,7 @@
 
                 <div class="form-group">
                     <label for="datetimepicker">图片</label>
-                    <input id="Picture" name="Picture" type="file" class="file-loading" accept="image/*">
+                    <input id="Picture-Upload" name="Picture-Upload" type="file" class="file-loading" accept="image/*">
                 </div>
             </div>
         </div>
@@ -92,6 +92,11 @@
 @section styles{
     @Styles.Render("~/Content/datepicker")
     @Styles.Render("~/Content/fileinput")
+<style type="text/css">
+    .file-preview-image {
+        width: 100%;
+    }
+</style>
 }
 @section scripts{
     @Scripts.Render("~/bundles/ueditor/")

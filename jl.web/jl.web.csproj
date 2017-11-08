@@ -960,6 +960,7 @@
     <Content Include="Areas\backend\Views\Product\Edit.cshtml" />
     <Content Include="Areas\backend\Views\Article\Index.cshtml" />
     <Content Include="Areas\backend\Views\Article\New.cshtml" />
+    <Content Include="Areas\backend\Views\Article\Edit.cshtml" />
     <None Include="Scripts\jquery-3.2.1.intellisense.js" />
     <Content Include="Images\search1.png" />
     <Content Include="Images\tick1.png" />

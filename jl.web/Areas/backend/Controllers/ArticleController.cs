@@ -50,6 +50,7 @@ namespace JL.Web.Areas.backend.Controllers
                 article.AddTime = model.AddTime ?? DateTime.Now;
                 article.Content = model.Content;
                 article.Title = model.Title;
+                article.Status = model.IsPublished ? 0 : 1;
                 // picture
                 if (Request.Files != null &&
                     Request.Files.Count > 0)
@@ -66,14 +67,47 @@ namespace JL.Web.Areas.backend.Controllers
         [HttpGet]
         public ActionResult Edit(int id)
         {
-            return View();
+            var article = jlService.GetArticle(id);
+
+            ArticleModel model = new ArticleModel();
+            model.AddTime = article.AddTime;
+            model.Content = article.Content;
+            model.Title = article.Title;
+            model.Picture = article.Picture;
+            model.IsPublished = article.Status == 0;
+            
+            return View(model);
         }
 
         [HttpPost]
         [ValidateInput(false)]
-        public ActionResult Edit(ArticleModel model)
+        public ActionResult Edit(ArticleModel model,int id)
         {
-            return View();
+            if(ModelState.IsValid)
+            {
+                var article = jlService.GetArticle(id);
+                article.AddTime = model.AddTime ?? article.AddTime;
+                article.Title = model.Title;
+                article.Content = model.Content;
+                // picture
+                if (Request.Files != null &&
+                    Request.Files.Count > 0)
+                {
+                    var imgLink = FileHelper.SaveArticleImage(Request.Files[0]);
+                    article.Picture = imgLink;
+                }
+                else
+                {
+                    article.Picture = model.Picture;
+                }                
+
+                jlService.UpdateArticle(article);
+                ViewData.Add("ResultObject", ResultObject.Succeed());
+
+                // for show
+                model.Picture = article.Picture;
+            }
+            return View(model);
         }
     }
 }

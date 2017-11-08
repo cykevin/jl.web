@@ -196,7 +196,7 @@ namespace JL.Web.Helpers
 
             if (path[0] == '~')
             {
-                return "http://www.jl.com/" + path.Substring(1);
+                return "http://www.jl.com" + path.Substring(1);
             }
 
             return path;
