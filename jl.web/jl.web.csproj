@@ -163,9 +163,12 @@
     <Compile Include="Areas\backend\Controllers\ProductController.cs" />
     <Compile Include="Areas\backend\Controllers\SettingController.cs" />
     <Compile Include="Areas\backend\Controllers\UserController.cs" />
+    <Compile Include="Areas\backend\Models\ArticleModel.cs" />
+    <Compile Include="Areas\backend\Models\ArticleSearchModel.cs" />
     <Compile Include="Areas\backend\Models\CategoryModel.cs" />
     <Compile Include="Areas\backend\Models\ProductModel.cs" />
     <Compile Include="Areas\backend\Models\ProductSearchModel.cs" />
+    <Compile Include="Common\Enums.cs" />
     <Compile Include="Common\ResultObject.cs" />
     <Compile Include="Content\ueditor\net\App_Code\Config.cs" />
     <Compile Include="Content\ueditor\net\App_Code\ConfigHandler.cs" />
@@ -955,6 +958,8 @@
     <Content Include="Areas\backend\Views\Category\Index.cshtml" />
     <Content Include="Areas\backend\Views\Product\Index.cshtml" />
     <Content Include="Areas\backend\Views\Product\Edit.cshtml" />
+    <Content Include="Areas\backend\Views\Article\Index.cshtml" />
+    <Content Include="Areas\backend\Views\Article\New.cshtml" />
     <None Include="Scripts\jquery-3.2.1.intellisense.js" />
     <Content Include="Images\search1.png" />
     <Content Include="Images\tick1.png" />
@@ -1003,7 +1008,6 @@
     <Folder Include="Areas\agent\Controllers\" />
     <Folder Include="Areas\agent\Models\" />
     <Folder Include="Areas\agent\Views\Shared\" />
-    <Folder Include="Areas\backend\Views\Article\" />
     <Folder Include="Areas\backend\Views\Franchisee\" />
     <Folder Include="Areas\backend\Views\Material\" />
     <Folder Include="Areas\backend\Views\Setting\" />

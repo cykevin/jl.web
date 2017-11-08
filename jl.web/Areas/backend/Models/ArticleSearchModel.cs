@@ -1,12 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Web;
 
-namespace JL.Core.Filters
+namespace JL.Web.Areas.backend.Models
 {
-    public class ArticleFilter
+    public class ArticleSearchModel
     {
         public string Title { get; set; }
     }

@@ -10,6 +10,7 @@ namespace JL.Core
         // article
         int AddArticle(Article article);
         PageData<Article> ArticlePage(PageReq pageReq);
+        PageData<Article> ArticlePage(PageReq<ArticleFilter> pageReq);
         void DeleteArticle(Article article);
         void UpdateArticle(Article model);
         Article GetArticle(int id);

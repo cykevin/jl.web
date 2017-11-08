@@ -85,10 +85,56 @@ namespace JL.Web.Helpers
 
         #region 图片地址展示 
 
-        public static string GenPictureUrlSmall(string path)
+        private static string MapPictureEnumsToDirName(JL.Web.PictureEnums type)
         {
+            var dirName = "products";
+            switch (type)
+            {
+                case PictureEnums.Product:
+                    dirName = "products";
+                    break;
+                case PictureEnums.Article:
+                    dirName = "articles";
+                    break;
+                case PictureEnums.User:
+                    dirName = "users";
+                    break;
+            }
+            return dirName;
+        }
+        public static string MapPictureEnumsToSize(JL.Web.PictureEnums type,PictureSize size)
+        {
+            switch (type)
+            {
+                case PictureEnums.Product:
+                    if (size == PictureSize.Big) return "430x430";
+                    if (size == PictureSize.Middle) return "250x250";
+                    if (size == PictureSize.Small) return "80x80";
+                    if (size == PictureSize.Big) return null;
+                    break;
+                case PictureEnums.Article:
+                    if (size == PictureSize.Big) return "440x330";
+                    if (size == PictureSize.Middle) return "220x165";
+                    if (size == PictureSize.Small) return "100x80";
+                    if (size == PictureSize.Big) return null;
+                    break;
+                case PictureEnums.User:
+                    if (size == PictureSize.Big) return "440x330";
+                    if (size == PictureSize.Middle) return "220x165";
+                    if (size == PictureSize.Small) return "100x80";
+                    if (size == PictureSize.Big) return null;
+                    break;
+            }
+            return null;
+        }
+
+        public static string GenPictureUrlSmall(string path, JL.Web.PictureEnums type = PictureEnums.Product)
+        {
+            var size = MapPictureEnumsToSize(type, PictureSize.Small);
             if (string.IsNullOrEmpty(path))
-                return "/images/products/default!50x50.jpg";
+            {
+                return "/images/" + MapPictureEnumsToDirName(type) + "/default!" + size + ".jpg";
+            }                
 
             if (path[0] == '~')
             {
@@ -97,15 +143,19 @@ namespace JL.Web.Helpers
                 var pre = path.Substring(0, extIndex);
                 var ext = path.Substring(extIndex);
 
-                return pre + "80x80" + ext;
+                return pre + size + ext;
             }
 
             return path;
         }
-        public static string GenPictureUrlMiddle(string path)
+
+        public static string GenPictureUrlMiddle(string path, JL.Web.PictureEnums type = PictureEnums.Product)
         {
+            var size = MapPictureEnumsToSize(type, PictureSize.Small);
             if (string.IsNullOrEmpty(path))
-                return "/images/products/default!250x250.jpg";
+            {
+                return "/images/" + MapPictureEnumsToDirName(type) + "/default!" + size + ".jpg";
+            }
 
             if (path[0] == '~')
             {
@@ -114,15 +164,18 @@ namespace JL.Web.Helpers
                 var pre = path.Substring(0, extIndex);
                 var ext = path.Substring(extIndex);
 
-                return pre + "250x250" + ext;
+                return pre + size + ext;
             }
 
             return path;
         }
-        public static string GenPictureUrlBig(string path)
+        public static string GenPictureUrlBig(string path, JL.Web.PictureEnums type = PictureEnums.Product)
         {
+            var size = MapPictureEnumsToSize(type, PictureSize.Small);
             if (string.IsNullOrEmpty(path))
-                return "/images/products/default!430x430.jpg";
+            {
+                return "/images/" + MapPictureEnumsToDirName(type) + "/default!" + size + ".jpg";
+            }
 
             if (path[0] == '~')
             {
@@ -131,19 +184,19 @@ namespace JL.Web.Helpers
                 var pre = path.Substring(0, extIndex);
                 var ext = path.Substring(extIndex);
 
-                return pre + "430x430" + ext;
+                return pre + size + ext;
             }
 
             return path;
         }
-        public static string GenPictureUrlSource(string path)
+        public static string GenPictureUrlSource(string path, JL.Web.PictureEnums type = PictureEnums.Product)
         {
             if (string.IsNullOrEmpty(path))
                 return null;
 
             if (path[0] == '~')
             {
-                return path.Substring(1);
+                return "http://www.jl.com/" + path.Substring(1);
             }
 
             return path;

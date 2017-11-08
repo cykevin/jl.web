@@ -6,6 +6,7 @@ using JL.Core.Repositories;
 using System;
 using System.Data;
 using System.Linq;
+using System.Text;
 
 namespace JL.Infrastructure.DapperRepository
 {
@@ -73,6 +74,48 @@ values (@Title,@Content,@Picture,@AddTime,@Tags,@PageViews,@SortIndex,@Status);S
             var pages = (int)Math.Ceiling((double)total / pageReq.PageSize);
 
             return PageData<Article>.Create(pageReq.PageIndex, pageReq.PageSize, pages, total, data);
+        }
+
+        public PageData<Article> ArticlePage(PageReq<ArticleFilter> pageReq)
+        {
+            var conn = DbConnectionFactory.CreateConnection();
+
+            var dParas = new DynamicParameters();
+            dParas.Add("@page", pageReq.PageIndex);
+            dParas.Add("@pagesize", pageReq.PageSize);
+            dParas.Add("@fields", "*");
+            dParas.Add("@tablename", "Article");
+            dParas.Add("@filter", BuildSqlFrom(pageReq.Data));
+            dParas.Add("@orderby", pageReq.OrderBy);
+            dParas.Add("@primarykey", "AutoId");
+            dParas.Add("@total", direction: ParameterDirection.Output);
+
+            var data = conn.Query<Article>("procPageQuery", param: dParas, commandType: CommandType.StoredProcedure);
+
+            var total = dParas.Get<int>("@total");
+
+            var pages = (int)Math.Ceiling((double)total / pageReq.PageSize);
+
+            return PageData<Article>.Create(pageReq.PageIndex, pageReq.PageSize, pages, total, data);
+        }
+
+        private string BuildSqlFrom(ArticleFilter filter)
+        {
+            if (filter != null)
+            {
+                StringBuilder sb = new StringBuilder();
+
+                if (!string.IsNullOrEmpty(filter.Title))
+                {
+                    sb.Append("p.name like '%" + filter.Title + "%'");
+                    sb.Append(" and ");
+                }
+
+                if (sb.Length > 0)
+                    return sb.Remove(sb.Length - 4, 4).ToString();
+            }
+
+            return null;
         }
 
         #endregion

@@ -87,6 +87,11 @@ namespace JL.Core.Providers
         {
             return articleRepository.GetById(id);
         }
+        
+        public PageData<Article> ArticlePage(PageReq<ArticleFilter> pageReq)
+        {
+            return articleRepository.ArticlePage(pageReq);
+        }
 
         #endregion
 

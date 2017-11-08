@@ -1,19 +1,16 @@
-﻿using JL.Core.Filters;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using JL.Core.Common;
+using JL.Core.Filters;
 
 namespace JL.Core.Repositories
 {
     public interface IArticleRepository
     {
         int Insert(Models.Article model);
-        JL.Core.Common.PageData<Models.Article> ArticlePage(JL.Core.Common.PageReq pageReq);
+        PageData<Models.Article> ArticlePage(PageReq pageReq);
         Models.Article GetById(int id);
         void Update(Models.Article model);
         void Delete(int id);
         void Delete(Models.Article model);
+        PageData<Models.Article> ArticlePage(PageReq<ArticleFilter> pageReq);
     }
 }
