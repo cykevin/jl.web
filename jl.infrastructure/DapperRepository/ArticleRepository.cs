@@ -107,7 +107,7 @@ values (@Title,@Content,@Picture,@AddTime,@Tags,@PageViews,@SortIndex,@Status);S
 
                 if (!string.IsNullOrEmpty(filter.Title))
                 {
-                    sb.Append("p.name like '%" + filter.Title + "%'");
+                    sb.Append("title like '%" + filter.Title + "%'");
                     sb.Append(" and ");
                 }
 
