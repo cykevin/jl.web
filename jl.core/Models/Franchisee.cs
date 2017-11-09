@@ -23,6 +23,9 @@ namespace JL.Core.Models
 
         public DateTime ApplyTime { get; set; }
         public DateTime ProcessTime { get; set; }
+        /// <summary>
+        /// 0（申请），1（通过），2（拒绝），3（终止）
+        /// </summary>
         public int Status { get; set; }
     }
 }

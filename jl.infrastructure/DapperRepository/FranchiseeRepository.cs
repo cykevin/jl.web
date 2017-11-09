@@ -1,5 +1,6 @@
 ﻿using Dapper;
 using JL.Core.Common;
+using JL.Core.Filters;
 using JL.Core.Models;
 using JL.Core.Repositories;
 using System;
@@ -31,6 +32,60 @@ namespace JL.Infrastructure.DapperRepository
             var pages = (int)Math.Ceiling((double)total / pageReq.PageSize);
 
             return PageData<Franchisee>.Create(pageReq.PageIndex, pageReq.PageSize, pages, total, data);
+        }
+
+        public PageData<Franchisee> FranchiseePage(PageReq<Core.Filters.FranchiseeFilter> pageReq)
+        {
+            var conn = DbConnectionFactory.CreateConnection();
+
+            var dParas = new DynamicParameters();
+            dParas.Add("@page", pageReq.PageIndex);
+            dParas.Add("@pagesize", pageReq.PageSize);
+            dParas.Add("@fields", "*");
+            dParas.Add("@tablename", "Franchisee");
+            dParas.Add("@filter", BuildSqlFrom(pageReq.Data));
+            dParas.Add("@orderby", pageReq.OrderBy);
+            dParas.Add("@primarykey", "AutoId");
+            dParas.Add("@total", direction: ParameterDirection.Output);
+
+            var data = conn.Query<Franchisee>("procPageQuery", param: dParas, commandType: CommandType.StoredProcedure);
+
+            var total = dParas.Get<int>("@total");
+
+            var pages = (int)Math.Ceiling((double)total / pageReq.PageSize);
+
+            return PageData<Franchisee>.Create(pageReq.PageIndex, pageReq.PageSize, pages, total, data);
+        }
+
+        private string BuildSqlFrom(FranchiseeFilter filter)
+        {
+            if (filter == null)
+                return null;
+
+            var sb = new System.Text.StringBuilder();
+            if (!string.IsNullOrEmpty(filter.Email))
+            {
+                sb.Append(" email like '%" + filter.Email + "%' ");
+                sb.Append(" and ");
+            }
+
+            if (!string.IsNullOrEmpty(filter.Name))
+            {
+                sb.Append(" name like '%" + filter.Name + "%' ");
+                sb.Append(" and ");
+            }
+            if (!string.IsNullOrEmpty(filter.Phone))
+            {
+                sb.Append(" phone like '%" + filter.Phone + "%' ");
+                sb.Append(" and ");
+            }
+
+            if (sb.Length > 0)
+            {
+                sb.Remove(sb.Length - 4, 4);
+            }
+
+            return sb.ToString();
         }
 
         #region methods from t4

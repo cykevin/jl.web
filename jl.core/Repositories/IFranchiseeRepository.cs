@@ -16,5 +16,6 @@ namespace JL.Core.Repositories
         PageData<Franchisee> FranchiseePage(PageReq pageReq);
         void Delete(int id);
         void Delete(Franchisee model);
+        PageData<Franchisee> FranchiseePage(PageReq<Filters.FranchiseeFilter> pageReq);
     }
 }

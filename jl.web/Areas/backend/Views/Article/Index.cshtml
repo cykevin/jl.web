@@ -41,7 +41,7 @@
 <div class="row">
     <div class="col-lg-12">
         <div class="query-part">
-            <form class="form-inline" method="post" action="@Url.Action("index","product")">
+            <form class="form-inline" method="post" action="@Url.Action("index","article")">
                 <div class="form-group">
                     <label for="productName">名称：</label>
                     <input type="text" class="form-control" name="title" placeholder="输入标题查询">
@@ -79,7 +79,15 @@
                         <td>@article.Title</td>                        
                         <td class="center">@article.Content</td>
                         <td class="center">@article.AddTime.ToString("yyyy-MM-dd")</td>
-                        <td class="center">@article.Status</td>
+                        @if (article.Status == 0)
+                        {
+                            <td class="center text-success">已发布</td>
+                        }
+                        else if(article.Status==1)
+                        {
+                            <td class="center text-danger">未发布</td>
+                        }
+                        
                         <td class="center">@article.PageViews</td>
                         <th class="center">
                             <a href="@Url.Action("edit","article",new { id = article.AutoId })">编辑</a>

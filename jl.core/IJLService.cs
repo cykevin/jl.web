@@ -47,7 +47,9 @@ namespace JL.Core
         void DeleteFranchisee(Franchisee model);
         int AddFranchisee(Franchisee model);
         void UpdateFranchisee(Franchisee model);
-        void FranchiseePage(PageReq pageReq);
+        PageData<Franchisee> FranchiseePage(PageReq pageReq);
+        PageData<Franchisee> FranchiseePage(PageReq<FranchiseeFilter> pageReq);
+        Franchisee GetFranchisee(int id);
 
         // userprofile
         int AddUser(UserProfile user);

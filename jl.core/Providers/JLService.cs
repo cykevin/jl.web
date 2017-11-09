@@ -131,14 +131,26 @@ namespace JL.Core.Providers
             throw new NotImplementedException();
         }
 
-        public void FranchiseePage(PageReq pageReq)
+        public PageData<Franchisee> FranchiseePage(PageReq pageReq)
         {
-            franchiseeRepository.FranchiseePage(pageReq);
+            return franchiseeRepository.FranchiseePage(pageReq);
         }
+
+        public PageData<Franchisee> FranchiseePage(PageReq<FranchiseeFilter> pageReq)
+        {
+            return franchiseeRepository.FranchiseePage(pageReq);
+        }
+
         public void UpdateFranchisee(Franchisee model)
         {
             franchiseeRepository.Update(model);
         }
+
+        public Franchisee GetFranchisee(int id)
+        {
+            return franchiseeRepository.GetById(id);
+        }
+
         #endregion
 
         #region product
@@ -186,28 +198,9 @@ namespace JL.Core.Providers
             return productRepository.ProductCategoryPage(pageReq);
         }
 
-        #endregion
-
-        #region member
-
-        public void DeleteMember(Member member)
+        public PageData<Product> ProductPage(PageReq<ProductFilter> pageReq)
         {
-            memberRepository.Delete(member);
-        }
-
-        public void UpdateMember(Member model)
-        {
-            memberRepository.Update(model);
-        }
-
-        public int AddMember(Member model)
-        {
-            return memberRepository.Insert(model);
-        }
-
-        public PageData<Member> MemberPage(PageReq pageReq)
-        {
-            return memberRepository.MemberPage(pageReq);
+            return productRepository.ProductPage(pageReq);
         }
 
         public Product GetProduct(int id)
@@ -232,11 +225,31 @@ namespace JL.Core.Providers
         {
             return productRepository.GetProductCategoryList();
         }
+        
+        #endregion
 
-        public PageData<Product> ProductPage(PageReq<ProductFilter> pageReq)
+        #region member
+
+        public void DeleteMember(Member member)
         {
-            return productRepository.ProductPage(pageReq);
+            memberRepository.Delete(member);
         }
+
+        public void UpdateMember(Member model)
+        {
+            memberRepository.Update(model);
+        }
+
+        public int AddMember(Member model)
+        {
+            return memberRepository.Insert(model);
+        }
+
+        public PageData<Member> MemberPage(PageReq pageReq)
+        {
+            return memberRepository.MemberPage(pageReq);
+        }
+
 
 
         #endregion

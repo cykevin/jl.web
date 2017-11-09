@@ -46,6 +46,7 @@
     <Compile Include="Common\Utils.cs" />
     <Compile Include="Consts.cs" />
     <Compile Include="Filters\ArticleFilter.cs" />
+    <Compile Include="Filters\FranchiseeFilter.cs" />
     <Compile Include="Filters\ProductFilter.cs" />
     <Compile Include="Filters\UserFilter.cs" />
     <Compile Include="IJLService.cs" />

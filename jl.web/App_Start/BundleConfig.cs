@@ -45,11 +45,11 @@ namespace JL.Web
 
             // datapicker
             bundles.Add(new StyleBundle("~/Content/datepicker").Include(
-                "~/Content/bootstrap-datepicker/css/bootstrap-datepicker.css"));
+                "~/Content/bootstrap-datetimepicker/css/bootstrap-datetimepicker.css"));
             
             bundles.Add(new ScriptBundle("~/bundles/datepicker/").Include(
-                "~/Content/bootstrap-datepicker/js/bootstrap-datepicker.js",
-                "~/Content/bootstrap-datepicker/locales/bootstrap-datepicker.zh-CN.min.js"
+                "~/Content/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js",
+                "~/Content/bootstrap-datetimepicker/js/locales/bootstrap-datetimepicker.zh-CN.js"
                 ));
             
         }
