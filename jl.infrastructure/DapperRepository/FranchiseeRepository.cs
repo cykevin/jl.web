@@ -65,18 +65,18 @@ namespace JL.Infrastructure.DapperRepository
             var sb = new System.Text.StringBuilder();
             if (!string.IsNullOrEmpty(filter.Email))
             {
-                sb.Append(" email like '%" + filter.Email + "%' ");
+                sb.Append(" email like '%" + SqlFilter.FilterQueryParameter(filter.Email) + "%' ");
                 sb.Append(" and ");
             }
 
             if (!string.IsNullOrEmpty(filter.Name))
             {
-                sb.Append(" name like '%" + filter.Name + "%' ");
+                sb.Append(" name like '%" + SqlFilter.FilterQueryParameter(filter.Name) + "%' ");
                 sb.Append(" and ");
             }
             if (!string.IsNullOrEmpty(filter.Phone))
             {
-                sb.Append(" phone like '%" + filter.Phone + "%' ");
+                sb.Append(" phone like '%" + SqlFilter.FilterQueryParameter(filter.Phone) + "%' ");
                 sb.Append(" and ");
             }
 

@@ -168,6 +168,7 @@
     <Compile Include="Areas\backend\Models\CategoryModel.cs" />
     <Compile Include="Areas\backend\Models\FranchiseeModel.cs" />
     <Compile Include="Areas\backend\Models\FranchiseeSearchModel.cs" />
+    <Compile Include="Areas\backend\Models\MaterialModel.cs" />
     <Compile Include="Areas\backend\Models\ProductModel.cs" />
     <Compile Include="Areas\backend\Models\ProductSearchModel.cs" />
     <Compile Include="Common\Enums.cs" />
@@ -966,6 +967,8 @@
     <Content Include="Areas\backend\Views\Franchisee\Index.cshtml" />
     <Content Include="Areas\backend\Views\Franchisee\New.cshtml" />
     <Content Include="Areas\backend\Views\Franchisee\Edit.cshtml" />
+    <Content Include="Areas\backend\Views\Material\Index.cshtml" />
+    <Content Include="Areas\backend\Views\Material\New.cshtml" />
     <None Include="Scripts\jquery-3.2.1.intellisense.js" />
     <Content Include="Images\search1.png" />
     <Content Include="Images\tick1.png" />
@@ -1014,7 +1017,6 @@
     <Folder Include="Areas\agent\Controllers\" />
     <Folder Include="Areas\agent\Models\" />
     <Folder Include="Areas\agent\Views\Shared\" />
-    <Folder Include="Areas\backend\Views\Material\" />
     <Folder Include="Areas\backend\Views\Setting\" />
     <Folder Include="Views\Article\" />
     <Folder Include="Views\Hi\" />
@@ -1027,6 +1029,10 @@
     <ProjectReference Include="..\jl.core\jl.core.csproj">
       <Project>{f31641bd-b28e-4d20-9921-71f545ca73fa}</Project>
       <Name>jl.core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\jl.infrastructure\jl.infrastructure.csproj">
+      <Project>{208c9f8d-b9ee-4bbb-b4a8-454caf09bd95}</Project>
+      <Name>jl.infrastructure</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
