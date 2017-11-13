@@ -169,6 +169,7 @@
     <Compile Include="Areas\backend\Models\FranchiseeModel.cs" />
     <Compile Include="Areas\backend\Models\FranchiseeSearchModel.cs" />
     <Compile Include="Areas\backend\Models\MaterialModel.cs" />
+    <Compile Include="Areas\backend\Models\MaterialSearchModel.cs" />
     <Compile Include="Areas\backend\Models\ProductModel.cs" />
     <Compile Include="Areas\backend\Models\ProductSearchModel.cs" />
     <Compile Include="Common\Enums.cs" />
@@ -969,6 +970,7 @@
     <Content Include="Areas\backend\Views\Franchisee\Edit.cshtml" />
     <Content Include="Areas\backend\Views\Material\Index.cshtml" />
     <Content Include="Areas\backend\Views\Material\New.cshtml" />
+    <Content Include="Areas\backend\Views\Material\Edit.cshtml" />
     <None Include="Scripts\jquery-3.2.1.intellisense.js" />
     <Content Include="Images\search1.png" />
     <Content Include="Images\tick1.png" />

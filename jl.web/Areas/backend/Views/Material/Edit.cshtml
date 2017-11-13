@@ -1,4 +1,5 @@
-﻿@model JL.Web.Areas.backend.Models.MaterialModel
+﻿
+@model JL.Web.Areas.backend.Models.MaterialModel
 @{
     ViewBag.Title = "新素材";
 }
@@ -44,7 +45,7 @@
                     <div class="form-group">
                         <label for="fileInput">选择文件</label>
                         <input id="fileInput" name="fileInput" type="file" class="file-loading" accept="image/*">
-                        @Html.HiddenFor(m=>m.FileName)
+                        @Html.HiddenFor(m => m.FileName)
                     </div>
 
                     <div class="form-group">
@@ -111,10 +112,21 @@
                 todayHighlight: true
             });
 
+            var preview = "<div class='file-preview-text'>" +
+    "<h2><i class='glyphicon glyphicon-file'></i></h2>" +
+                "@Model.Title" + "</div>"
+
+            //var imgArray = [];
+            //if (url.length > 0)
+            //{
+            //    imgArray.push('<img src="' + url + '" class="file-preview-image"/>');
+            //}
+
             $('#fileInput').fileinput({
                 language: 'zh', //设置语言
                 //allowedFileTypes: ['image', 'video'],
-                allowedFileExtensions: ['3gp','asf','avi','dat','dv','flv','f4v','gif','m2t','m3u8','m4v','mj2','mjpeg','mkv','mov','mp4','mpe','mpg','mpeg','mts','ogg','qt','rm','rmvb','ts','vob','wmv','webm','jpg','jpeg','png','bmp'],
+                allowedFileExtensions: ['3gp', 'asf', 'avi', 'dat', 'dv', 'flv', 'f4v', 'gif', 'm2t', 'm3u8', 'm4v', 'mj2', 'mjpeg', 'mkv', 'mov', 'mp4', 'mpe', 'mpg', 'mpeg', 'mts', 'ogg', 'qt', 'rm', 'rmvb', 'ts', 'vob', 'wmv', 'webm', 'jpg', 'jpeg', 'png', 'bmp'],
+                initialPreview: preview,
                 showUpload: false,
                 showCaption: false,
                 browseClass: "btn btn-primary",
@@ -132,14 +144,11 @@
             });
 
             $('#materialForm').validate({
-                ignore:[],
                 rules: {
-                    Title: "required",
-                    FileName:"required"
+                    Title: "required"
                 },
                 messages: {
-                    Title: "请输入素材名称",
-                    FileName:"请选择文件"
+                    Title: "请输入素材名称"
                 },
                 errorElement: "em",
                 errorPlacement: function (error, element) {
@@ -162,3 +171,7 @@
         });
     </script>
 }
+
+
+
+

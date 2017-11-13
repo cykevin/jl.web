@@ -19,7 +19,9 @@ namespace JL.Core
         int AddMaterial(Material model);
         void DeleteMaterial(Material model);
         void UpdateMaterial(Material model);
+        Material GetMaterial(int id);
         PageData<Material> MaterialPage(PageReq pageReq);
+        PageData<Material> MaterialPage(PageReq<MaterialFilter> pageReq);
 
         // member
         int AddMember(Member model);

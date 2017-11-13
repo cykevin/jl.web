@@ -1,7 +1,109 @@
-﻿
+﻿@using MVCPaging
+
+@model JL.Core.Common.PageData<JL.Core.Models.Material>
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "素材中心";
+}
+@section styles{
+    <style type="text/css">
+        .query-part {
+            padding-bottom: 9px;
+            margin: 4px 0 10px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .thumbnail {
+            margin-bottom: 2px;
+        }
+
+        .table {
+            table-layout: fixed;
+        }
+
+            .table th, .table td {
+                text-align: center;
+                vertical-align: middle !important;
+            }
+
+            .table td {
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+            }
+    </style>
+
 }
 
-<h2>Index</h2>
+<div class="row">
+    <div class="col-lg-12">
+        <h3 class="page-header">素材中心</h3>
+    </div>
+</div>
 
+<div class="row">
+    <div class="col-lg-12">
+        <div class="query-part">
+            <form class="form-inline" method="post" action="@Url.Action("index","material")">
+                <div class="form-group">
+                    <label for="materialname">名称：</label>
+                    <input type="text" class="form-control" name="materialname" placeholder="输入名称查询">
+                </div>
+
+                <button type="submit" class="btn btn-primary">查询</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-12">
+        <table class="table table-striped table-bordered table-hover table-l" id="dataTable-products">
+            <thead>
+                <tr>
+                    <th class="col-lg-1">图片</th>
+                    <th class="col-lg-2">名称</th>
+                    <th class="col-lg-4">描述</th>
+                    <th class="col-lg-1">发布日期</th>
+                    <th class="col-lg-1">状态</th>
+                    <th class="col-lg-1">下载量</th>
+                    <th class="col-lg-2">操作</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var material in Model.Data)
+                {
+                    <tr>
+                        <td>
+                            <a href="#" class="thumbnail">
+                                <img src="@JL.Web.Helpers.ImageHelper.GenPictureUrlSmall(material.Picture,PictureEnums.Material)" alt="" class="img-responsive">
+                            </a>
+                        </td>
+                        <td>@material.Title</td>
+                        <td class="center">@material.Description</td>
+                        <td class="center">@material.AddTime.ToString("yyyy-MM-dd")</td>
+                        @if (material.Status == 0)
+                        {
+                            <td class="center text-success">已发布</td>
+                        }
+                        else if (material.Status == 1)
+                        {
+                            <td class="center text-danger">未发布</td>
+                        }
+
+                        <td class="center">@material.PageViews</td>
+                        <th class="center">
+                            <a href="@Url.Action("edit","material",new { id = material.AutoId })">编辑</a>
+                        </th>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+<div class="row">
+    <div class="col-lg-12">
+        @Html.Pager(Model.PageSize, Model.PageIndex, Model.TotalCount).Options(o => o.Action("Index"))
+    </div>
+</div>

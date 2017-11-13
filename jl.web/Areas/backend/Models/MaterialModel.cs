@@ -11,8 +11,10 @@ namespace JL.Web.Areas.backend.Models
         public string Type { get; set; }
         public string Description { get; set; }
         public string FileName { get; set; }
+        public string Url { get; set; }
         public string Picture { get; set; }
 
+        public DateTime? AddTime { get; set; }
         public bool Status { get; set; }// 对外开放
     }
 }

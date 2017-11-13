@@ -202,6 +202,19 @@ namespace JL.Web.Helpers
             return path;
         }
 
+        public static string GenMaterialUrlSource(string path)
+        {
+            if (string.IsNullOrEmpty(path))
+                return null;
+
+            if (path[0] == '~')
+            {
+                return "http://www.jl.com" + path.Substring(1);
+            }
+
+            return path;
+        }
+
         #endregion
     }
 }

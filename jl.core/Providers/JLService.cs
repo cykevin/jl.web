@@ -117,6 +117,16 @@ namespace JL.Core.Providers
             materialRepository.Update(model);
         }
 
+        public PageData<Material> MaterialPage(PageReq<MaterialFilter> pageReq)
+        {
+            return materialRepository.MaterialPage(pageReq);
+        }
+
+        public Material GetMaterial(int id)
+        {
+            return materialRepository.GetById(id);
+        }
+
         #endregion
 
         #region franchisee

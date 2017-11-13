@@ -24,6 +24,8 @@ namespace JL.Core.Models
         public int PageViews { get; set; }
         public int SortIndex { get; set; }
         public int Status { get; set; }
+
+        public DateTime AddTime { get; set; }
     }
     
 }

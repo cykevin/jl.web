@@ -100,5 +100,31 @@ namespace JL.Web.Helpers
 
             return virtualPath + "/" + fileName;
         }        
+
+        public static string SaveMaterial(HttpPostedFileBase file)
+        {
+            // 保存文件到目录/material/2017xxxx/
+            if (file.ContentLength < 1)
+                return null;
+            
+            var dirName = DateTime.Now.ToString("yyyyMMdd");
+            var virtualPath = "~/materials/" + dirName;
+
+            var dir = System.Web.Hosting.HostingEnvironment.MapPath(virtualPath);
+
+            if (!System.IO.Directory.Exists(dir))
+            {
+                System.IO.Directory.CreateDirectory(dir);
+            }
+
+            var ext = System.IO.Path.GetExtension(file.FileName);
+            var fileName = DateTime.Now.ToString("yyyyMMddHHmmss") + "!" + ext;
+
+            // 保存源文件
+            var newFilePath = System.IO.Path.Combine(dir, fileName);
+            file.SaveAs(newFilePath);
+
+            return virtualPath + "/" + fileName;
+        }
     }
 }
