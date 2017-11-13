@@ -20,6 +20,8 @@ namespace JL.Web.Areas.backend.Models
         public float? RetailPrice { get; set; }        
         public float? MarketPrice { get; set; }
 
+        public bool IsPublished { get; set; }
+
         public ProductModel()
         {
             SortIndex = 100;

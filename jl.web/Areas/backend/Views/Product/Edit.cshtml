@@ -70,7 +70,7 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="datetimepicker">发布日期</label>                    
+                    <label for="AddTime">发布日期</label>                    
                     <input type="text" name="AddTime" class="form-control" value="@Model.AddTime.ToString("yyyy-MM-dd")" id="AddTime" data-date-format="yyyy-mm-dd">
                 </div>
 
@@ -110,11 +110,12 @@
         $(document).ready(function () {
             var ue = UE.getEditor('Description');
 
-            $('#datetimepicker').datepicker({
+            $('#AddTime').datetimepicker({
                 language: 'zh-CN',
                 autoclose: true,
                 todayBtn: true,
-                pickerPosition: "bottom-left",
+                format: 'yyyy-mm-dd hh:ii',
+                pickerPosition: "left-bottom",
                 todayHighlight: true
             });
 
@@ -125,7 +126,7 @@
                 imgArray.push('<img src="' + url + '" class="file-preview-image"/>');
             }            
 
-            $('#Picture').fileinput({
+            $('#Picture-Upload').fileinput({
                 language: 'zh', //设置语言
                 allowedFileExtensions: ['jpg', 'png', 'gif'],
                 initialPreview: imgArray,
