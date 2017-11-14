@@ -14,4 +14,9 @@ namespace JL.Web
     {
         Small,Middle,Big,Source
     }
+
+    public enum MaterialType
+    {
+        Picture=1,Video=2
+    }
 }

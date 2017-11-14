@@ -1,0 +1,96 @@
+﻿@using MVCPaging
+
+@model JL.Core.Common.PageData<JL.Core.Models.Material>
+@{
+    ViewBag.Title = "素材中心";
+}
+@section styles{
+    <style type="text/css">
+        .query-part {
+            padding-bottom: 9px;
+            margin: 14px 0 10px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .thumbnail {
+            margin-bottom: 2px;
+        }
+
+        .table {
+            table-layout: fixed;
+        }
+
+        .table th, .table td {
+            text-align: center;
+            vertical-align: middle !important;
+        }
+
+        .table td {
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+    </style>
+
+}
+
+<div class="row">
+    <div class="col-lg-12">
+        <h3 class="page-header">素材中心</h3>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-12">
+        <ul class="nav nav-tabs">
+            <li role="presentation"><a href="@Url.Action("index","material")">全部</a></li>
+            <li role="presentation"><a href="@Url.Action("picture","material")">图片</a></li>
+            <li role="presentation" class="active"><a href="@Url.Action("video","material")">视频</a></li>
+        </ul>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="query-part">
+            <form class="form-inline" method="post" action="@Url.Action("video","material")">
+                <div class="form-group">
+                    <label for="materialname">名称：</label>
+                    <input type="text" class="form-control" name="materialname" placeholder="输入名称查询">
+                </div>
+
+                <button type="submit" class="btn btn-primary">查询</button>
+                <a href="@Url.Action("newvideo","material")">
+                    <button type="button" class="btn btn-success">添加</button>
+                </a>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    @foreach (var material in Model.Data)
+    {
+        <div class="col-lg-3">
+            <div class="thumbnail">
+                <img src="@JL.Web.Helpers.ImageHelper.GenPictureUrlMiddle(material.Picture,PictureEnums.Material)" alt="">
+                <div class="caption">
+                    <h3>@material.Title</h3>
+                    <p>@material.Description</p>
+                    <p>
+                        <span>@(material.Status == 0 ? "已发布" : "未发布")</span>
+                        <a href="@Url.Action("edit","material",new { id = material.AutoId })" class="btn btn-primary" role="button">编辑</a>
+                    </p>
+                    <p><i>下载量：@material.PageViews</i></p>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+
+<div class="row">
+    <div class="col-lg-12">
+        @Html.Pager(Model.PageSize, Model.PageIndex, Model.TotalCount).Options(o => o.Action("Picture"))
+    </div>
+</div>

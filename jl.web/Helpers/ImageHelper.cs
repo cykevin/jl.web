@@ -99,6 +99,9 @@ namespace JL.Web.Helpers
                 case PictureEnums.User:
                     dirName = "users";
                     break;
+                case PictureEnums.Material:
+                    dirName = "materials";
+                    break;
             }
             return dirName;
         }
@@ -122,6 +125,18 @@ namespace JL.Web.Helpers
                     if (size == PictureSize.Big) return "440x330";
                     if (size == PictureSize.Middle) return "220x165";
                     if (size == PictureSize.Small) return "100x80";
+                    if (size == PictureSize.Big) return null;
+                    break;
+                case PictureEnums.Material:
+                    if (size == PictureSize.Big) return "430x430";
+                    if (size == PictureSize.Middle) return "250x250";
+                    if (size == PictureSize.Small) return "80x80";
+                    if (size == PictureSize.Big) return null;
+                    break;
+                default:
+                    if (size == PictureSize.Big) return "430x430";
+                    if (size == PictureSize.Middle) return "250x250";
+                    if (size == PictureSize.Small) return "80x80";
                     if (size == PictureSize.Big) return null;
                     break;
             }
@@ -151,7 +166,7 @@ namespace JL.Web.Helpers
 
         public static string GenPictureUrlMiddle(string path, JL.Web.PictureEnums type = PictureEnums.Product)
         {
-            var size = MapPictureEnumsToSize(type, PictureSize.Small);
+            var size = MapPictureEnumsToSize(type, PictureSize.Middle);
             if (string.IsNullOrEmpty(path))
             {
                 return "/images/" + MapPictureEnumsToDirName(type) + "/default!" + size + ".jpg";
@@ -171,7 +186,7 @@ namespace JL.Web.Helpers
         }
         public static string GenPictureUrlBig(string path, JL.Web.PictureEnums type = PictureEnums.Product)
         {
-            var size = MapPictureEnumsToSize(type, PictureSize.Small);
+            var size = MapPictureEnumsToSize(type, PictureSize.Big);
             if (string.IsNullOrEmpty(path))
             {
                 return "/images/" + MapPictureEnumsToDirName(type) + "/default!" + size + ".jpg";

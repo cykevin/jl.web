@@ -101,7 +101,7 @@ namespace JL.Web.Helpers
             return virtualPath + "/" + fileName;
         }        
 
-        public static string SaveMaterial(HttpPostedFileBase file)
+        public static string SaveMaterial(HttpPostedFileBase file,int materialType)
         {
             // 保存文件到目录/material/2017xxxx/
             if (file.ContentLength < 1)
@@ -123,8 +123,46 @@ namespace JL.Web.Helpers
             // 保存源文件
             var newFilePath = System.IO.Path.Combine(dir, fileName);
             file.SaveAs(newFilePath);
-
+            
             return virtualPath + "/" + fileName;
+        }
+
+        public static string SaveMaterialImage(string fileVirtualPath, int materialType)
+        {
+            var dirName = DateTime.Now.ToString("yyyyMMdd");
+            var virtualPath = "~/materials/" + dirName;
+
+            var filePath = System.Web.Hosting.HostingEnvironment.MapPath(fileVirtualPath);
+
+            var dir = System.IO.Directory.GetParent(filePath).FullName;
+            var ext = System.IO.Path.GetExtension(filePath);
+
+            if (materialType == (int)MaterialType.Picture)
+            {
+                // 保存3种大小的缩略图
+                var size = ImageHelper.MapPictureEnumsToSize(PictureEnums.Material, PictureSize.Small);
+                var wh = size.Split('x').Select(i => Convert.ToInt32(i)).ToArray();
+                var thumbnail = System.IO.Path.Combine(dir, DateTime.Now.ToString("yyyyMMddHHmmss") + "!" + size + ext);
+                ImageHelper.MakeThumbnail(filePath, thumbnail, wh[0], wh[1], "Cut");
+
+                size = ImageHelper.MapPictureEnumsToSize(PictureEnums.Material, PictureSize.Middle);
+                wh = size.Split('x').Select(i => Convert.ToInt32(i)).ToArray();
+                thumbnail = System.IO.Path.Combine(dir, DateTime.Now.ToString("yyyyMMddHHmmss") + "!" + size + ext);
+                ImageHelper.MakeThumbnail(filePath, thumbnail, wh[0], wh[1], "Cut");
+
+                size = ImageHelper.MapPictureEnumsToSize(PictureEnums.Material, PictureSize.Big);
+                wh = size.Split('x').Select(i => Convert.ToInt32(i)).ToArray();
+                thumbnail = System.IO.Path.Combine(dir, DateTime.Now.ToString("yyyyMMddHHmmss") + "!" + size + ext);
+                ImageHelper.MakeThumbnail(filePath, thumbnail, wh[0], wh[1], "Cut");
+
+                return virtualPath + "/" + System.IO.Path.GetFileName(filePath);
+            }
+            else if (materialType == (int)MaterialType.Video)
+            {
+                return null;
+            }
+
+            return null;
         }
     }
 }

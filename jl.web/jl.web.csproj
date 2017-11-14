@@ -971,6 +971,10 @@
     <Content Include="Areas\backend\Views\Material\Index.cshtml" />
     <Content Include="Areas\backend\Views\Material\New.cshtml" />
     <Content Include="Areas\backend\Views\Material\Edit.cshtml" />
+    <Content Include="Areas\backend\Views\Material\Picture.cshtml" />
+    <Content Include="Areas\backend\Views\Material\Video.cshtml" />
+    <Content Include="Areas\backend\Views\Material\NewPicture.cshtml" />
+    <Content Include="Areas\backend\Views\Material\NewVideo.cshtml" />
     <None Include="Scripts\jquery-3.2.1.intellisense.js" />
     <Content Include="Images\search1.png" />
     <Content Include="Images\tick1.png" />

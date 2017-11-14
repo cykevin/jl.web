@@ -4,7 +4,7 @@
     ViewBag.Title = "新素材";
 }
 
-@using (Html.BeginForm("new", "material", FormMethod.Post, new { id = "materialForm", enctype = "multipart/form-data" }))
+@using (Html.BeginForm("edit", "material", FormMethod.Post, new { id = "materialForm", enctype = "multipart/form-data" }))
 {
     if (ViewData.ContainsKey("ResultObject"))
     {

@@ -21,8 +21,11 @@ namespace JL.Web.Areas.backend.Controllers
             this.jlService = jlService;
         }
 
+        #region list page
+
+
         // GET: backend/Material
-        public ActionResult Index(MaterialSearchModel model)
+        public ActionResult Index(MaterialSearchModel model, int page = 1)
         {
             MaterialFilter filter = new MaterialFilter();
             filter.AddTimeFrom = model.AddTimeFrom;
@@ -30,11 +33,41 @@ namespace JL.Web.Areas.backend.Controllers
             filter.MaterialType = model.MaterialType;
             filter.Title = model.Title;
 
-            PageReq<MaterialFilter> pager = PageReq<MaterialFilter>.Create(filter);
+            PageReq<MaterialFilter> pager = PageReq<MaterialFilter>.Create(filter, page);
             var data = jlService.MaterialPage(pager);
 
             return View(data);
         }
+        public ActionResult Picture(MaterialSearchModel model, int page = 1)
+        {
+            MaterialFilter filter = new MaterialFilter();
+            filter.AddTimeFrom = model.AddTimeFrom;
+            filter.AddTimeTo = model.AddTimeTo;
+            filter.MaterialType = (int)MaterialType.Picture;
+            filter.Title = model.Title;
+
+            PageReq<MaterialFilter> pager = PageReq<MaterialFilter>.Create(filter, page);
+            var data = jlService.MaterialPage(pager);
+
+            return View(data);
+        }
+        public ActionResult Video(MaterialSearchModel model,int page=1)
+        {
+            MaterialFilter filter = new MaterialFilter();
+            filter.AddTimeFrom = model.AddTimeFrom;
+            filter.AddTimeTo = model.AddTimeTo;
+            filter.MaterialType = (int)MaterialType.Video;
+            filter.Title = model.Title;
+
+            PageReq<MaterialFilter> pager = PageReq<MaterialFilter>.Create(filter, page);
+            var data = jlService.MaterialPage(pager);
+
+            return View(data);
+        }
+
+        #endregion
+
+        #region new page
 
         [HttpGet]
         public ActionResult New()
@@ -50,7 +83,37 @@ namespace JL.Web.Areas.backend.Controllers
             {
                 var material = new JL.Core.Models.Material();
                 material.Title = model.Title;
-                material.MaterialType = model.Type;
+                material.MaterialType = model.FileType;
+                material.Description = model.Description;
+                material.FileName = model.FileName;
+                material.Url = model.FileName;
+                material.Picture = model.Picture;
+                material.Status = model.Status ? 0 : 1;
+                material.AddTime = model.AddTime ?? DateTime.Now;
+
+                jlService.AddMaterial(material);
+                ViewData.Add("ResultObject", ResultObject.Succeed());
+            }
+
+            return View();
+        }
+
+
+        [HttpGet]
+        public ActionResult NewPicture()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateInput(false)]
+        public ActionResult NewPicture(MaterialModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var material = new JL.Core.Models.Material();
+                material.Title = model.Title;
+                material.MaterialType = (int)MaterialType.Picture;
                 material.Description = model.Description;
                 material.FileName = model.FileName;
                 material.Url = model.FileName;
@@ -66,6 +129,37 @@ namespace JL.Web.Areas.backend.Controllers
         }
 
         [HttpGet]
+        public ActionResult NewVideo()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateInput(false)]
+        public ActionResult NewVideo(MaterialModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var material = new JL.Core.Models.Material();
+                material.Title = model.Title;
+                material.MaterialType = (int)MaterialType.Video;
+                material.Description = model.Description;
+                material.FileName = model.FileName;
+                material.Url = model.FileName;
+                material.Picture = model.FileName;
+                material.Status = model.Status ? 0 : 1;
+                material.AddTime = model.AddTime ?? DateTime.Now;
+
+                jlService.AddMaterial(material);
+                ViewData.Add("ResultObject", ResultObject.Succeed());
+            }
+
+            return View();
+        }
+
+        #endregion
+
+        [HttpGet]
         public ActionResult Edit(int id)
         {
             var material = jlService.GetMaterial(id);
@@ -76,13 +170,14 @@ namespace JL.Web.Areas.backend.Controllers
             model.Picture = material.Picture;
             model.Status = material.Status==0;
             model.Title = material.Title;
-            model.Type = material.MaterialType;
+            model.FileType = material.MaterialType;
             material.AddTime = model.AddTime ?? DateTime.Now;
 
             return View(model);
         }
 
         [HttpPost]
+        [ValidateInput(false)]
         public ActionResult Edit(MaterialModel model,int id)
         {
             if(ModelState.IsValid)
@@ -90,7 +185,7 @@ namespace JL.Web.Areas.backend.Controllers
                 var material = new JL.Core.Models.Material();
                 material.AutoId = id;
                 material.Title = model.Title;
-                material.MaterialType = model.Type;
+                material.MaterialType = model.FileType;
                 material.Description = model.Description;
                 material.FileName = model.FileName;
                 material.Url = model.FileName;
@@ -101,31 +196,34 @@ namespace JL.Web.Areas.backend.Controllers
                 ViewData.Add("ResultObject", ResultObject.Succeed());
             }
 
-            return View();
+            return View(model);
         }
 
 
         [HttpPost]
-        public ActionResult Upload()
+        public ActionResult Upload(int fileType)
         {
             // file
             if (Request.Files != null &&
                 Request.Files.Count > 0)
             {
-                string imgLink = "";
+                string fileLink = "";
+                string thumbLink = "";
                 try
                 {
-                    imgLink = FileHelper.SaveMaterial(Request.Files[0]);
+                    fileLink = FileHelper.SaveMaterial(Request.Files[0], fileType);
+                    thumbLink = FileHelper.SaveMaterialImage(fileLink, fileType);
                 }
                 catch (Exception e)
                 {
                     return Json(ResultObject.Failed(e.ToString()));
                 }
 
-                return Json(ResultObject<string>.Succeed(imgLink));
+                return Json(ResultObject<object>.Succeed(new { Picture = thumbLink, FileLink = fileLink }));
             }
 
             return Json(ResultObject.Failed());
         }
+
     }
 }

@@ -19,7 +19,7 @@ namespace JL.Core.Models
 
         public string FileName { get; set; }
         public string Url { get; set; }// 网络地址
-        public string MaterialType { get; set; }
+        public int MaterialType { get; set; }
 
         public int PageViews { get; set; }
         public int SortIndex { get; set; }

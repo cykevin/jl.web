@@ -8,7 +8,7 @@ namespace JL.Core.Filters
 {
     public class MaterialFilter
     {
-        public string MaterialType { get; set; }
+        public int? MaterialType { get; set; }
         public string Title { get; set; }
 
         public DateTime? AddTimeFrom { get; set; }

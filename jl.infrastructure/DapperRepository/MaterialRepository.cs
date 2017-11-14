@@ -43,7 +43,7 @@ namespace JL.Infrastructure.DapperRepository
             dParas.Add("@pagesize", pageReq.PageSize);
             dParas.Add("@fields", "*");
             dParas.Add("@tablename", "Material");
-            dParas.Add("@filter", "");
+            dParas.Add("@filter", BuildSqlFrom(pageReq.Data));
             dParas.Add("@orderby", pageReq.OrderBy);
             dParas.Add("@primarykey", "AutoId");
             dParas.Add("@total", direction: ParameterDirection.Output);
@@ -75,9 +75,9 @@ namespace JL.Infrastructure.DapperRepository
                 sb.Append(" addtime <= " + filter.AddTimeTo.Value.ToString("yyyy-MM-dd"));
                 sb.Append(" and ");
             }
-            if (!string.IsNullOrEmpty(filter.MaterialType))
+            if (filter.MaterialType > 0)
             {
-                sb.AppendFormat(" materialtype = '{0}' ", SqlFilter.FilterQueryParameter(filter.MaterialType));
+                sb.AppendFormat(" materialtype = '{0}' ", SqlFilter.FilterQueryParameter(filter.MaterialType.Value.ToString()));
                 sb.Append(" and ");
             }
             if (!string.IsNullOrEmpty(filter.Title))

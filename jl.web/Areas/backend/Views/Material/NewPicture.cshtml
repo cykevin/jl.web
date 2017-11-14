@@ -3,7 +3,7 @@
     ViewBag.Title = "新素材";
 }
 
-@using (Html.BeginForm("new", "material", FormMethod.Post, new { id = "materialForm", enctype = "multipart/form-data" }))
+@using (Html.BeginForm("newpicture", "material", FormMethod.Post, new { id = "materialForm", enctype = "multipart/form-data" }))
 {
     if (ViewData.ContainsKey("ResultObject"))
     {
@@ -44,8 +44,9 @@
                     <div class="form-group">
                         <label for="fileInput">选择文件</label>
                         <input id="fileInput" name="fileInput" type="file" class="file-loading" accept="image/*">
-                        @Html.HiddenFor(m=>m.FileName)
+                        @Html.HiddenFor(m => m.FileName)
                         @Html.HiddenFor(m => m.Picture)
+                        <input type="hidden" id="filetype" value="1" />
                     </div>
 
                     <div class="form-group">
@@ -54,15 +55,7 @@
                     </div>
 
                     <div class="form-group">
-                        <label>素材类型</label>
-                        <div class="radio">
-                            <label style="margin-right:15px;">
-                                <input type="radio" name="fileType" checked="checked" value="1"> 图片
-                            </label>
-                            <label style="margin-right:15px;">
-                                <input type="radio" name="fileType"  value="2"> 视频
-                            </label>                            
-                        </div>
+                        <label for="categories">类型</label>
                     </div>
 
                     <div class="form-group">
@@ -122,28 +115,24 @@
 
             $('#fileInput').fileinput({
                 language: 'zh', //设置语言
-                allowedFileTypes: ['image', 'video'],
-                allowedFileExtensions: ['3gp', 'asf', 'avi', 'dat', 'dv', 'flv', 'f4v', 'gif', 'm2t', 'm3u8', 'm4v', 'mj2', 'mjpeg', 'mkv', 'mov', 'mp4', 'mpe', 'mpg', 'mpeg', 'mts', 'ogg', 'qt', 'rm', 'rmvb', 'ts', 'vob', 'wmv', 'webm', 'jpg', 'jpeg', 'png', 'bmp'],
+                //allowedFileTypes: ['image', 'video'],
+                allowedFileExtensions: ['3gp','asf','avi','dat','dv','flv','f4v','gif','m2t','m3u8','m4v','mj2','mjpeg','mkv','mov','mp4','mpe','mpg','mpeg','mts','ogg','qt','rm','rmvb','ts','vob','wmv','webm','jpg','jpeg','png','bmp'],
                 showUpload: false,
                 showCaption: false,
                 browseClass: "btn btn-primary",
                 previewFileIcon: "<i class='glyphicon glyphicon-king'></i>",
                 uploadUrl: '/material/upload',
                 uploadExtraData: function () {
-                    var fileType = $('input[name="fileType"]:checked').val();
-                    return { fileType: fileType };
+                    return { fileType: 1 };
                 }
             });
             $('#fileInput').on('fileuploaded', function (event, data, previewId, index) {
                 var form = data.form, files = data.files, extra = data.extra,
                     response = data.response, reader = data.reader;
                 if (response.Success) {
-                    if (response.Data) {
-                        var fileLink = response.Data.FileLink;
-                        var imgLink = response.Data.Picture;
-                    }                    
-                    $('#FileName').val(fileLink);
-                    $('#Picture').val(imgLink);
+                    var imgLink = response.Data;
+                    console.log('imglink:' + imgLink);
+                    $('#FileName').val(imgLink);
                 }
             });
 

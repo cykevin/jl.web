@@ -7,10 +7,10 @@ namespace JL.Web.Areas.backend.Models
 {
     public class MaterialSearchModel
     {
-        public string MaterialType { get; set; }
+        public int? MaterialType { get; set; }
         public string Title { get; set; }
 
-        public DateTime AddTimeFrom { get; set; }
-        public DateTime AddTimeTo { get; set; }
+        public DateTime? AddTimeFrom { get; set; }
+        public DateTime? AddTimeTo { get; set; }
     }
 }

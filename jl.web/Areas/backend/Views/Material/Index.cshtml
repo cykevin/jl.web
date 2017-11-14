@@ -8,7 +8,7 @@
     <style type="text/css">
         .query-part {
             padding-bottom: 9px;
-            margin: 4px 0 10px;
+            margin: 14px 0 10px;
             border-bottom: 1px solid #eee;
         }
 
@@ -37,6 +37,16 @@
 <div class="row">
     <div class="col-lg-12">
         <h3 class="page-header">素材中心</h3>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-12">
+        <ul class="nav nav-tabs">
+            <li role="presentation" class="active"><a href="@Url.Action("index","material")">全部</a></li>
+            <li role="presentation"><a href="@Url.Action("picture","material")">图片</a></li>
+            <li role="presentation"><a href="@Url.Action("video","material")">视频</a></li>
+        </ul>
     </div>
 </div>
 
