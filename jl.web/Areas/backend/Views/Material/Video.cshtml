@@ -73,15 +73,16 @@
     {
         <div class="col-lg-3">
             <div class="thumbnail">
-                <img src="@JL.Web.Helpers.ImageHelper.GenPictureUrlMiddle(material.Picture,PictureEnums.Material)" alt="">
-                <div class="caption">
-                    <h3>@material.Title</h3>
-                    <p>@material.Description</p>
+                <a href="@Url.Action("edit","material",new { id = material.AutoId })" class="thumbnail">
+                    <img src="@JL.Web.Helpers.ImageHelper.GenMaterailPicture(material.Picture,MaterialType.Video,PictureSize.Middle)" alt="">
+                </a>
+                <div class="caption clearfix">
+                    <h4>@material.Title</h4>
+                    <p>@Html.Raw(material.Description)</p>
                     <p>
-                        <span>@(material.Status == 0 ? "已发布" : "未发布")</span>
-                        <a href="@Url.Action("edit","material",new { id = material.AutoId })" class="btn btn-primary" role="button">编辑</a>
+                        <span class="pull-left">@(material.Status == 0 ? "已发布" : "未发布")</span>  
+                        <span class="pull-right">下载数：@material.PageViews</span>
                     </p>
-                    <p><i>下载量：@material.PageViews</i></p>
                 </div>
             </div>
         </div>

@@ -87,11 +87,16 @@ namespace JL.Web.Areas.backend.Controllers
                 material.Description = model.Description;
                 material.FileName = model.FileName;
                 material.Url = model.FileName;
-                material.Picture = model.Picture;
+
                 material.Status = model.Status ? 0 : 1;
                 material.AddTime = model.AddTime ?? DateTime.Now;
 
-                jlService.AddMaterial(material);
+                // 生成缩略图
+                var thumbLink = FileHelper.SaveMaterialImage(model.FileName, material.MaterialType);
+                material.Picture = thumbLink;
+
+                jlService.AddMaterial(material);                
+
                 ViewData.Add("ResultObject", ResultObject.Succeed());
             }
 
@@ -117,9 +122,13 @@ namespace JL.Web.Areas.backend.Controllers
                 material.Description = model.Description;
                 material.FileName = model.FileName;
                 material.Url = model.FileName;
-                material.Picture = model.Picture;
+
                 material.Status = model.Status ? 0 : 1;
                 material.AddTime = model.AddTime ?? DateTime.Now;
+
+                // 生成缩略图
+                var thumbLink = FileHelper.SaveMaterialImage(model.FileName, material.MaterialType);
+                material.Picture = thumbLink;
 
                 jlService.AddMaterial(material);
                 ViewData.Add("ResultObject", ResultObject.Succeed());
@@ -146,11 +155,16 @@ namespace JL.Web.Areas.backend.Controllers
                 material.Description = model.Description;
                 material.FileName = model.FileName;
                 material.Url = model.FileName;
-                material.Picture = model.FileName;
+
                 material.Status = model.Status ? 0 : 1;
                 material.AddTime = model.AddTime ?? DateTime.Now;
 
+                // 生成缩略图
+                var thumbLink = FileHelper.SaveMaterialImage(model.FileName, material.MaterialType);
+                material.Picture = thumbLink;
+
                 jlService.AddMaterial(material);
+
                 ViewData.Add("ResultObject", ResultObject.Succeed());
             }
 
@@ -208,18 +222,17 @@ namespace JL.Web.Areas.backend.Controllers
                 Request.Files.Count > 0)
             {
                 string fileLink = "";
-                string thumbLink = "";
                 try
                 {
-                    fileLink = FileHelper.SaveMaterial(Request.Files[0], fileType);
-                    thumbLink = FileHelper.SaveMaterialImage(fileLink, fileType);
+                    // 保存文件
+                    fileLink = FileHelper.SaveMaterial(Request.Files[0], fileType);                    
                 }
                 catch (Exception e)
                 {
                     return Json(ResultObject.Failed(e.ToString()));
                 }
-
-                return Json(ResultObject<object>.Succeed(new { Picture = thumbLink, FileLink = fileLink }));
+                
+                return Json(ResultObject<object>.Succeed(new { FileLink = fileLink }));
             }
 
             return Json(ResultObject.Failed());

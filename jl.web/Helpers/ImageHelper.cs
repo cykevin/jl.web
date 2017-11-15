@@ -8,6 +8,9 @@ namespace JL.Web.Helpers
 {
     public class ImageHelper
     {
+        #region 生成缩略图
+
+
         /// <summary> 
         /// 生成缩略图 
         /// </summary> 
@@ -57,12 +60,12 @@ namespace JL.Web.Helpers
                 default:
                     break;
             }
-            
+
             Image bitmap = new System.Drawing.Bitmap(towidth, toheight);
             Graphics g = System.Drawing.Graphics.FromImage(bitmap);
-            g.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.High;            
-            g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighQuality;            
-            g.Clear(Color.Transparent);            
+            g.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.High;
+            g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighQuality;
+            g.Clear(Color.Transparent);
             g.DrawImage(originalImage, new Rectangle(0, 0, towidth, toheight),
                 new Rectangle(x, y, ow, oh),
                 GraphicsUnit.Pixel);
@@ -105,7 +108,7 @@ namespace JL.Web.Helpers
             }
             return dirName;
         }
-        public static string MapPictureEnumsToSize(JL.Web.PictureEnums type,PictureSize size)
+        public static string MapPictureEnumsToSize(JL.Web.PictureEnums type, PictureSize size)
         {
             switch (type)
             {
@@ -149,7 +152,7 @@ namespace JL.Web.Helpers
             if (string.IsNullOrEmpty(path))
             {
                 return "/images/" + MapPictureEnumsToDirName(type) + "/default!" + size + ".jpg";
-            }                
+            }
 
             if (path[0] == '~')
             {
@@ -217,6 +220,11 @@ namespace JL.Web.Helpers
             return path;
         }
 
+
+        #endregion
+
+        #region 素材缩略图
+
         public static string GenMaterialUrlSource(string path)
         {
             if (string.IsNullOrEmpty(path))
@@ -229,6 +237,48 @@ namespace JL.Web.Helpers
 
             return path;
         }
+
+        /// <summary>
+        /// 获取素材缩略图展示地址：
+        /// 根据数据库中的地址，解析三种不同的尺寸缩略图
+        /// </summary>
+        /// <param name="virtualPath"></param>
+        /// <param name="materialType"></param>
+        /// <param name="pictureSize"></param>
+        /// <returns></returns>
+        public static string GenMaterailPicture(string virtualPath, MaterialType materialType, PictureSize pictureSize)
+        {
+            string size = "";
+
+            if (materialType == MaterialType.Picture)
+            {
+                size = MapPictureEnumsToSize(PictureEnums.Material, pictureSize);
+            }
+
+            if (string.IsNullOrEmpty(virtualPath))
+            {
+                return "/images/" + MapPictureEnumsToDirName(PictureEnums.Material) + "/default!" + size + ".jpg";
+            }
+
+            if (materialType == MaterialType.Video)
+            {
+                return virtualPath.Substring(1);
+            }
+
+            if (virtualPath[0] == '~')
+            {
+                var path = virtualPath.Substring(1);
+                var extIndex = path.LastIndexOf('.');
+                var pre = path.Substring(0, extIndex);
+                var ext = path.Substring(extIndex);
+
+                return pre + size + ext;
+            }
+
+            return virtualPath;
+        }
+
+        #endregion
 
         #endregion
     }

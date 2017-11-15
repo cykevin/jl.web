@@ -45,7 +45,6 @@
                         <label for="fileInput">选择文件</label>
                         <input id="fileInput" name="fileInput" type="file" class="file-loading" accept="image/*">
                         @Html.HiddenFor(m => m.FileName)
-                        @Html.HiddenFor(m => m.Picture)
                         <input type="hidden" id="filetype" value="1" />
                     </div>
 
@@ -130,9 +129,10 @@
                 var form = data.form, files = data.files, extra = data.extra,
                     response = data.response, reader = data.reader;
                 if (response.Success) {
-                    var imgLink = response.Data;
-                    console.log('imglink:' + imgLink);
-                    $('#FileName').val(imgLink);
+                    if (response.Data) {
+                        var fileLink = response.Data.FileLink;
+                    }
+                    $('#FileName').val(fileLink);
                 }
             });
 

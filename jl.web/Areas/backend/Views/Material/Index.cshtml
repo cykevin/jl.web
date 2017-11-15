@@ -84,8 +84,8 @@
                 {
                     <tr>
                         <td>
-                            <a href="#" class="thumbnail">
-                                <img src="@JL.Web.Helpers.ImageHelper.GenPictureUrlSmall(material.Picture,PictureEnums.Material)" alt="" class="img-responsive">
+                            <a href="#" class="thumbnail">                                
+                               <img src="@JL.Web.Helpers.ImageHelper.GenMaterailPicture(material.Picture,(MaterialType)material.MaterialType,PictureSize.Small)" alt="" class="img-responsive">
                             </a>
                         </td>
                         <td>@material.Title</td>

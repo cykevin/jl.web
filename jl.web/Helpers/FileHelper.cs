@@ -159,7 +159,7 @@ namespace JL.Web.Helpers
             }
             else if (materialType == (int)MaterialType.Video)
             {
-                return null;
+                return VideoHelper.CatchVideoThumbnail(fileVirtualPath);
             }
 
             return null;
