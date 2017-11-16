@@ -89,7 +89,7 @@
                             </a>
                         </td>
                         <td>@material.Title</td>
-                        <td class="center">@material.Description</td>
+                        <td class="center">@Html.Raw(material.Description)</td>
                         <td class="center">@material.AddTime.ToString("yyyy-MM-dd")</td>
                         @if (material.Status == 0)
                         {
