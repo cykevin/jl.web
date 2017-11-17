@@ -20,12 +20,28 @@ namespace JL.Web.Areas.backend.Controllers
         {
             return View();
         }
-
+        
         [HttpPost]
         [ValidateInput(false)]
         public ActionResult New(MemberModel model)
         {
             return View();
         }
+
+        [HttpGet]
+        public ActionResult Edit(int id)
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateInput(false)]
+        public ActionResult Edit(MemberModel model, int id)
+        {
+
+            return View();
+        }
+
+
     }
 }

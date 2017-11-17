@@ -986,6 +986,7 @@
     <Content Include="Areas\backend\Views\Material\NewVideo.cshtml" />
     <Content Include="Areas\backend\Views\Member\Index.cshtml" />
     <Content Include="Areas\backend\Views\Member\New.cshtml" />
+    <Content Include="Areas\backend\Views\Member\Edit.cshtml" />
     <None Include="Scripts\jquery-3.2.1.intellisense.js" />
     <Content Include="Images\search1.png" />
     <Content Include="Images\tick1.png" />

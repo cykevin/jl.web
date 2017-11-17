@@ -3,7 +3,7 @@
     ViewBag.Title = "添加团队成员";
 }
 
-@using (Html.BeginForm("new", "member", FormMethod.Post, new { id = "memberForm", enctype = "multipart/form-data",@class= "form-horizontal" }))
+@using (Html.BeginForm("new", "member", FormMethod.Post, new { id = "memberForm", enctype = "multipart/form-data", @class = "form-horizontal" }))
 {
     if (ViewData.ContainsKey("ResultObject"))
     {
@@ -31,13 +31,13 @@
     </div>
 
 
-        <div class="form-group">
-            <label for="Name" class="col-lg-1 control-label text-left">姓名</label>
-            <div class="col-lg-4">@Html.TextBoxFor(a => a.Name, new { @class = "form-control", placeholder = "请输入姓名" })</div>
+    <div class="form-group">
+        <label for="Name" class="col-lg-1 control-label text-left">姓名</label>
+        <div class="col-lg-4">@Html.TextBoxFor(a => a.Name, new { @class = "form-control", placeholder = "请输入姓名" })</div>
 
-            <label for="NickName" class="col-lg-1 control-label">昵称</label>
-            <div class="col-lg-4">@Html.TextBoxFor(a => a.NickName, new { @class = "form-control", placeholder = "请输入昵称" })</div>
-        </div>
+        <label for="NickName" class="col-lg-1 control-label">昵称</label>
+        <div class="col-lg-4">@Html.TextBoxFor(a => a.NickName, new { @class = "form-control", placeholder = "请输入昵称" })</div>
+    </div>
         <div class="form-group">
             <label for="Weixin" class="col-lg-1 control-label">微信号</label>
             <div class="col-lg-4">@Html.TextBoxFor(a => a.Weixin, new { @class = "form-control", placeholder = "请输入微信" })</div>
@@ -45,42 +45,39 @@
             <label for="Phone" class="col-lg-1 control-label">手机号</label>
             <div class="col-lg-4">@Html.TextBoxFor(a => a.Phone, new { @class = "form-control", placeholder = "请输入手机号" })</div>
         </div>
-        
+
         <div class="form-group">
             <label for="Picture" class="col-lg-1 control-label">上传图片</label>
             <div class="col-lg-4">
                 <!--image-->
                 <div class="img-container">
-                     <img alt="" src="" name="PictureArea" id="PictureArea" class="img-thumbnail" />
+                    <img alt="" src="" name="PictureArea" id="PictureArea" class="img-thumbnail" />
                 </div>
 
                 <input id="Picture" name="Picture" type="file" class="file-loading" accept="image/*">
             </div>
-            <div class="col-lg-4">
-                <div class="preview"></div>
+        </div>
+
+        <div class="form-group">
+            <label for="Words" class="col-lg-1 control-label">寄语</label>
+            <div class="col-lg-11">
+                @Html.TextAreaFor(m => m.Words, new { Style = "Height:160px;" })
             </div>
         </div>
 
             <div class="form-group">
-                <label for="Words" class="col-lg-1 control-label">寄语</label>
+                <label for="Description" class="col-lg-1 control-label">自我介绍</label>
                 <div class="col-lg-11">
-                    @Html.TextAreaFor(m => m.Words, new { Style = "Height:160px;" })
+                    @Html.TextAreaFor(m => m.Description, new { Style = "Height:160px;" })
                 </div>
             </div>
-
-        <div class="form-group">
-            <label for="Description" class="col-lg-1 control-label">自我介绍</label>
-            <div class="col-lg-11">
-                @Html.TextAreaFor(m => m.Description, new { Style = "Height:160px;" })
-            </div>
-        </div>
 
             <div class="form-group">
                 <label for="JoinTime" class="col-lg-1 control-label">加入日期</label>
                 <div class="col-lg-11">
                     <input type="text" name="JoinTime" class="form-control" value="@DateTime.Now.Date.ToString("yyyy-MM-dd")" id="ProcessTime">
-                    </div>
                 </div>
+            </div>
 
                 <div class="form-group">
                     <label class="col-lg-1 control-label">状态</label>
@@ -88,62 +85,61 @@
                         <label style="margin-right:15px;" class="control-label">
                             <input type="radio" name="status" value="0"> 展示
                         </label>
-                        <label  class="control-label">
+                        <label class="control-label">
                             <input type="radio" name="status" checked="checked" value="0"> 隐藏
-                        </label>                
+                        </label>
                     </div>
                 </div>
-                    
+
                 <div class="form-group">
                     <div class="col-lg-11 col-lg-offset-1">
-                    <button type="submit" class="btn btn-success">提交</button>
-                        </div>
+                        <button type="submit" class="btn btn-success">提交</button>
+                    </div>
                 </div>
-                
+
                 <div class="clearfix"></div>
 
 }
 
 @section styles{
     @Styles.Render("~/Content/datepicker")
-@Styles.Render("~/Content/fileinput")
+    @Styles.Render("~/Content/fileinput")
     @Styles.Render("~/Content/cropperjs-1.1.3/cropper.css")
-<style type="text/css">    
-.img-container,
-.preview {
-  background-color: #f7f7f7;
-  overflow: hidden;
-  width: 100%;
-  text-align: center;
-}
+    <style type="text/css">
+        .img-container,
+        .img-preview {
+            background-color: #f7f7f7;
+            overflow: hidden;
+            width: 100%;
+            text-align: center;
+        }
 
-.img-container {
-  min-height: 200px;
-  max-height: 266px;
-  margin-bottom: 20px;
-}
+        .img-container {
+            min-height: 200px;
+            max-height: 266px;
+            margin-bottom: 20px;
+        }
 
-@@media (min-width: 768px) {
-  .img-container {
-    min-height: 266px;
-  }
-}
+        @@media (min-width: 768px) {
+            .img-container {
+                min-height: 266px;
+            }
+        }
 
-    .img-container > img {
-        max-width: 100%;
-    }
+        .img-container > img {
+            max-width: 100%;
+        }
     </style>
 }
 
 @section scripts{
-@Scripts.Render("~/bundles/ueditor/")
+    @Scripts.Render("~/bundles/ueditor/")
     @Scripts.Render("~/bundles/datepicker/")
     @Scripts.Render("~/bundles/jqueryval")
-@Scripts.Render("~/bundles/fileinput")
+    @Scripts.Render("~/bundles/fileinput")
     @Scripts.Render("~/Content/cropperjs-1.1.3/cropper.js")
 
     <script type="text/javascript">
-
         function getEditor(name) {
             return UE.getEditor(name, {
                 toolbars: [
@@ -159,16 +155,6 @@
                 elementPathEnabled: false
             });
         }
-        function each(arr, callback) {
-            var length = arr.length;
-            var i;
-
-            for (i = 0; i < length; i++) {
-                callback.call(arr, arr[i], i, arr);
-            }
-
-            return arr;
-        }
 
         var CropperWrapper = {
             cropperObj: null,
@@ -182,76 +168,50 @@
                 if (CropperWrapper.cropperObj != null) {
                     CropperWrapper.cropperObj.destroy();
                 }
-                CropperWrapper.cropperObj = null;                    
+                CropperWrapper.cropperObj = null;
             }
         };
         function initCropper(selector) {
             var image = document.querySelector(selector);
-            var fixRatio = 16 / 9;
             var minAspectRatio = 0.5;
             var maxAspectRatio = 1.5;
-            var previews = document.querySelectorAll('.preview');
             var cropper = new Cropper(image, {
-                aspectRatio: 16 / 9,
                 ready: function () {
                     var cropper = this.cropper;
-                    //croper.zoomTo(1);
-                    
-                    //var containerData = cropper.getContainerData();
-                    //var cropBoxData = cropper.getCropBoxData();
-                    //var aspectRatio = cropBoxData.width / cropBoxData.height;
-                    //console.log(cropBoxData.width + ',' + cropBoxData.height);
-                    //var newCropBoxWidth;
+                    var containerData = cropper.getContainerData();
+                    var cropBoxData = cropper.getCropBoxData();
+                    var aspectRatio = cropBoxData.width / cropBoxData.height;
+                    var newCropBoxWidth;
 
-                    //if (aspectRatio < minAspectRatio || aspectRatio > maxAspectRatio) {
-                    //    newCropBoxWidth = cropBoxData.height * ((minAspectRatio + maxAspectRatio) / 2);
+                    if (aspectRatio < minAspectRatio || aspectRatio > maxAspectRatio) {
+                        newCropBoxWidth = cropBoxData.height * ((minAspectRatio + maxAspectRatio) / 2);
 
-                    //    cropper.setCropBoxData({
-                    //        left: (containerData.width - newCropBoxWidth) / 2,
-                    //        width: newCropBoxWidth
-                    //    });
-                    //}
-                    // preview
-                    var clone = this.cloneNode();
-
-                    clone.className = ''
-                    clone.style.cssText = (
-                        'display: block;' +
-                        'width: 100%;' +
-                        'min-width: 0;' +
-                        'min-height: 0;' +
-                        'max-width: none;' +
-                        'max-height: none;'
-                    );
-
-                    each(previews, function (elem) {
-                        elem.appendChild(clone.cloneNode());
-                    });
+                        cropper.setCropBoxData({
+                            left: (containerData.width - newCropBoxWidth) / 2,
+                            width: newCropBoxWidth
+                        });
+                    }
                 },
-                //cropmove: function () {
-                //    var cropper = this.cropper;
-                //    var cropBoxData = cropper.getCropBoxData();
-                //    var aspectRatio = cropBoxData.width / cropBoxData.height;
+                cropmove: function () {
+                    var cropper = this.cropper;
+                    var cropBoxData = cropper.getCropBoxData();
+                    var aspectRatio = cropBoxData.width / cropBoxData.height;
 
-                //    if (aspectRatio < minAspectRatio) {
-                //        cropper.setCropBoxData({
-                //            width: cropBoxData.height * minAspectRatio
-                //        });
-                //    } else if (aspectRatio > maxAspectRatio) {
-                //        cropper.setCropBoxData({
-                //            width: cropBoxData.height * maxAspectRatio
-                //        });
-                //    }
-                //},
+                    if (aspectRatio < minAspectRatio) {
+                        cropper.setCropBoxData({
+                            width: cropBoxData.height * minAspectRatio
+                        });
+                    } else if (aspectRatio > maxAspectRatio) {
+                        cropper.setCropBoxData({
+                            width: cropBoxData.height * maxAspectRatio
+                        });
+                    }
+                },
                 crop: function (e) {
                     var data = e.detail;
-                    var cropper = this.cropper;
+
                     console.log(e.type);
                     console.log(data);
-
-                    var imageData = cropper.getImageData();
-                    var previewAspectRatio = data.width / data.height;
-
                     //dataX.value = Math.round(data.x);
                     //dataY.value = Math.round(data.y);
                     //dataHeight.value = Math.round(data.height);
@@ -259,20 +219,6 @@
                     //dataRotate.value = typeof data.rotate !== 'undefined' ? data.rotate : '';
                     //dataScaleX.value = typeof data.scaleX !== 'undefined' ? data.scaleX : '';
                     //dataScaleY.value = typeof data.scaleY !== 'undefined' ? data.scaleY : '';
-
-                    // preview
-                    each(previews, function (elem) {
-                        var previewImage = elem.getElementsByTagName('img').item(0);
-                        var previewWidth = elem.offsetWidth;
-                        var previewHeight = previewWidth / previewAspectRatio;
-                        var imageScaledRatio = data.width / previewWidth;
-
-                        elem.style.height = previewHeight + 'px';
-                        previewImage.style.width = imageData.naturalWidth / imageScaledRatio + 'px';
-                        previewImage.style.height = imageData.naturalHeight / imageScaledRatio + 'px';
-                        previewImage.style.marginLeft = -data.x / imageScaledRatio + 'px';
-                        previewImage.style.marginTop = -data.y / imageScaledRatio + 'px';
-                    });
                 },
             });
             return cropper;
@@ -310,7 +256,6 @@
                 }
             }).on('change', function (event) {
                 CropperWrapper.destroy();
-                $('.preview').html('');
 
                 var files = $('#Picture').get(0).files[0];
                 var src = URL.createObjectURL(files);
@@ -318,7 +263,7 @@
 
                 // cropper
                 CropperWrapper.initCropper();
-            })            
+            })
 
             $('#memberForm').validate({
                 rules: {
