@@ -48,6 +48,7 @@
     <Compile Include="Filters\ArticleFilter.cs" />
     <Compile Include="Filters\FranchiseeFilter.cs" />
     <Compile Include="Filters\MaterialFilter.cs" />
+    <Compile Include="Filters\MemberFilter.cs" />
     <Compile Include="Filters\ProductFilter.cs" />
     <Compile Include="Filters\UserFilter.cs" />
     <Compile Include="IJLService.cs" />

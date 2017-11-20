@@ -5,6 +5,8 @@ using JL.Core.Repositories;
 using System;
 using System.Data;
 using System.Linq;
+using JL.Core.Filters;
+using System.Text;
 
 namespace JL.Infrastructure.DapperRepository
 {
@@ -37,11 +39,16 @@ namespace JL.Infrastructure.DapperRepository
 
         public int Insert(Member model)
         {
-            var connection = DbConnectionFactory.CreateConnection();
-            var id=connection.Query<int>(@"Insert into Member(NickName,RealName,Description,Phone,Weixin,QQ,Email,Address,JoinTime,Picture,Words,SortIndex,Status)
+            using (var connection = DbConnectionFactory.CreateConnection())
+            {
+                connection.Open();
+                var id = connection.Query<int>(@"Insert into Member(NickName,RealName,Description,Phone,Weixin,QQ,Email,Address,JoinTime,Picture,Words,SortIndex,Status)
 values (@NickName,@RealName,@Description,@Phone,@Weixin,@QQ,@Email,@Address,@JoinTime,@Picture,@Words,@SortIndex,@Status);SELECT LAST_INSERT_ID()",
                 model).FirstOrDefault();
-            return id;
+
+                connection.Close();
+                return id;
+            }
         }
 
         public Member GetById(int id)
@@ -72,6 +79,57 @@ values (@NickName,@RealName,@Description,@Phone,@Weixin,@QQ,@Email,@Address,@Joi
             var sql = "delete from Member where AutoId=@AutoId";
             var conn = DbConnectionFactory.CreateConnection();
             conn.Execute(sql, new { AutoId = id });
+        }
+
+        public PageData<Member> MemberPage(PageReq<MemberFilter> pageReq)
+        {
+            var conn = DbConnectionFactory.CreateConnection();
+
+            var dParas = new DynamicParameters();
+            dParas.Add("@page", pageReq.PageIndex);
+            dParas.Add("@pagesize", pageReq.PageSize);
+            dParas.Add("@fields", "p.*");
+            dParas.Add("@tablename", " member ");
+            dParas.Add("@filter", BuildSqlFrom(pageReq.Data));
+            dParas.Add("@orderby", pageReq.OrderBy);
+            dParas.Add("@primarykey", "AutoId");
+            dParas.Add("@total", direction: ParameterDirection.Output);
+
+            var data = conn.Query<Member>("procPageQuery", param: dParas, commandType: CommandType.StoredProcedure);
+            
+            var total = dParas.Get<int>("@total");
+
+            var pages = (int)Math.Ceiling((double)total / pageReq.PageSize);
+
+            return PageData<Member>.Create(pageReq.PageIndex, pageReq.PageSize, pages, total, data);
+        }
+
+        private string BuildSqlFrom(MemberFilter filter)
+        {
+            if (filter != null)
+            {
+                StringBuilder sb = new StringBuilder();
+                if (!string.IsNullOrEmpty(filter.NickName))
+                {
+                    sb.Append(" nickname like '%" + filter.NickName + "%' ");
+                    sb.Append(" and ");
+                }
+                if (filter.JoinTimeFrom.HasValue)
+                {
+                    sb.Append(" jointime >= '" + filter.JoinTimeFrom.Value.ToString("yyyy-MM-dd") + "'");
+                    sb.Append(" and ");
+                }
+                if(filter.JoinTimeTo.HasValue)
+                {
+                    sb.Append(" jointime <= '" + filter.JoinTimeTo.Value.ToString("yyyy-MM-dd") + "'");
+                    sb.Append(" and ");
+                }
+
+                if (sb.Length > 0)
+                    return sb.Remove(sb.Length - 4, 4).ToString();
+            }
+
+            return null;
         }
 
         #endregion

@@ -172,6 +172,7 @@
     <Compile Include="Areas\backend\Models\MaterialModel.cs" />
     <Compile Include="Areas\backend\Models\MaterialSearchModel.cs" />
     <Compile Include="Areas\backend\Models\MemberModel.cs" />
+    <Compile Include="Areas\backend\Models\MemberSearchModel.cs" />
     <Compile Include="Areas\backend\Models\ProductModel.cs" />
     <Compile Include="Areas\backend\Models\ProductSearchModel.cs" />
     <Compile Include="Common\Enums.cs" />

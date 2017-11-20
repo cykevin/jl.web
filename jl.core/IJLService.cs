@@ -28,6 +28,7 @@ namespace JL.Core
         void DeleteMember(Member model);
         void UpdateMember(Member model);
         PageData<Member> MemberPage(PageReq pageReq);
+        Member GetMember(int id);
 
         // product
         int AddProduct(Product model);

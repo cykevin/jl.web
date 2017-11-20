@@ -143,17 +143,17 @@ namespace JL.Web.Helpers
                 var size = ImageHelper.MapPictureEnumsToSize(PictureEnums.Material, PictureSize.Small);
                 var wh = size.Split('x').Select(i => Convert.ToInt32(i)).ToArray();
                 var thumbnail = System.IO.Path.Combine(dir, DateTime.Now.ToString("yyyyMMddHHmmss") + "!" + size + ext);
-                ImageHelper.MakeThumbnail(filePath, thumbnail, wh[0], wh[1], "Cut");
+                ImageHelper.MakeThumbnail(filePath, thumbnail, wh[0], wh[1], "HW");
 
                 size = ImageHelper.MapPictureEnumsToSize(PictureEnums.Material, PictureSize.Middle);
                 wh = size.Split('x').Select(i => Convert.ToInt32(i)).ToArray();
                 thumbnail = System.IO.Path.Combine(dir, DateTime.Now.ToString("yyyyMMddHHmmss") + "!" + size + ext);
-                ImageHelper.MakeThumbnail(filePath, thumbnail, wh[0], wh[1], "Cut");
+                ImageHelper.MakeThumbnail(filePath, thumbnail, wh[0], wh[1], "HW");
 
                 size = ImageHelper.MapPictureEnumsToSize(PictureEnums.Material, PictureSize.Big);
                 wh = size.Split('x').Select(i => Convert.ToInt32(i)).ToArray();
                 thumbnail = System.IO.Path.Combine(dir, DateTime.Now.ToString("yyyyMMddHHmmss") + "!" + size + ext);
-                ImageHelper.MakeThumbnail(filePath, thumbnail, wh[0], wh[1], "Cut");
+                ImageHelper.MakeThumbnail(filePath, thumbnail, wh[0], wh[1], "HW");
 
                 return virtualPath + "/" + System.IO.Path.GetFileName(filePath);
             }
@@ -163,6 +163,67 @@ namespace JL.Web.Helpers
             }
 
             return null;
+        }
+
+        public static string SaveMemberImage(HttpPostedFileBase file,int x,int y,int width,int height)
+        {
+            if (file.ContentLength < 1)
+                return null;
+
+            var dirName = DateTime.Now.ToString("yyyyMMdd");
+
+            var dir = System.Web.Hosting.HostingEnvironment.MapPath("~/Images/Members/" + dirName);
+
+            if (!System.IO.Directory.Exists(dir))
+            {
+                System.IO.Directory.CreateDirectory(dir);
+            }
+
+            var ext = System.IO.Path.GetExtension(file.FileName);
+            var fileName = DateTime.Now.ToString("yyyyMMddHHmmss") + "!";
+
+            // 保存源图片文件
+            var newFilePath = System.IO.Path.Combine(dir, fileName + ext);
+            file.SaveAs(newFilePath);
+
+            try
+            {
+                var img = System.Drawing.Image.FromFile(newFilePath);
+                
+                // 根据参数裁剪
+                var newImg = ImageHelper.Cut(img, x, y, width, height);
+
+                var path = System.IO.Path.Combine(dir, string.Format("{0}{1}x{2}.jpg", fileName, width, height));
+                newImg.Save(path, System.Drawing.Imaging.ImageFormat.Jpeg);
+
+                // 删除源图片
+                img.Dispose();
+
+                // 生成缩略图
+                // 保存3种大小的缩略图
+                var size = ImageHelper.MapPictureEnumsToSize(PictureEnums.Member, PictureSize.Small);
+                var wh = size.Split('x').Select(i => Convert.ToInt32(i)).ToArray();
+                var thumbnail = System.IO.Path.Combine(dir, DateTime.Now.ToString("yyyyMMddHHmmss") + "!" + size + ext);
+                ImageHelper.MakeThumbnail(newFilePath, thumbnail, wh[0], wh[1], "Cut");
+
+                size = ImageHelper.MapPictureEnumsToSize(PictureEnums.Member, PictureSize.Middle);
+                wh = size.Split('x').Select(i => Convert.ToInt32(i)).ToArray();
+                thumbnail = System.IO.Path.Combine(dir, DateTime.Now.ToString("yyyyMMddHHmmss") + "!" + size + ext);
+                ImageHelper.MakeThumbnail(newFilePath, thumbnail, wh[0], wh[1], "Cut");
+
+                size = ImageHelper.MapPictureEnumsToSize(PictureEnums.Member, PictureSize.Big);
+                wh = size.Split('x').Select(i => Convert.ToInt32(i)).ToArray();
+                thumbnail = System.IO.Path.Combine(dir, DateTime.Now.ToString("yyyyMMddHHmmss") + "!" + size + ext);
+                ImageHelper.MakeThumbnail(newFilePath, thumbnail, wh[0], wh[1], "Cut");
+                                
+                System.IO.File.Delete(newFilePath);
+
+                return "~/Images/Members/" + dirName + "/" + fileName + ext;
+            }
+            catch
+            {
+                throw;
+            }
         }
     }
 }

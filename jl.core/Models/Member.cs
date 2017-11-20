@@ -14,7 +14,7 @@ namespace JL.Core.Models
         public int AutoId { get; set; }
         public string NickName { get; set; }
         public string RealName { get; set; }
-        public string Desctiption { get; set; }
+        public string Description { get; set; }
         
         public string Phone { get; set; }
         public string Weixin { get; set; }

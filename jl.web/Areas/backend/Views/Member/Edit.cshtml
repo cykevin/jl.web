@@ -1,9 +1,9 @@
 ﻿@model JL.Web.Areas.backend.Models.MemberModel
 @{
-    ViewBag.Title = "添加团队成员";
+    ViewBag.Title = "成员信息 - 修改";
 }
 
-@using (Html.BeginForm("new", "member", FormMethod.Post, new { id = "memberForm", enctype = "multipart/form-data", @class = "form-horizontal" }))
+@using (Html.BeginForm("edit", "member", FormMethod.Post, new { id = "memberForm", enctype = "multipart/form-data", @class = "form-horizontal" }))
 {
     if (ViewData.ContainsKey("ResultObject"))
     {
@@ -12,7 +12,7 @@
         {
             <div class="alert alert-success navbar-fixed-top container" role="alert">
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <strong>操作成功！</strong> 点击<a href="@Url.Action("Index","franchisee")" class="alert-link">这里</a>跳转到加盟商列表。
+                <strong>操作成功！</strong> 点击<a href="@Url.Action("index","member")" class="alert-link">这里</a>跳转到团队中心。
             </div>
         }
         else
@@ -26,7 +26,7 @@
 
     <div class="row">
         <div class="col-lg-12">
-            <h3 class="page-header">添加团队成员</h3>
+            <h3 class="page-header">团队成员信息</h3>
         </div>
     </div>
 
@@ -38,6 +38,7 @@
         <label for="NickName" class="col-lg-1 control-label">昵称</label>
         <div class="col-lg-4">@Html.TextBoxFor(a => a.NickName, new { @class = "form-control", placeholder = "请输入昵称" })</div>
     </div>
+
         <div class="form-group">
             <label for="Weixin" class="col-lg-1 control-label">微信号</label>
             <div class="col-lg-4">@Html.TextBoxFor(a => a.Weixin, new { @class = "form-control", placeholder = "请输入微信" })</div>
@@ -47,15 +48,27 @@
         </div>
 
         <div class="form-group">
+            <label for="QQ" class="col-lg-1 control-label">QQ</label>
+            <div class="col-lg-4">@Html.TextBoxFor(a => a.QQ, new { @class = "form-control", placeholder = "请输入QQ号" })</div>
+
+            <label for="Email" class="col-lg-1 control-label">Email</label>
+            <div class="col-lg-4">@Html.TextBoxFor(a => a.Email, new { @class = "form-control", placeholder = "请输入Email" })</div>
+        </div>
+
+        <div class="form-group">
             <label for="Picture" class="col-lg-1 control-label">上传图片</label>
             <div class="col-lg-4">
                 <!--image-->
                 <div class="img-container">
-                    <img alt="" src="" name="PictureArea" id="PictureArea" class="img-thumbnail" />
+                    <img alt="" src="@JL.Web.Helpers.ImageHelper.GenPictureUrlBig(Model.Picture,PictureEnums.Member)" name="PictureArea" id="PictureArea" class="img-thumbnail" />
                 </div>
 
                 <input id="Picture" name="Picture" type="file" class="file-loading" accept="image/*">
             </div>
+            <div class="col-lg-4">
+                <div class="preview"></div>
+            </div>
+            <input type="hidden" name="cutPara" />
         </div>
 
         <div class="form-group">
@@ -83,10 +96,12 @@
                     <label class="col-lg-1 control-label">状态</label>
                     <div class="radio col-lg-11" style="padding-top:0px;">
                         <label style="margin-right:15px;" class="control-label">
-                            <input type="radio" name="status" value="0"> 展示
+                            @Html.RadioButtonFor(m=>m.Status,0) 展示
+                            @*<input type="radio" name="status" value="0" @(Model.Status==0> 展示*@
                         </label>
                         <label class="control-label">
-                            <input type="radio" name="status" checked="checked" value="0"> 隐藏
+                            @Html.RadioButtonFor(m => m.Status, 1) 隐藏
+                            @*<input type="radio" name="status" checked="checked" value="1"> 隐藏*@
                         </label>
                     </div>
                 </div>
@@ -107,7 +122,7 @@
     @Styles.Render("~/Content/cropperjs-1.1.3/cropper.css")
     <style type="text/css">
         .img-container,
-        .img-preview {
+        .preview {
             background-color: #f7f7f7;
             overflow: hidden;
             width: 100%;
@@ -122,7 +137,7 @@
 
         @@media (min-width: 768px) {
             .img-container {
-                min-height: 266px;
+                min-height: 259px;
             }
         }
 
@@ -140,6 +155,7 @@
     @Scripts.Render("~/Content/cropperjs-1.1.3/cropper.js")
 
     <script type="text/javascript">
+
         function getEditor(name) {
             return UE.getEditor(name, {
                 toolbars: [
@@ -154,6 +170,16 @@
                 wordCount: false,
                 elementPathEnabled: false
             });
+        }
+        function each(arr, callback) {
+            var length = arr.length;
+            var i;
+
+            for (i = 0; i < length; i++) {
+                callback.call(arr, arr[i], i, arr);
+            }
+
+            return arr;
         }
 
         var CropperWrapper = {
@@ -173,45 +199,73 @@
         };
         function initCropper(selector) {
             var image = document.querySelector(selector);
+            var fixRatio = 16 / 9;
             var minAspectRatio = 0.5;
             var maxAspectRatio = 1.5;
+            var previews = document.querySelectorAll('.preview');
             var cropper = new Cropper(image, {
+                aspectRatio: 16 / 9,
                 ready: function () {
                     var cropper = this.cropper;
-                    var containerData = cropper.getContainerData();
-                    var cropBoxData = cropper.getCropBoxData();
-                    var aspectRatio = cropBoxData.width / cropBoxData.height;
-                    var newCropBoxWidth;
+                    //croper.zoomTo(1);
 
-                    if (aspectRatio < minAspectRatio || aspectRatio > maxAspectRatio) {
-                        newCropBoxWidth = cropBoxData.height * ((minAspectRatio + maxAspectRatio) / 2);
+                    //var containerData = cropper.getContainerData();
+                    //var cropBoxData = cropper.getCropBoxData();
+                    //var aspectRatio = cropBoxData.width / cropBoxData.height;
+                    //console.log(cropBoxData.width + ',' + cropBoxData.height);
+                    //var newCropBoxWidth;
 
-                        cropper.setCropBoxData({
-                            left: (containerData.width - newCropBoxWidth) / 2,
-                            width: newCropBoxWidth
-                        });
-                    }
+                    //if (aspectRatio < minAspectRatio || aspectRatio > maxAspectRatio) {
+                    //    newCropBoxWidth = cropBoxData.height * ((minAspectRatio + maxAspectRatio) / 2);
+
+                    //    cropper.setCropBoxData({
+                    //        left: (containerData.width - newCropBoxWidth) / 2,
+                    //        width: newCropBoxWidth
+                    //    });
+                    //}
+                    // preview
+                    var clone = this.cloneNode();
+
+                    clone.className = ''
+                    clone.style.cssText = (
+                        'display: block;' +
+                        'width: 100%;' +
+                        'min-width: 0;' +
+                        'min-height: 0;' +
+                        'max-width: none;' +
+                        'max-height: none;'
+                    );
+
+                    each(previews, function (elem) {
+                        elem.appendChild(clone.cloneNode());
+                    });
                 },
-                cropmove: function () {
-                    var cropper = this.cropper;
-                    var cropBoxData = cropper.getCropBoxData();
-                    var aspectRatio = cropBoxData.width / cropBoxData.height;
+                //cropmove: function () {
+                //    var cropper = this.cropper;
+                //    var cropBoxData = cropper.getCropBoxData();
+                //    var aspectRatio = cropBoxData.width / cropBoxData.height;
 
-                    if (aspectRatio < minAspectRatio) {
-                        cropper.setCropBoxData({
-                            width: cropBoxData.height * minAspectRatio
-                        });
-                    } else if (aspectRatio > maxAspectRatio) {
-                        cropper.setCropBoxData({
-                            width: cropBoxData.height * maxAspectRatio
-                        });
-                    }
-                },
+                //    if (aspectRatio < minAspectRatio) {
+                //        cropper.setCropBoxData({
+                //            width: cropBoxData.height * minAspectRatio
+                //        });
+                //    } else if (aspectRatio > maxAspectRatio) {
+                //        cropper.setCropBoxData({
+                //            width: cropBoxData.height * maxAspectRatio
+                //        });
+                //    }
+                //},
                 crop: function (e) {
                     var data = e.detail;
+                    var cropper = this.cropper;
 
-                    console.log(e.type);
                     console.log(data);
+
+                    $('input[name="cutPara"]').val(data.x + ',' + data.y + ',' + data.width + ',' + data.height);
+
+                    var imageData = cropper.getImageData();
+                    var previewAspectRatio = data.width / data.height;
+
                     //dataX.value = Math.round(data.x);
                     //dataY.value = Math.round(data.y);
                     //dataHeight.value = Math.round(data.height);
@@ -219,6 +273,20 @@
                     //dataRotate.value = typeof data.rotate !== 'undefined' ? data.rotate : '';
                     //dataScaleX.value = typeof data.scaleX !== 'undefined' ? data.scaleX : '';
                     //dataScaleY.value = typeof data.scaleY !== 'undefined' ? data.scaleY : '';
+
+                    // preview
+                    each(previews, function (elem) {
+                        var previewImage = elem.getElementsByTagName('img').item(0);
+                        var previewWidth = elem.offsetWidth;
+                        var previewHeight = previewWidth / previewAspectRatio;
+                        var imageScaledRatio = data.width / previewWidth;
+
+                        elem.style.height = previewHeight + 'px';
+                        previewImage.style.width = imageData.naturalWidth / imageScaledRatio + 'px';
+                        previewImage.style.height = imageData.naturalHeight / imageScaledRatio + 'px';
+                        previewImage.style.marginLeft = -data.x / imageScaledRatio + 'px';
+                        previewImage.style.marginTop = -data.y / imageScaledRatio + 'px';
+                    });
                 },
             });
             return cropper;
@@ -256,6 +324,7 @@
                 }
             }).on('change', function (event) {
                 CropperWrapper.destroy();
+                $('.preview').html('');
 
                 var files = $('#Picture').get(0).files[0];
                 var src = URL.createObjectURL(files);

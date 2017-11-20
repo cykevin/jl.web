@@ -260,6 +260,11 @@ namespace JL.Core.Providers
             return memberRepository.MemberPage(pageReq);
         }
 
+        public Member GetMember(int id)
+        {
+            return memberRepository.GetById(id);
+        }
+
 
 
         #endregion

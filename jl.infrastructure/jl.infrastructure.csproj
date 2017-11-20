@@ -51,6 +51,7 @@
     <Compile Include="DapperRepository\ProductRepository.cs" />
     <Compile Include="DapperRepository\UserRepository.cs" />
     <Compile Include="DbConnectionFactory.cs" />
+    <Compile Include="Extensons\StringExtension.cs" />
     <Compile Include="IDbCommandExt.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SqlFilter\SqlFilter.cs" />
@@ -72,5 +73,6 @@
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

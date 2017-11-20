@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Drawing.Imaging;
 using System.Linq;
 using System.Web;
 
@@ -86,6 +87,51 @@ namespace JL.Web.Helpers
             }
         }
 
+        #endregion
+
+        /// <summary>  
+        /// 剪裁 -- 用GDI+   
+        /// </summary>  
+        /// <param name="b">原始Bitmap</param>  
+        /// <param name="StartX">开始坐标X</param>  
+        /// <param name="StartY">开始坐标Y</param>  
+        /// <param name="iWidth">宽度</param>  
+        /// <param name="iHeight">高度</param>  
+        /// <returns>剪裁后的Bitmap</returns>  
+        public static Bitmap Cut(Image b, int StartX, int StartY, int iWidth, int iHeight)
+        {
+            if (b == null)
+            {
+                return null;
+            }
+            int w = b.Width;
+            int h = b.Height;
+            if (StartX >= w || StartY >= h)
+            {
+                return null;
+            }
+            if (StartX + iWidth > w)
+            {
+                iWidth = w - StartX;
+            }
+            if (StartY + iHeight > h)
+            {
+                iHeight = h - StartY;
+            }
+            try
+            {
+                Bitmap bmpOut = new Bitmap(iWidth, iHeight, PixelFormat.Format24bppRgb);
+                Graphics g = Graphics.FromImage(bmpOut);
+                g.DrawImage(b, new Rectangle(0, 0, iWidth, iHeight), new Rectangle(StartX, StartY, iWidth, iHeight), GraphicsUnit.Pixel);
+                g.Dispose();
+                return bmpOut;
+            }
+            catch
+            {
+                return null;
+            }
+        }
+
         #region 图片地址展示 
 
         private static string MapPictureEnumsToDirName(JL.Web.PictureEnums type)
@@ -116,32 +162,32 @@ namespace JL.Web.Helpers
                     if (size == PictureSize.Big) return "430x430";
                     if (size == PictureSize.Middle) return "250x250";
                     if (size == PictureSize.Small) return "80x80";
-                    if (size == PictureSize.Big) return null;
                     break;
                 case PictureEnums.Article:
                     if (size == PictureSize.Big) return "440x330";
                     if (size == PictureSize.Middle) return "220x165";
                     if (size == PictureSize.Small) return "100x80";
-                    if (size == PictureSize.Big) return null;
                     break;
                 case PictureEnums.User:
                     if (size == PictureSize.Big) return "440x330";
                     if (size == PictureSize.Middle) return "220x165";
                     if (size == PictureSize.Small) return "100x80";
-                    if (size == PictureSize.Big) return null;
                     break;
                 case PictureEnums.Material:
                     if (size == PictureSize.Big) return "430x430";
                     if (size == PictureSize.Middle) return "250x250";
                     if (size == PictureSize.Small) return "80x80";
-                    if (size == PictureSize.Big) return null;
+                    break;
+                case PictureEnums.Member:
+                    if (size == PictureSize.Big) return "453x255";
+                    if (size == PictureSize.Middle) return "250x141";
+                    if (size == PictureSize.Small) return "80x45";
                     break;
                 default:
                     if (size == PictureSize.Big) return "430x430";
                     if (size == PictureSize.Middle) return "250x250";
                     if (size == PictureSize.Small) return "80x80";
-                    if (size == PictureSize.Big) return null;
-                    break;
+                    break;                    
             }
             return null;
         }
@@ -158,9 +204,12 @@ namespace JL.Web.Helpers
             {
                 path = path.Substring(1);
                 var extIndex = path.LastIndexOf('.');
+                if (extIndex == -1)
+                {
+                    extIndex = path.Length - 1;
+                }
                 var pre = path.Substring(0, extIndex);
                 var ext = path.Substring(extIndex);
-
                 return pre + size + ext;
             }
 
@@ -280,6 +329,6 @@ namespace JL.Web.Helpers
 
         #endregion
 
-        #endregion
+
     }
 }

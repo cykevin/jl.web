@@ -12,7 +12,7 @@
         {
             <div class="alert alert-success navbar-fixed-top container" role="alert">
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <strong>操作成功！</strong> 点击<a href="@Url.Action("Index","franchisee")" class="alert-link">这里</a>跳转到加盟商列表。
+                <strong>操作成功！</strong> 点击<a href="@Url.Action("index","member")" class="alert-link">这里</a>跳转到团队中心。
             </div>
         }
         else
@@ -38,6 +38,7 @@
             <label for="NickName" class="col-lg-1 control-label">昵称</label>
             <div class="col-lg-4">@Html.TextBoxFor(a => a.NickName, new { @class = "form-control", placeholder = "请输入昵称" })</div>
         </div>
+
         <div class="form-group">
             <label for="Weixin" class="col-lg-1 control-label">微信号</label>
             <div class="col-lg-4">@Html.TextBoxFor(a => a.Weixin, new { @class = "form-control", placeholder = "请输入微信" })</div>
@@ -45,7 +46,15 @@
             <label for="Phone" class="col-lg-1 control-label">手机号</label>
             <div class="col-lg-4">@Html.TextBoxFor(a => a.Phone, new { @class = "form-control", placeholder = "请输入手机号" })</div>
         </div>
-        
+
+        <div class="form-group">
+            <label for="QQ" class="col-lg-1 control-label">QQ</label>
+            <div class="col-lg-4">@Html.TextBoxFor(a => a.QQ, new { @class = "form-control", placeholder = "请输入QQ号" })</div>
+
+            <label for="Email" class="col-lg-1 control-label">Email</label>
+            <div class="col-lg-4">@Html.TextBoxFor(a => a.Email, new { @class = "form-control", placeholder = "请输入Email" })</div>
+        </div>
+
         <div class="form-group">
             <label for="Picture" class="col-lg-1 control-label">上传图片</label>
             <div class="col-lg-4">
@@ -59,9 +68,10 @@
             <div class="col-lg-4">
                 <div class="preview"></div>
             </div>
+            <input type="hidden" name="cutPara" />
         </div>
 
-            <div class="form-group">
+        <div class="form-group">
                 <label for="Words" class="col-lg-1 control-label">寄语</label>
                 <div class="col-lg-11">
                     @Html.TextAreaFor(m => m.Words, new { Style = "Height:160px;" })
@@ -89,7 +99,7 @@
                             <input type="radio" name="status" value="0"> 展示
                         </label>
                         <label  class="control-label">
-                            <input type="radio" name="status" checked="checked" value="0"> 隐藏
+                            <input type="radio" name="status" checked="checked" value="1"> 隐藏
                         </label>                
                     </div>
                 </div>
@@ -125,7 +135,7 @@
 
 @@media (min-width: 768px) {
   .img-container {
-    min-height: 266px;
+    min-height: 259px;
   }
 }
 
@@ -246,8 +256,10 @@
                 crop: function (e) {
                     var data = e.detail;
                     var cropper = this.cropper;
-                    console.log(e.type);
+                    
                     console.log(data);
+
+                    $('input[name="cutPara"]').val(data.x + ',' + data.y + ',' + data.width + ',' + data.height);
 
                     var imageData = cropper.getImageData();
                     var previewAspectRatio = data.width / data.height;

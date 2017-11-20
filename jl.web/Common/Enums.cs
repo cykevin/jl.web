@@ -7,7 +7,7 @@ namespace JL.Web
 {
     public enum PictureEnums
     {
-        Product,Article,User,Material
+        Product,Article,User,Material,Member
     }
 
     public enum PictureSize
