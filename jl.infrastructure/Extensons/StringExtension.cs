@@ -28,5 +28,15 @@ namespace JL.Infrastructure
             Double.TryParse(t, out id);//这里当转换失败时返回的id为0
             return id;
         }
+
+        public static bool IsNullOrEmpty(this string t)
+        {
+            return string.IsNullOrEmpty(t);
+        }
+
+        public static bool IsEquals(this string t,string other)
+        {
+            return string.Equals(t, other, StringComparison.OrdinalIgnoreCase);
+        }
     }
 }

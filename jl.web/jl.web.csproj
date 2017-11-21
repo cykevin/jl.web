@@ -177,6 +177,7 @@
     <Compile Include="Areas\backend\Models\MemberSearchModel.cs" />
     <Compile Include="Areas\backend\Models\ProductModel.cs" />
     <Compile Include="Areas\backend\Models\ProductSearchModel.cs" />
+    <Compile Include="Areas\backend\Models\SettingModel.cs" />
     <Compile Include="Common\Enums.cs" />
     <Compile Include="Common\ResultObject.cs" />
     <Compile Include="Content\ueditor\net\App_Code\Config.cs" />
@@ -993,6 +994,7 @@
     <Content Include="Areas\backend\Views\Banner\Index.cshtml" />
     <Content Include="Areas\backend\Views\Banner\New.cshtml" />
     <Content Include="Areas\backend\Views\Banner\Edit.cshtml" />
+    <Content Include="Areas\backend\Views\Setting\Index.cshtml" />
     <None Include="Scripts\jquery-3.2.1.intellisense.js" />
     <Content Include="Images\search1.png" />
     <Content Include="Images\tick1.png" />
@@ -1041,7 +1043,6 @@
     <Folder Include="Areas\agent\Controllers\" />
     <Folder Include="Areas\agent\Models\" />
     <Folder Include="Areas\agent\Views\Shared\" />
-    <Folder Include="Areas\backend\Views\Setting\" />
     <Folder Include="Views\Article\" />
     <Folder Include="Views\Hi\" />
     <Folder Include="Views\Product\" />

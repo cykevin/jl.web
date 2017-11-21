@@ -17,6 +17,7 @@ namespace JL.Core.Providers
         private readonly IFranchiseeRepository franchiseeRepository;
         private readonly IMaterialRepository materialRepository;
         private readonly IBannerRepository bannerRepository;
+        private readonly ISettingRepository settingRepository;
 
         public JLService(IUserRepository userRepository,
             IArticleRepository articleRepository,
@@ -24,7 +25,8 @@ namespace JL.Core.Providers
             IMemberRepository memberRepository,
             IFranchiseeRepository franchiseeRepository,
             IMaterialRepository materialRepository,
-            IBannerRepository bannerRepository)
+            IBannerRepository bannerRepository,
+            ISettingRepository settingRepository)
         {
             this.userRepository = userRepository;
             this.articleRepository = articleRepository;
@@ -33,6 +35,7 @@ namespace JL.Core.Providers
             this.franchiseeRepository = franchiseeRepository;
             this.materialRepository = materialRepository;
             this.bannerRepository = bannerRepository;
+            this.settingRepository = settingRepository;
         }
 
         #region userprofile
@@ -299,5 +302,47 @@ namespace JL.Core.Providers
 
         #endregion
 
+        #region setting
+
+        private static IList<Setting> settings;
+
+        public IEnumerable<Models.Setting> GetSettingList()
+        {
+            if (settings != null)
+            {
+                return settings;
+            }
+            else
+            {
+                settings = settingRepository.GetList().ToList();
+            }
+            return settings;
+        }
+
+        public Models.Setting SaveSetting(Models.Setting setting)
+        {
+            if (setting == null)
+                return null;
+
+            if (settings != null)
+            {
+                // 更新
+                var theOne = settings.FirstOrDefault(s => string.Equals(setting.Key, s.Key));
+                if (theOne != null)
+                {
+                    settings.Remove(theOne);
+                    settings.Add(theOne);
+                    return theOne;
+                }
+            }
+
+            // 新增
+            var id = settingRepository.Insert(setting);
+            setting.AutoId = id;
+            settings.Add(setting);
+            return setting;
+        }
+
+        #endregion
     }
 }

@@ -50,6 +50,7 @@
     <Compile Include="DapperRepository\MaterialRepository.cs" />
     <Compile Include="DapperRepository\MemberRepository.cs" />
     <Compile Include="DapperRepository\ProductRepository.cs" />
+    <Compile Include="DapperRepository\SettingRepository.cs" />
     <Compile Include="DapperRepository\UserRepository.cs" />
     <Compile Include="DbConnectionFactory.cs" />
     <Compile Include="Extensons\StringExtension.cs" />
