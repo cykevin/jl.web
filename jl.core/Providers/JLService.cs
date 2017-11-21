@@ -16,13 +16,15 @@ namespace JL.Core.Providers
         private readonly IMemberRepository memberRepository;
         private readonly IFranchiseeRepository franchiseeRepository;
         private readonly IMaterialRepository materialRepository;
+        private readonly IBannerRepository bannerRepository;
 
         public JLService(IUserRepository userRepository,
             IArticleRepository articleRepository,
             IProductRepository productRepository,
             IMemberRepository memberRepository,
             IFranchiseeRepository franchiseeRepository,
-            IMaterialRepository materialRepository)
+            IMaterialRepository materialRepository,
+            IBannerRepository bannerRepository)
         {
             this.userRepository = userRepository;
             this.articleRepository = articleRepository;
@@ -30,6 +32,7 @@ namespace JL.Core.Providers
             this.memberRepository = memberRepository;
             this.franchiseeRepository = franchiseeRepository;
             this.materialRepository = materialRepository;
+            this.bannerRepository = bannerRepository;
         }
 
         #region userprofile
@@ -265,7 +268,34 @@ namespace JL.Core.Providers
             return memberRepository.GetById(id);
         }
 
+        #endregion
 
+        #region banner
+
+        public int AddBanner(Banner banner)
+        {
+            return bannerRepository.Insert(banner);
+        }
+
+        public void UpdateBanner(Banner banner)
+        {
+            bannerRepository.Update(banner);
+        }
+
+        public void DeleteBanner(int id)
+        {
+            bannerRepository.Delete(id);
+        }
+
+        public Banner GetBanner(int id)
+        {
+            return bannerRepository.GetById(id);
+        }
+
+        public PageData<Models.Banner> BannerPage(PageReq pageReq)
+        {
+            return bannerRepository.BannerPage(pageReq);
+        }
 
         #endregion
 

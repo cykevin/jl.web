@@ -1,0 +1,105 @@
+﻿@using MVCPaging
+
+@model JL.Core.Common.PageData<JL.Core.Models.Banner>
+@{
+    ViewBag.Title = "Index";
+}
+@section styles{
+    <style type="text/css">
+        .query-part {
+            padding-bottom: 9px;
+            margin: 4px 0 10px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .thumbnail {
+            margin-bottom: 2px;
+        }
+
+        .table th, .table td {
+            text-align: center;
+            vertical-align: middle !important;
+        }
+    </style>
+
+}
+
+<div class="row">
+    <div class="col-lg-12">
+        <h3 class="page-header">成员列表</h3>
+    </div>
+</div>
+
+@*<div class="row">
+    <div class="col-lg-12">
+        <div class="query-part">
+            <form class="form-inline" method="post" action="@Url.Action("index","product")">
+                <div class="form-group">
+                    <label for="productName">名称：</label>
+                    <input type="text" class="form-control" name="title" placeholder="输入名称查询">
+                </div>
+
+                <button type="submit" class="btn btn-primary">查询</button>
+            </form>
+        </div>
+    </div>
+</div>*@
+
+<div class="row">
+    <div class="col-lg-12">
+        <table class="table table-striped table-bordered table-hover" id="dataTable-products">
+            <thead>
+                <tr>
+                    <th class="col-lg-1">图片</th>
+                    <th class="col-lg-2">标题</th>
+                    <th class="col-lg-1">详细内容</th>                    
+                    <th class="col-lg-1">跳转地址</th>
+                    <th class="col-lg-1">背景色</th>
+                    <th class="col-lg-1">排序</th>
+                    <th class="col-lg-1">状态</th>
+                    <th class="col-lg-1">操作</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var member in Model.Data)
+                {
+                    <tr>
+                        <td>
+                            <a href="#" class="thumbnail">
+                                <img src="@JL.Web.Helpers.ImageHelper.GenPictureUrlSource(member.Picture,PictureEnums.Member)" alt="" class="img-responsive">
+                            </a>
+                        </td>
+                        <td>@member.Title</td>
+                        <td>@member.Desctiption</td>                        
+                        <td>@member.Url</td>
+                        <td class="center">@member.BackgroundColor</td>
+                        <td class="center">@member.SortIndex</td>
+                        @if (member.Status == 0)
+                        {
+                            <td class="center text-success">已启用</td>
+                        }
+                        else if (member.Status == 1)
+                        {
+                            <td class="center text-danger">已禁用</td>
+                        }
+                        else
+                        {
+                            <td class="center text-info">未知</td>
+                        }
+                        <th class="center">
+                            <a href="@Url.Action("edit","banner",new { id = member.AutoId })">编辑</a>
+                        </th>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+<div class="row">
+    <div class="col-lg-12">
+        @Html.Pager(Model.PageSize, Model.PageIndex, Model.TotalCount).Options(o => o.Action("Index"))
+
+    </div>
+</div>

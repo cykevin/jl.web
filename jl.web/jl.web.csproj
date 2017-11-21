@@ -156,6 +156,7 @@
     <Compile Include="Areas\agent\agentAreaRegistration.cs" />
     <Compile Include="Areas\backend\backendAreaRegistration.cs" />
     <Compile Include="Areas\backend\Controllers\ArticleController.cs" />
+    <Compile Include="Areas\backend\Controllers\BannerController.cs" />
     <Compile Include="Areas\backend\Controllers\CategoryController.cs" />
     <Compile Include="Areas\backend\Controllers\FranchiseeController.cs" />
     <Compile Include="Areas\backend\Controllers\HomeController.cs" />
@@ -166,6 +167,7 @@
     <Compile Include="Areas\backend\Controllers\UserController.cs" />
     <Compile Include="Areas\backend\Models\ArticleModel.cs" />
     <Compile Include="Areas\backend\Models\ArticleSearchModel.cs" />
+    <Compile Include="Areas\backend\Models\BannerModel.cs" />
     <Compile Include="Areas\backend\Models\CategoryModel.cs" />
     <Compile Include="Areas\backend\Models\FranchiseeModel.cs" />
     <Compile Include="Areas\backend\Models\FranchiseeSearchModel.cs" />
@@ -988,6 +990,9 @@
     <Content Include="Areas\backend\Views\Member\Index.cshtml" />
     <Content Include="Areas\backend\Views\Member\New.cshtml" />
     <Content Include="Areas\backend\Views\Member\Edit.cshtml" />
+    <Content Include="Areas\backend\Views\Banner\Index.cshtml" />
+    <Content Include="Areas\backend\Views\Banner\New.cshtml" />
+    <Content Include="Areas\backend\Views\Banner\Edit.cshtml" />
     <None Include="Scripts\jquery-3.2.1.intellisense.js" />
     <Content Include="Images\search1.png" />
     <Content Include="Images\tick1.png" />

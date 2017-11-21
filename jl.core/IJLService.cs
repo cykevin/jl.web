@@ -60,5 +60,12 @@ namespace JL.Core
         UserProfile GetUser(int id);
         UserProfile GetUser(string username);
         PageData<UserProfile> UserPage(PageReq pageReq);
+
+        // banner
+        int AddBanner(Banner banner);
+        void UpdateBanner(Banner banner);
+        void DeleteBanner(int id);
+        Banner GetBanner(int id);
+        PageData<Models.Banner> BannerPage(PageReq pageReq);
     }
 }

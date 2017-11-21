@@ -1,0 +1,191 @@
+﻿@model JL.Web.Areas.backend.Models.BannerModel
+@{
+    ViewBag.Title = "编辑Banner";
+}
+
+@using (Html.BeginForm("edit", "banner", FormMethod.Post, new { id = "bannerForm", enctype = "multipart/form-data", @class = "form-horizontal" }))
+{
+    if (ViewData.ContainsKey("ResultObject"))
+    {
+        var obj = ViewData["ResultObject"] as JL.Web.Common.ResultObject;
+        if (obj.Success)
+        {
+            <div class="alert alert-success navbar-fixed-top container" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <strong>操作成功！</strong> 点击<a href="@Url.Action("index","banner")" class="alert-link">这里</a>跳转到Banner列表。
+            </div>
+        }
+        else
+        {
+            <div class="alert alert-danger navbar-fixed-top container" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <strong>操作失败！</strong> @obj.Message
+            </div>
+        }
+    }
+
+    <div class="row">
+        <div class="col-lg-12">
+            <h3 class="page-header">编辑Banner</h3>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="Title" class="col-lg-1 control-label text-left">标题</label>
+        <div class="col-lg-11">@Html.TextBoxFor(a => a.Title, new { @class = "form-control", placeholder = "请输入标题" })</div>
+    </div>
+
+        <div class="form-group">
+            <label for="Desctiption" class="col-lg-1 control-label">描述</label>
+            <div class="col-lg-11">@Html.TextBoxFor(a => a.Desctiption, new { @class = "form-control", placeholder = "请输入内容" })</div>
+        </div>
+
+        <div class="form-group">
+            <label for="Picture" class="col-lg-1 control-label">上传图片</label>
+            <div class="col-lg-11">
+                <!--image-->
+                <div class="img-container">
+                    <img alt="" src="@JL.Web.Helpers.ImageHelper.GenPictureUrlSource(Model.Picture,PictureEnums.Member)" name="PictureArea" id="PictureArea" class="img-thumbnail" />
+                </div>
+
+                <input id="PictureInput" name="PictureInput" type="file" class="file-loading" accept="image/*">
+                <em>建议上传尺寸为1180x460以获取最好的效果</em>
+
+                @Html.HiddenFor(m=>m.Picture)
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="Words" class="col-lg-1 control-label">背景色</label>
+            <div class="col-lg-11">
+                @Html.TextBoxFor(m => m.BackgroundColor, new { @class = "form-control" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="JoinTime" class="col-lg-1 control-label">跳转地址</label>
+            <div class="col-lg-11">
+                @Html.TextBoxFor(m => m.Url, new { @class = "form-control" })
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="SortIndex" class="col-lg-1 control-label">排序</label>
+            <div class="col-lg-11">
+                @Html.TextBoxFor(m => m.SortIndex, new { @class = "form-control" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-lg-1 control-label">状态</label>
+            <div class="radio col-lg-11" style="padding-top:0px;">
+                <label style="margin-right:15px;" class="control-label">
+                    <input type="radio" name="status" checked="checked" value="0"> 启用
+                </label>
+                <label class="control-label">
+                    <input type="radio" name="status" value="1"> 禁用
+                </label>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-lg-11 col-lg-offset-1">
+                <button type="submit" class="btn btn-success">提交</button>
+            </div>
+        </div>
+
+                <div class="clearfix"></div>
+
+}
+
+@section styles{
+    @Styles.Render("~/Content/fileinput")
+    <style type="text/css">
+        .img-container,
+        .preview {
+            background-color: #f7f7f7;
+            overflow: hidden;
+            width: 100%;
+            text-align: center;
+        }
+
+        .img-container {
+            min-height: 200px;
+            max-height: 266px;
+            margin-bottom: 20px;
+        }
+
+        @@media (min-width: 768px) {
+            .img-container {
+                min-height: 259px;
+            }
+        }
+
+        .img-container > img {
+            max-width: 100%;
+        }
+    </style>
+}
+
+@section scripts{
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/fileinput")
+
+    <script type="text/javascript">
+
+        // jquery validate
+        $(document).ready(function () {
+
+            $('#PictureInput').fileinput({
+                language: 'zh',
+                allowedFileTypes: ['image'],
+                allowedFileExtensions: ['gif', 'jpg', 'jpeg', 'png', 'bmp'],
+                showUpload: false,
+                showCaption: false,
+                showPreview: false,
+                showRemove: false,
+                dropZoneEnabled: false,
+                browseClass: "btn btn-primary",
+                previewFileIcon: "<i class='glyphicon glyphicon-king'></i>",
+                uploadExtraData: function () {
+                    var fileType = $('input[name="fileType"]:checked').val();
+                    return { fileType: fileType };
+                }
+            }).on('change', function (event) {
+                $('.preview').html('');
+
+                var files = $('#PictureInput').get(0).files[0];
+                var src = URL.createObjectURL(files);
+                $('#PictureArea').prop('src', src);
+            })
+
+            $('#bannerForm').validate({
+                rules: {
+                    Picture: "required",
+                    SortIndex:"number"
+                },
+                messages: {
+                    Picture: "请选择图片",
+                    SortIndex: "必须输入数字"
+                },
+                errorElement: "em",
+                errorPlacement: function (error, element) {
+                    // Add the `help-block` class to the error element
+                    error.addClass("help-block");
+                    if (element.prop("type") === "checkbox") {
+                        error.insertAfter(element.parent("label"));
+                    } else {
+                        error.insertAfter(element);
+                    }
+                },
+                highlight: function (element, errorClass, validClass) {
+                    $(element).parents(".form-group").addClass("has-error").removeClass("has-success");
+                },
+                unhighlight: function (element, errorClass, validClass) {
+                    $(element).parents(".form-group").addClass("has-success").removeClass("has-error");
+                }
+
+            });
+        });
+    </script>
+
+}

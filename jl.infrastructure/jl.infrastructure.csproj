@@ -45,6 +45,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DapperRepository\ArticleRepository.cs" />
+    <Compile Include="DapperRepository\BannerRepository.cs" />
     <Compile Include="DapperRepository\FranchiseeRepository.cs" />
     <Compile Include="DapperRepository\MaterialRepository.cs" />
     <Compile Include="DapperRepository\MemberRepository.cs" />
@@ -73,6 +74,11 @@
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Content Include="T4\RepositoryT4.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>RepositoryT4.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
