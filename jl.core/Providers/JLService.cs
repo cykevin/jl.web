@@ -5,6 +5,7 @@ using System;
 using System.Linq;
 using System.Collections.Generic;
 using JL.Core.Filters;
+using JL.Infrastructure;
 
 namespace JL.Core.Providers
 {
@@ -306,6 +307,16 @@ namespace JL.Core.Providers
 
         private static IList<Setting> settings;
 
+        public Models.Setting GetSetting(string key)
+        {
+            if (!string.IsNullOrEmpty(key))
+                return null;
+
+            // 更新
+            var oldOne = settings.FirstOrDefault(s => string.Equals(key, s.Key));
+            return oldOne;
+        }
+
         public IEnumerable<Models.Setting> GetSettingList()
         {
             if (settings != null)
@@ -327,12 +338,17 @@ namespace JL.Core.Providers
             if (settings != null)
             {
                 // 更新
-                var theOne = settings.FirstOrDefault(s => string.Equals(setting.Key, s.Key));
-                if (theOne != null)
+                var oldOne = settings.FirstOrDefault(s => string.Equals(setting.Key, s.Key));
+                if (oldOne != null)
                 {
-                    settings.Remove(theOne);
-                    settings.Add(theOne);
-                    return theOne;
+                    setting.AutoId = oldOne.AutoId;
+                    if(!string.Equals(setting.Value,oldOne.Value))
+                    {
+                        settingRepository.Update(setting);
+                        settings.Remove(oldOne);
+                        settings.Add(setting);
+                    }
+                    return setting;
                 }
             }
 
@@ -341,6 +357,37 @@ namespace JL.Core.Providers
             setting.AutoId = id;
             settings.Add(setting);
             return setting;
+        }
+
+        public Models.Setting SaveSetting(string key,string value)
+        {
+            if (key.IsNullOrEmpty())
+                return null;
+
+            if (settings != null)
+            {
+                // 更新
+                var oldOne = settings.FirstOrDefault(s => string.Equals(key, s.Key));
+                if (oldOne != null)
+                {
+                    if (!string.Equals(value, oldOne.Value))
+                    {
+                        oldOne.Value = value;
+                        settingRepository.Update(oldOne);
+                    }
+                    return oldOne;
+                }
+            }
+
+            // 新增
+            var newSetting = new Models.Setting();
+            newSetting.Key = key;
+            newSetting.Value = value;
+
+            var id = settingRepository.Insert(newSetting);
+            newSetting.AutoId = id;
+            settings.Add(newSetting);
+            return newSetting;
         }
 
         #endregion

@@ -71,6 +71,11 @@
     <Compile Include="Repositories\IProductRepository.cs" />
     <Compile Include="Repositories\IUserRepository.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\jl.infrastructure\jl.infrastructure.csproj">
+      <Project>{208c9f8d-b9ee-4bbb-b4a8-454caf09bd95}</Project>
+      <Name>jl.infrastructure</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
