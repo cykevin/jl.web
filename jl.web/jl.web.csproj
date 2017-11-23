@@ -1051,6 +1051,10 @@
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\jl.core.repositories\jl.core.repositories.csproj">
+      <Project>{21d9e691-96b1-457b-ba70-8ab0cf679e03}</Project>
+      <Name>jl.core.repositories</Name>
+    </ProjectReference>
     <ProjectReference Include="..\jl.core\jl.core.csproj">
       <Project>{f31641bd-b28e-4d20-9921-71f545ca73fa}</Project>
       <Name>jl.core</Name>

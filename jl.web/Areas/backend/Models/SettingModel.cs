@@ -12,5 +12,6 @@ namespace JL.Web.Areas.backend.Models
         public string IcpNO { get; set; }
         public string Copyright { get; set; }
         public string Address { get; set; }
+        public string Phone { get; set; }
     }
 }
