@@ -14,6 +14,7 @@ namespace JL.Core.Repositories
         PageData<Product> ProductPage(PageReq<ProductFilter> pageReq);
         void Delete(int id);
         void Delete(Product model);
+        IEnumerable<Product> GetList(string where, string fields , int top, string orderBy );
 
         // product category
         ProductCategory GetProductCategoryById(int id);

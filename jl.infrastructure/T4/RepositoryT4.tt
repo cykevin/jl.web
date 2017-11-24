@@ -16,8 +16,8 @@
 <#@ include file=".\T4Include.ttinclude" #>
 <#@ output extension=".cs"  #>
 <# 
-    var tableName="setting";
-	var modelName="Setting";
+    var tableName="Product";
+	var modelName="Product";
 
 	var table=TableInfo.Init(tableName);
 #>
@@ -55,12 +55,13 @@ namespace JL.Infrastructure.DapperRepository
 				}
 				sqlBuilder.Remove(sqlBuilder.Length-1,1);
 				sqlBuilder.Append(")");
-
+				sqlBuilder.Append(";SELECT LAST_INSERT_ID()");
 				// value builder
 
 			#>var connection = DbConnectionFactory.CreateConnection();
-			connection.Execute(@"<#=sqlBuilder.ToString()#>",
-				model);
+			var id=connection.Query<int>(@"<#=sqlBuilder.ToString()#>",
+				model).FirstOrDefault();
+            return id;
 		}
 
 	    public <#=modelName#> GetById(int id)

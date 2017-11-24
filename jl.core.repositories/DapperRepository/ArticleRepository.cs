@@ -110,7 +110,11 @@ values (@Title,@Content,@Picture,@AddTime,@Tags,@PageViews,@SortIndex,@Status);S
                     sb.Append("title like '%" + filter.Title + "%'");
                     sb.Append(" and ");
                 }
-
+                if(filter.Status>-1)
+                {
+                    sb.Append(" status = " + filter.Status);
+                    sb.Append(" and ");
+                }
                 if (sb.Length > 0)
                     return sb.Remove(sb.Length - 4, 4).ToString();
             }

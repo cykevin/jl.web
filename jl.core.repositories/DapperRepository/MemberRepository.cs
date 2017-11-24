@@ -82,6 +82,10 @@ values (@NickName,@RealName,@Description,@Phone,@Weixin,@QQ,@Email,@Address,@Joi
             conn.Execute(sql, new { AutoId = id });
         }
 
+
+
+        #endregion
+
         public PageData<Member> MemberPage(PageReq<MemberFilter> pageReq)
         {
             var conn = DbConnectionFactory.CreateConnection();
@@ -89,7 +93,7 @@ values (@NickName,@RealName,@Description,@Phone,@Weixin,@QQ,@Email,@Address,@Joi
             var dParas = new DynamicParameters();
             dParas.Add("@page", pageReq.PageIndex);
             dParas.Add("@pagesize", pageReq.PageSize);
-            dParas.Add("@fields", "p.*");
+            dParas.Add("@fields", "*");
             dParas.Add("@tablename", " member ");
             dParas.Add("@filter", BuildSqlFrom(pageReq.Data));
             dParas.Add("@orderby", pageReq.OrderBy);
@@ -97,7 +101,7 @@ values (@NickName,@RealName,@Description,@Phone,@Weixin,@QQ,@Email,@Address,@Joi
             dParas.Add("@total", direction: ParameterDirection.Output);
 
             var data = conn.Query<Member>("procPageQuery", param: dParas, commandType: CommandType.StoredProcedure);
-            
+
             var total = dParas.Get<int>("@total");
 
             var pages = (int)Math.Ceiling((double)total / pageReq.PageSize);
@@ -120,19 +124,21 @@ values (@NickName,@RealName,@Description,@Phone,@Weixin,@QQ,@Email,@Address,@Joi
                     sb.Append(" jointime >= '" + filter.JoinTimeFrom.Value.ToString("yyyy-MM-dd") + "'");
                     sb.Append(" and ");
                 }
-                if(filter.JoinTimeTo.HasValue)
+                if (filter.JoinTimeTo.HasValue)
                 {
                     sb.Append(" jointime <= '" + filter.JoinTimeTo.Value.ToString("yyyy-MM-dd") + "'");
                     sb.Append(" and ");
                 }
-
+                if(filter.Status>-1)
+                {
+                    sb.Append(" status = " + filter.Status);
+                    sb.Append(" and ");
+                }
                 if (sb.Length > 0)
                     return sb.Remove(sb.Length - 4, 4).ToString();
             }
 
             return null;
         }
-
-        #endregion
     }
 }

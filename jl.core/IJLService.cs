@@ -28,6 +28,7 @@ namespace JL.Core
         void DeleteMember(Member model);
         void UpdateMember(Member model);
         PageData<Member> MemberPage(PageReq pageReq);
+        PageData<Member> MemberPage(PageReq<MemberFilter> pageReq);
         Member GetMember(int id);
 
         // product
@@ -37,6 +38,7 @@ namespace JL.Core
         void UpdateProduct(Product model);
         PageData<Product> ProductPage(PageReq pageReq);
         PageData<Product> ProductPage(PageReq<ProductFilter> pageReq);
+        IEnumerable<Product> GetProductsRecommends();
 
         int AddProductCategory(ProductCategory model);
         ProductCategory GetProductCategory(int id);

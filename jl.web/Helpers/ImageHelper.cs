@@ -228,10 +228,14 @@ namespace JL.Web.Helpers
             {
                 path = path.Substring(1);
                 var extIndex = path.LastIndexOf('.');
-                var pre = path.Substring(0, extIndex);
-                var ext = path.Substring(extIndex);
+                if(extIndex>-1)
+                {
+                    var pre = path.Substring(0, extIndex);
+                    var ext = path.Substring(extIndex);
 
-                return pre + size + ext;
+                    return pre + size + ext;
+                }
+                return path;
             }
 
             return path;

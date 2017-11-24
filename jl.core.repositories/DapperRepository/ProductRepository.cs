@@ -38,13 +38,40 @@ namespace JL.Core.Repositories.DapperRepository
             return PageData<Product>.Create(pageReq.PageIndex, pageReq.PageSize, pages, total, data);
         }
 
+
+        public IEnumerable<Product> GetList(string where, string fields = "*", int top = 0, string orderBy = null)
+        {
+            var sql = new StringBuilder();
+            sql.Append(" select ");            
+            sql.Append(fields);
+            sql.Append(" from product ");
+            if (!string.IsNullOrEmpty(where))
+            {
+                sql.Append(where);
+            }
+
+            if (!string.IsNullOrEmpty(orderBy))
+            {
+                sql.Append(orderBy);
+            }
+
+            if (top > 0)
+            {
+                sql.Append(" limit " + top.ToString() + " ");
+            }
+
+            var conn = DbConnectionFactory.CreateConnection();
+            var data = conn.Query<Product>(sql.ToString());
+            return data;
+        }
+
         #region methods from t4
 
         public int Insert(Product model)
         {
             var connection = DbConnectionFactory.CreateConnection();
-            var id=connection.Query<int>(@"Insert into Product(Name,Alias,Description,Picture,RetailPrice,MarketPrice,PageViews,SortIndex,Status)
-values (@Name,@Alias,@Description,@Picture,@RetailPrice,@MarketPrice,@PageViews,@SortIndex,@Status);SELECT LAST_INSERT_ID()",
+            var id=connection.Query<int>(@"Insert into Product(Name,Alias,Description,Picture,RetailPrice,MarketPrice,PageViews,SortIndex,Status,IsRecommendAsNew)
+values (@Name,@Alias,@Description,@Picture,@RetailPrice,@MarketPrice,@PageViews,@SortIndex,@Status,@IsRecommendAsNew);SELECT LAST_INSERT_ID()",
                 model).FirstOrDefault();
             return id;
         }
@@ -58,21 +85,9 @@ values (@Name,@Alias,@Description,@Picture,@RetailPrice,@MarketPrice,@PageViews,
 
         }
 
-
-        public ProductCategory GetProductCategory(int id)
-        {
-            var query = "select pc.*,p.* from productcategory pc left join productcategorylink pcl on pc.AutoId = pcl.categoryid left join product p on pcl.productid = p.autoid where AutoId=@id";
-
-            var conn = DbConnectionFactory.CreateConnection();
-            return conn.Query<ProductCategory, Product, ProductCategory>(query,(pc,p)=> {
-                pc.Products.Add(p);
-                return pc;
-            }, new { id = id }).FirstOrDefault();
-        }
-
         public void Update(Product model)
         {
-            var sql = "update Product set Name=@Name,Alias=@Alias,Description=@Description,Picture=@Picture,RetailPrice=@RetailPrice,MarketPrice=@MarketPrice,PageViews=@PageViews,SortIndex=@SortIndex,Status=@Status where AutoId=@AutoId";
+            var sql = "update Product set Name=@Name,Alias=@Alias,Description=@Description,Picture=@Picture,RetailPrice=@RetailPrice,MarketPrice=@MarketPrice,PageViews=@PageViews,SortIndex=@SortIndex,Status=@Status,IsRecommendAsNew=@IsRecommendAsNew where AutoId=@AutoId";
             var conn = DbConnectionFactory.CreateConnection();
             conn.Execute(sql, model);
         }
@@ -90,7 +105,19 @@ values (@Name,@Alias,@Description,@Picture,@RetailPrice,@MarketPrice,@PageViews,
             var conn = DbConnectionFactory.CreateConnection();
             conn.Execute(sql, new { AutoId = id });
         }
+              
 
+        public ProductCategory GetProductCategory(int id)
+        {
+            var query = "select pc.*,p.* from productcategory pc left join productcategorylink pcl on pc.AutoId = pcl.categoryid left join product p on pcl.productid = p.autoid where AutoId=@id";
+
+            var conn = DbConnectionFactory.CreateConnection();
+            return conn.Query<ProductCategory, Product, ProductCategory>(query,(pc,p)=> {
+                pc.Products.Add(p);
+                return pc;
+            }, new { id = id }).FirstOrDefault();
+        }
+        
         public int InsertProductCategory(ProductCategory model)
         {
             var connection = DbConnectionFactory.CreateConnection();
@@ -169,8 +196,7 @@ values (@Name,@Alias,@Picture,@Path,@Depth,@ParentId,@PageViews,@SortIndex,@Stat
                 return PageData<ProductCategory>.Create(pageReq.PageIndex, pageReq.PageSize, pages, total, data);
             }
         }
-
-
+        
         public void SetProductToCategory(int productId, int categoryId)
         {
             var connection = DbConnectionFactory.CreateConnection();
@@ -251,6 +277,11 @@ values(@productId,@categoryId)",
                     sb.Append("p.name like '%" + filter.Title + "%'");
                     sb.Append(" and ");
                 }
+                if(filter.Status>-1)
+                {
+                    sb.Append("p.Status=" + filter.Status);
+                    sb.Append(" and ");
+                }
 
                 if (sb.Length > 0)
                     return sb.Remove(sb.Length - 4, 4).ToString();
@@ -258,6 +289,8 @@ values(@productId,@categoryId)",
 
             return null;
         }
+
+
         #endregion
     }
 }

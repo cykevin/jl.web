@@ -11,5 +11,6 @@ namespace JL.Core.Filters
         public string NickName { get; set; }
         public DateTime? JoinTimeFrom { get; set; }
         public DateTime? JoinTimeTo { get; set; }
+        public int Status { get; set; }
     }
 }

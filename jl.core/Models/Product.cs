@@ -28,6 +28,11 @@ namespace JL.Core.Models
         public int SortIndex { get; set; }
         public int Status { get; set; }
 
+        /// <summary>
+        /// 作为新品推荐（0（是），1（不是））
+        /// </summary>
+        public int IsRecommendAsNew { get; set; }
+
         public virtual ICollection<ProductCategory> Categories { get; set; }
 
         public Product()

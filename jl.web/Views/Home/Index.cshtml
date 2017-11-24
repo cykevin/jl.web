@@ -4,170 +4,61 @@
 
 <!--新品推荐-->
 <div class="container">
-    <div class="center">
+    <div class="text-center">
         <h3>新品推荐</h3>
         <p>NEW PRODUCT</p>
     </div>
 
     <div class="row">
-        <div class="col-sm-4 col-md-3">
-            <div class="thumbnail">
-                <img src="..." alt="...">
-                <div class="caption">
-                    <h3>Thumbnail label</h3>
-                    <p>...</p>
-                    <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
-                </div>
+        @foreach (var product in ViewBag.RecommendProducts)
+        {
+            <div class="col-sm-4 col-md-3">
+                <a href="#" class="thumbnail">
+                    <img src="@JL.Web.Helpers.ImageHelper.GenPictureUrlMiddle(product.Picture,PictureEnums.Product)" alt="">
+                </a>
             </div>
-        </div>
-        <div class="col-sm-4 col-md-3">
-            <div class="thumbnail">
-                <img src="..." alt="...">
-                <div class="caption">
-                    <h3>Thumbnail label</h3>
-                    <p>...</p>
-                    <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
-                </div>
-            </div>
-        </div>
-        <div class="col-sm-4 col-md-3">
-            <div class="thumbnail">
-                <img src="..." alt="...">
-                <div class="caption">
-                    <h3>Thumbnail label</h3>
-                    <p>...</p>
-                    <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
-                </div>
-            </div>
-        </div>
-        <div class="col-sm-4 col-md-3">
-            <div class="thumbnail">
-                <img src="..." alt="...">
-                <div class="caption">
-                    <h3>Thumbnail label</h3>
-                    <p>...</p>
-                    <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
-                </div>
-            </div>
-        </div>
-        <div class="col-sm-4 col-md-3">
-            <div class="thumbnail">
-                <img src="..." alt="...">
-                <div class="caption">
-                    <h3>Thumbnail label</h3>
-                    <p>...</p>
-                    <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
-                </div>
-            </div>
-        </div>
-        <div class="col-sm-4 col-md-3">
-            <div class="thumbnail">
-                <img src="..." alt="...">
-                <div class="caption">
-                    <h3>Thumbnail label</h3>
-                    <p>...</p>
-                    <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
-                </div>
-            </div>
-        </div>
-        <div class="col-sm-4 col-md-3">
-            <div class="thumbnail">
-                <img src="..." alt="...">
-                <div class="caption">
-                    <h3>Thumbnail label</h3>
-                    <p>...</p>
-                    <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
-                </div>
-            </div>
-        </div>
-        <div class="col-sm-4 col-md-3">
-            <div class="thumbnail">
-                <img src="..." alt="...">
-                <div class="caption">
-                    <h3>Thumbnail label</h3>
-                    <p>...</p>
-                    <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
-                </div>
-            </div>
-        </div>
+        }
     </div>
 </div>
 
 <!--关于我们-->
 <div class="jumbotron">
     <div class="container">
-        关于我们 ABOUT US
+        <div class="text-center">
+            <h3>关于我们</h3>
+            <p>ABOUT US</p>
+            <p class="text-muted">
+                自成立以来，公司坚持以人为本，重视人才培养，拥有一支富有新营销理念、市场拓展能力强的商务团队； 经验丰 富、学历层次高的技术研发团队； 新闻敏感度高、采编经验丰富的编辑团队。
+            </p>
+        </div>        
     </div>
 </div>
 
 <!--产品中心-->
 <div class="container">
-    <div class="text-capitalize">
+    <div class="text-center">
         <h3>产品中心</h3>
         <p>PRODUCT CENTER</p>
     </div>
 
     <div class="row">
-        <div class="col-sm-6 col-md-6">
-            <div class="thumbnail">
-                <img src="..." alt="...">
-                <div class="caption">
-                    <h3>Thumbnail label</h3>
-                    <p>...</p>
-                    <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
+        @foreach (JL.Core.Models.Product product in ViewBag.ProductCenter)
+        {
+            <div class="col-sm-6 col-md-6">
+                <div class="media">
+                    <a href="#" class="pull-left">
+                        <img src="@JL.Web.Helpers.ImageHelper.GenPictureUrlSmall(product.Picture,PictureEnums.Product)" alt="">
+                    </a>
+
+                    <div class="media-body">
+                        <h4>@product.Name</h4>
+                        <p>@Html.Raw(product.Description)</p>
+
+                        <p>零售价：@product.RetailPrice</p>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="col-sm-6 col-md-6">
-            <div class="thumbnail">
-                <img src="..." alt="...">
-                <div class="caption">
-                    <h3>Thumbnail label</h3>
-                    <p>...</p>
-                    <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
-                </div>
-            </div>
-        </div>
-        <div class="col-sm-6 col-md-6">
-            <div class="thumbnail">
-                <img src="..." alt="...">
-                <div class="caption">
-                    <h3>Thumbnail label</h3>
-                    <p>...</p>
-                    <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
-                </div>
-            </div>
-        </div>
-        <div class="col-sm-6 col-md-6">
-            <div class="thumbnail">
-                <img src="..." alt="...">
-                <div class="caption">
-                    <h3>Thumbnail label</h3>
-                    <p>...</p>
-                    <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
-                </div>
-            </div>
-        </div>
-        <div class="col-sm-6 col-md-6">
-            <div class="thumbnail">
-                <img src="..." alt="...">
-                <div class="caption">
-                    <h3>Thumbnail label</h3>
-                    <p>...</p>
-                    <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
-                </div>
-            </div>
-        </div>
-        <div class="col-sm-6 col-md-6">
-            <div class="thumbnail">
-                <img src="..." alt="...">
-                <div class="caption">
-                    <h3>Thumbnail label</h3>
-                    <p>...</p>
-                    <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
-                </div>
-            </div>
-        </div>
+        }
     </div>
 </div>
 
@@ -243,51 +134,24 @@
 <!--关于我们-->
 <div class="text-center">
     <h3>团队中心</h3>
-    <p>Series</p>
+    <p>Members</p>
 </div>
 <div class="jumbotron">
     <div class="container">        
         <div class="row">
-            <div class="col-sm-3 col-md-3">
-                <div class="thumbnail">
-                    <img src="..." alt="...">
-                    <div class="caption">
-                        <h3>Thumbnail label</h3>
-                        <p>...</p>
-                        <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
+            @foreach (JL.Core.Models.Member member in ViewBag.Members)
+            {
+                <div class="col-sm-3 col-md-3">
+                    <div class="thumbnail">
+                        <a href="#" class="thumbnail">
+                            <img src="@JL.Web.Helpers.ImageHelper.GenPictureUrlMiddle(member.Picture,PictureEnums.Member)" alt="">
+                        </a>
+                        <div class="caption">
+                            <h4>@member.NickName</h4>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-sm-3 col-md-3">
-                <div class="thumbnail">
-                    <img src="..." alt="...">
-                    <div class="caption">
-                        <h3>Thumbnail label</h3>
-                        <p>...</p>
-                        <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-3 col-md-3">
-                <div class="thumbnail">
-                    <img src="..." alt="...">
-                    <div class="caption">
-                        <h3>Thumbnail label</h3>
-                        <p>...</p>
-                        <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-3 col-md-3">
-                <div class="thumbnail">
-                    <img src="..." alt="...">
-                    <div class="caption">
-                        <h3>Thumbnail label</h3>
-                        <p>...</p>
-                        <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
-                    </div>
-                </div>
-            </div>
+            }
         </div>
     </div>
 </div>
@@ -300,87 +164,15 @@
         <p>NEWS</p>
     </div>
     <div class="row col-no-padding">
-        <div class="col-sm-3 col-md-3">
-            <div class="thumbnail">
-                <img src="..." alt="...">
-                <div class="caption">
-                    <h3>Thumbnail label</h3>
-                    <p>...</p>
-                    <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
-                </div>
+        @foreach (JL.Core.Models.Article article in ViewBag.Articles)
+        {
+            <div class="col-sm-3 col-md-3">
+                
+                    <a href="#" class="thumbnail">
+                        <img src="@JL.Web.Helpers.ImageHelper.GenPictureUrlMiddle(article.Picture,PictureEnums.Article)" alt="">
+                    </a>                    
+                
             </div>
-        </div>
-        <div class="col-sm-3 col-md-3">
-            <div class="thumbnail">
-                <img src="..." alt="...">
-                <div class="caption">
-                    <h3>Thumbnail label</h3>
-                    <p>...</p>
-                    <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
-                </div>
-            </div>
-        </div>
-        <div class="col-sm-3 col-md-3">
-            <div class="thumbnail">
-                <img src="..." alt="...">
-                <div class="caption">
-                    <h3>Thumbnail label</h3>
-                    <p>...</p>
-                    <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
-                </div>
-            </div>
-        </div>
-        <div class="col-sm-3 col-md-3">
-            <div class="thumbnail">
-                <img src="..." alt="...">
-                <div class="caption">
-                    <h3>Thumbnail label</h3>
-                    <p>...</p>
-                    <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
-                </div>
-            </div>
-        </div>
-        </div>
-    <div class="row col-no-padding">
-        <div class="col-sm-3 col-md-3">
-            <div class="thumbnail">
-                <img src="..." alt="...">
-                <div class="caption">
-                    <h3>Thumbnail label</h3>
-                    <p>...</p>
-                    <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
-                </div>
-            </div>
-        </div>
-        <div class="col-sm-3 col-md-3">
-            <div class="thumbnail">
-                <img src="..." alt="...">
-                <div class="caption">
-                    <h3>Thumbnail label</h3>
-                    <p>...</p>
-                    <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
-                </div>
-            </div>
-        </div>
-        <div class="col-sm-3 col-md-3">
-            <div class="thumbnail">
-                <img src="..." alt="...">
-                <div class="caption">
-                    <h3>Thumbnail label</h3>
-                    <p>...</p>
-                    <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
-                </div>
-            </div>
-        </div>
-        <div class="col-sm-3 col-md-3">
-            <div class="thumbnail">
-                <img src="..." alt="...">
-                <div class="caption">
-                    <h3>Thumbnail label</h3>
-                    <p>...</p>
-                    <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
-                </div>
-            </div>
-        </div>
-    </div>
+        }
+    </div>    
 </div>

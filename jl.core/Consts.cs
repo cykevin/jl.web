@@ -21,5 +21,19 @@ namespace JL.Core
         public const string SettingItem_Phone = "phone";
 
         #endregion
+
+        #region 产品
+
+        public const int ProductStatus_Public = 0;// 已发布/对外展示
+        public const int ProductStatus_Private = 1;// 已发布/对外展示
+
+
+        #endregion
+
+        #region 资讯
+
+        public const int ArticleStatus_Published = 0;
+        public const int ArticleStatus_Private = 1;
+        #endregion
     }
 }

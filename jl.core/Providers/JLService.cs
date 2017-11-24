@@ -243,6 +243,11 @@ namespace JL.Core.Providers
             return productRepository.GetProductCategoryList();
         }
         
+        public IEnumerable<Product> GetProductsRecommends()
+        {
+            return productRepository.GetList("where isrecommendasnew=0 ", "*", 8, "order by sortindex desc");
+        }
+
         #endregion
 
         #region member
@@ -271,6 +276,13 @@ namespace JL.Core.Providers
         {
             return memberRepository.GetById(id);
         }
+
+
+        public PageData<Member> MemberPage(PageReq<MemberFilter> pageReq)
+        {
+            return memberRepository.MemberPage(pageReq);
+        }
+
 
         #endregion
 
@@ -389,6 +401,7 @@ namespace JL.Core.Providers
             settings.Add(newSetting);
             return newSetting;
         }
+
 
         #endregion
     }
