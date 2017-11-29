@@ -74,14 +74,14 @@
         <div class="form-group">
                 <label for="Words" class="col-lg-1 control-label">寄语</label>
                 <div class="col-lg-11">
-                    @Html.TextAreaFor(m => m.Words, new { Style = "Height:160px;" })
+                    @Html.TextAreaFor(m => m.Words, new { @class = "form-control" })
                 </div>
             </div>
 
         <div class="form-group">
             <label for="Description" class="col-lg-1 control-label">自我介绍</label>
             <div class="col-lg-11">
-                @Html.TextAreaFor(m => m.Description, new { Style = "Height:160px;" })
+                @Html.TextAreaFor(m => m.Description, new { @class = "form-control" })
             </div>
         </div>
 
@@ -292,10 +292,7 @@
 
         // jquery validate
         $(document).ready(function () {
-
-            var ueWords = getEditor('Words');
-            var ueDesc = getEditor('Description');
-
+            
             $('#JoinTime').datetimepicker({
                 language: 'zh-CN',
                 autoclose: true,

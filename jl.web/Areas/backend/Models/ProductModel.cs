@@ -10,6 +10,7 @@ namespace JL.Web.Areas.backend.Models
     {
         public string Name { get; set; }
         public string Alias { get; set; }
+        public string BriefIntro { get; set; }
         public string Description { get; set; }
         
         public int? SortIndex { get; set; }        

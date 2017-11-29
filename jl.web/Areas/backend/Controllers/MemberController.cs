@@ -124,8 +124,9 @@ namespace JL.Web.Areas.backend.Controllers
                 string fileLink = "";
 
                 // file
-                if (Request.Files != null &&
-                    Request.Files.Count > 0)
+                if (Request.Files != null
+                    && Request.Files.Count > 0
+                    && Request.Files[0].ContentLength > 0)
                 {
 
                     int x = 0, y = 0, width = 0, height = 0;

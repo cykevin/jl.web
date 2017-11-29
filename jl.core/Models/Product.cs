@@ -17,6 +17,7 @@ namespace JL.Core.Models
         public int AutoId { get; set; }
         public string Name { get; set; }
         public string Alias { get; set; }
+        public string BriefIntroduction { get; set; }
         public string Description { get; set; }
         public string Picture { get; set; }
         public DateTime AddTime { get; set; }

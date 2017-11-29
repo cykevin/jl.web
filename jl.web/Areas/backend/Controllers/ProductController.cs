@@ -54,6 +54,7 @@ namespace JL.Web.Areas.backend.Controllers
                 Product product = new Product();
                 product.Name = model.Name;
                 product.Alias = model.Alias;
+                product.BriefIntroduction = model.BriefIntro;
                 product.Description = model.Description;
                 product.MarketPrice = model.MarketPrice ?? product.MarketPrice;
                 product.RetailPrice = model.RetailPrice ?? product.RetailPrice;
@@ -89,6 +90,7 @@ namespace JL.Web.Areas.backend.Controllers
             vo.MarketPrice = model.MarketPrice;
             vo.RetailPrice = model.RetailPrice;
             vo.SortIndex = model.SortIndex;
+            vo.BriefIntro = model.BriefIntroduction;
             vo.Description = model.Description;
             vo.CategoryId = 0;
             vo.AddTime = model.AddTime;
@@ -105,13 +107,16 @@ namespace JL.Web.Areas.backend.Controllers
                 var product = jlService.GetProduct(id);
                 product.Alias = model.Alias;
                 product.Name = model.Name;
+                product.BriefIntroduction = model.BriefIntro;
                 product.Description = model.Description;
                 product.MarketPrice = model.MarketPrice??0;
                 product.RetailPrice = model.RetailPrice??0;
                 product.SortIndex = model.SortIndex?? product.SortIndex;
+                product.AddTime = model.AddTime;
                 // picture
-                if (Request.Files != null &&
-            Request.Files.Count > 0)
+                if (Request.Files != null
+                    && Request.Files.Count > 0
+                    && Request.Files[0].ContentLength > 0)
                 {
                     var imgLink = FileHelper.SaveProductImage(Request.Files[0]);
                     product.Picture = imgLink;

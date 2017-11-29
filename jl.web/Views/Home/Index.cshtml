@@ -5,7 +5,7 @@
 <!--新品推荐-->
 <div class="container">
     <div class="text-center">
-        <h3>新品推荐</h3>
+        <h3 class="text-moduletitle">新品推荐</h3>
         <p>NEW PRODUCT</p>
     </div>
 
@@ -25,7 +25,7 @@
 <div class="jumbotron">
     <div class="container">
         <div class="text-center">
-            <h3>关于我们</h3>
+            <h3 class="text-moduletitle">关于我们</h3>
             <p>ABOUT US</p>
             <p class="text-muted">
                 自成立以来，公司坚持以人为本，重视人才培养，拥有一支富有新营销理念、市场拓展能力强的商务团队； 经验丰 富、学历层次高的技术研发团队； 新闻敏感度高、采编经验丰富的编辑团队。
@@ -37,7 +37,7 @@
 <!--产品中心-->
 <div class="container">
     <div class="text-center">
-        <h3>产品中心</h3>
+        <h3 class="text-moduletitle">产品中心</h3>
         <p>PRODUCT CENTER</p>
     </div>
 
@@ -46,12 +46,14 @@
         {
             <div class="col-sm-6 col-md-6">
                 <div class="media">
-                    <a href="#" class="pull-left">
-                        <img src="@JL.Web.Helpers.ImageHelper.GenPictureUrlSmall(product.Picture,PictureEnums.Product)" alt="">
-                    </a>
+                    <div class="media-left">
+                        <a href="#" class="pull-left">
+                            <img src="@JL.Web.Helpers.ImageHelper.GenPictureUrlSmall(product.Picture,PictureEnums.Product)" alt="">
+                        </a>
+                    </div>
 
                     <div class="media-body">
-                        <h4>@product.Name</h4>
+                        <h4 class="media-heading">@product.Name</h4>
                         <p>@Html.Raw(product.Description)</p>
 
                         <p>零售价：@product.RetailPrice</p>
@@ -63,10 +65,9 @@
 </div>
 
 <!--套装系列-->
-<!--产品中心-->
 <div class="container">
     <div class="text-center">
-        <h3>套装系列</h3>
+        <h3 class="text-moduletitle">套装系列</h3>
         <p>Series</p>
     </div>
 
@@ -133,7 +134,7 @@
 <!--团队中心-->
 <!--关于我们-->
 <div class="text-center">
-    <h3>团队中心</h3>
+    <h3 class="text-moduletitle">团队中心</h3>
     <p>Members</p>
 </div>
 <div class="jumbotron">
@@ -143,11 +144,12 @@
             {
                 <div class="col-sm-3 col-md-3">
                     <div class="thumbnail">
-                        <a href="#" class="thumbnail">
+                        <a href="#">
                             <img src="@JL.Web.Helpers.ImageHelper.GenPictureUrlMiddle(member.Picture,PictureEnums.Member)" alt="">
                         </a>
                         <div class="caption">
-                            <h4>@member.NickName</h4>
+                            <h4 class="text-moduletitle text-center">@member.NickName</h4>
+                            <p>@member.Description</p>
                         </div>
                     </div>
                 </div>
@@ -160,7 +162,7 @@
 
 <div class="container">
     <div class="text-center">
-        <h3>资讯中心</h3>
+        <h3 class="text-moduletitle">资讯中心</h3>
         <p>NEWS</p>
     </div>
     <div class="row col-no-padding">
@@ -170,9 +172,23 @@
                 
                     <a href="#" class="thumbnail">
                         <img src="@JL.Web.Helpers.ImageHelper.GenPictureUrlMiddle(article.Picture,PictureEnums.Article)" alt="">
-                    </a>                    
-                
+                    </a>                
             </div>
         }
     </div>    
 </div>
+
+
+@section styles{
+    <style type="text/css">
+        .text-moduletitle {
+            color:#42BCDB;
+        }
+        .media-body h4 {
+            margin-bottom: 14px;
+            font-weight: normal;
+            font-size: 16px;
+            color: #42BCDB;
+        }
+    </style>
+}

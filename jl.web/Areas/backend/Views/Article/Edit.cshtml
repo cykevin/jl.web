@@ -92,11 +92,12 @@
         $(document).ready(function () {
             var ue = UE.getEditor('Content');
 
-            $('#AddTime').datepicker({
+            $('#AddTime').datetimepicker({
                 language: 'zh-CN',
                 autoclose: true,
                 todayBtn: true,
-                pickerPosition: "bottom-left",
+                format: 'yyyy-mm-dd hh:ii',
+                pickerPosition: "left-bottom",
                 todayHighlight: true
             });
 

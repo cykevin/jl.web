@@ -47,9 +47,15 @@
 
                 </div>
                 <div class="panel-body">
+                    <div class="form-group">
+                        <label for="briefintro">简短介绍</label>
+                        @Html.TextAreaFor(m => m.BriefIntro, new { @class = "form-control", rows = 3 })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="Description">详细介绍</label>
                     @Html.TextAreaFor(m => m.Description, new { Style = "Height:500px;" })
                 </div>
-
             </div>
             <button type="submit" class="btn btn-success">发布</button>
         </div>
