@@ -31,9 +31,17 @@ namespace JL.Core
         #endregion
 
         #region 资讯
-
+        public const int ArticleStatus_All = -1;
         public const int ArticleStatus_Published = 0;
         public const int ArticleStatus_Private = 1;
+        #endregion
+
+        #region banner
+
+        public const int BannerStatus_All = -1;
+        public const int BannerStatus_Enable = 0;
+        public const int BannerStatus_Disable = 1;
+
         #endregion
     }
 }

@@ -25,7 +25,8 @@ namespace JL.Web.Areas.backend.Controllers
         public ActionResult Index(ArticleSearchModel model,int page=1)
         {
             ArticleFilter filter = new ArticleFilter();
-            filter.Title = model.Title;            
+            filter.Title = model.Title;
+            filter.Status = Consts.ArticleStatus_All;
             var pager = PageReq<ArticleFilter>.Create(filter, page);
             pager.OrderBy = "addtime";
             
@@ -89,17 +90,15 @@ namespace JL.Web.Areas.backend.Controllers
                 article.AddTime = model.AddTime ?? article.AddTime;
                 article.Title = model.Title;
                 article.Content = model.Content;
+                article.Status = model.IsPublished ? 0 : 1;
                 // picture
-                if (Request.Files != null &&
-                    Request.Files.Count > 0)
+                if (Request.Files != null
+                    && Request.Files.Count > 0
+                    && Request.Files[0].ContentLength > 0)
                 {
                     var imgLink = FileHelper.SaveArticleImage(Request.Files[0]);
                     article.Picture = imgLink;
                 }
-                else
-                {
-                    article.Picture = model.Picture;
-                }                
 
                 jlService.UpdateArticle(article);
                 ViewData.Add("ResultObject", ResultObject.Succeed());

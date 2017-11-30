@@ -38,5 +38,17 @@ namespace JL.Infrastructure
         {
             return string.Equals(t, other, StringComparison.OrdinalIgnoreCase);
         }
+
+        public static string Intercept(this string source,int maxLength)
+        {
+            if (string.IsNullOrEmpty(source))
+                return source;
+
+            if (source.Length <= maxLength)
+                return source;
+
+            return source.Substring(0, maxLength) + "...";
+        }
+
     }
 }

@@ -69,6 +69,7 @@ namespace JL.Core
         void DeleteBanner(int id);
         Banner GetBanner(int id);
         PageData<Models.Banner> BannerPage(PageReq pageReq);
+        IEnumerable<Models.Banner> Banners();
 
         // setting
         IEnumerable<Models.Setting> GetSettingList();

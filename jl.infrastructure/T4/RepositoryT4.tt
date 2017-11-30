@@ -16,8 +16,8 @@
 <#@ include file=".\T4Include.ttinclude" #>
 <#@ output extension=".cs"  #>
 <# 
-    var tableName="Product";
-	var modelName="Product";
+    var tableName="Banner";
+	var modelName="Banner";
 
 	var table=TableInfo.Init(tableName);
 #>
@@ -155,5 +155,14 @@ namespace JL.Infrastructure.DapperRepository
 
             return PageData<<#=modelName#>>.Create(pageReq.PageIndex, pageReq.PageSize, pages, data);
         }
+
+		public IEnumerable<<#=modelName#>> GetList()
+		{
+            var conn = DbConnectionFactory.CreateConnection();
+			var sql="select * from <#= tableName #>";
+			var data = conn.Query<<#=modelName#>>(sql);
+			return data;			 
+		}
+		 
 	}
 }

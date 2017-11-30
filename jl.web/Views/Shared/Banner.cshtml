@@ -1,0 +1,46 @@
+﻿@model IEnumerable<JL.Core.Models.Banner>
+
+<div class="container">
+    <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+        <!-- Indicators -->
+        <ol class="carousel-indicators">
+            @{ 
+                var i = 0;
+            }
+            @foreach (var banner in Model)
+            {
+                <li data-target="#carousel-example-generic" data-slide-to="@i" @(i == 0 ? "class=\"active\"" : "")></li>
+
+                i++;
+            }
+        </ol>
+        <!-- Wrapper for slides -->
+        <div class="carousel-inner" role="listbox">
+            @{ 
+                    i = 0;
+                    foreach (var banner in Model)
+                    {
+                    <div class="item@(i == 0 ? " active" : "")">
+                        <img src="@JL.Web.Helpers.ImageHelper.GenPictureUrlSource(banner.Picture)" alt="@banner.Title">
+                        <div class="carousel-caption">
+                            <h3>@banner.Title</h3>
+                            <p>@banner.Desctiption</p>
+                        </div>
+                    </div>
+
+                    i++;
+                }
+            }          
+        </div>
+
+        <!-- Controls -->
+        <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
+            <span class="glyphicon glyphicon-chevron-left" aria-hidden="false"></span>
+            <span class="sr-only">Previous</span>
+        </a>
+        <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
+            <span class="glyphicon glyphicon-chevron-right" aria-hidden="false"></span>
+            <span class="sr-only">Next</span>
+        </a>
+    </div>
+</div>

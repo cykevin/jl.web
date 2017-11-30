@@ -4,6 +4,7 @@ using JL.Core.Models;
 using JL.Core.Repositories;
 using JL.Infrastructure;
 using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 
@@ -72,6 +73,15 @@ values (@Title,@Desctiption,@Picture,@BackgroundColor,@Status,@SortIndex)",
 
             return PageData<Banner>.Create(pageReq.PageIndex, pageReq.PageSize, pages, total, data);
         }
-                
+
+
+        public IEnumerable<Banner> GetList()
+        {
+            var conn = DbConnectionFactory.CreateConnection();
+            var sql = "select * from Banner";
+            var data = conn.Query<Banner>(sql);
+            return data;
+        }
+
     }
 }

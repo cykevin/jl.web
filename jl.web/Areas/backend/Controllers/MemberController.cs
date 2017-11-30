@@ -148,16 +148,17 @@ namespace JL.Web.Areas.backend.Controllers
                 }
 
                 // info
-
                 var member = jlService.GetMember(id);
-
+                if (fileLink != "")
+                {
+                    member.Picture = fileLink;
+                }
                 member.Address = model.Address;
                 member.Description = model.Description;
                 member.Email = model.Email;
                 member.JoinTime = model.JoinTime ?? DateTime.Now;
                 member.NickName = model.NickName;
                 member.Phone = model.Phone;
-                member.Picture = model.Picture;
                 member.QQ = model.QQ;
                 member.RealName = model.Name;
                 member.Status = model.Status;
@@ -170,7 +171,5 @@ namespace JL.Web.Areas.backend.Controllers
 
             return View(model);
         }
-
-
     }
 }

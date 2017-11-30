@@ -11,6 +11,7 @@ namespace JL.Core.Repositories
     {
         int Insert(Models.Banner model);
         PageData<Models.Banner> BannerPage(PageReq pageReq);
+        IEnumerable<Models.Banner> GetList();
         Models.Banner GetById(int id);
         void Update(Models.Banner model);
         void Delete(int id);

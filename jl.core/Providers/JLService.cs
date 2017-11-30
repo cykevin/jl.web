@@ -313,6 +313,14 @@ namespace JL.Core.Providers
             return bannerRepository.BannerPage(pageReq);
         }
 
+
+        public IEnumerable<Banner> Banners()
+        {
+            var banners = bannerRepository.GetList();
+
+            return banners.Where(b => b.Status == Consts.BannerStatus_Enable);
+        }
+
         #endregion
 
         #region setting
