@@ -18,7 +18,7 @@ namespace JL.Web.Controllers
         }
 
         // GET: Product
-        public ActionResult Index(int id)
+        public ActionResult Index()
         {            
             return View();
         }

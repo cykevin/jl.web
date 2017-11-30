@@ -22,24 +22,5 @@ namespace JL.Web.Controllers
         {
             return View();
         }
-
-        public string Publish()
-        {
-            Article article = new Article();
-            article.AddTime = DateTime.Now;
-            article.Title = "join us now!";
-            article.Content = "welcome to wechat business";
-            jlService.AddArticle(article);
-
-            return article.ToString();
-        }
-
-        public string delete(int id)
-        {
-            var article = jlService.GetArticle(id);
-            jlService.DeleteArticle(article);
-
-            return "deleted : " + article.ToString();
-        }
     }
 }
