@@ -14,11 +14,20 @@ namespace JL.Web
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
             routes.MapRoute(
+                name: "SkinCarePage",
+                url: "skincare/page-{page}",
+                defaults: new { controller = "skincare", action = "page" },
+                constraints: new { page = @"\d+" },
+                namespaces: new string[] { "JL.Web.Controllers" }
+            );
+
+            routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional },
                 namespaces: new string[] { "JL.Web.Controllers" }
             );
+            
         }
     }
 }

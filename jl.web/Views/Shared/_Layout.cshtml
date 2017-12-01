@@ -66,16 +66,16 @@
                         <li @Html.Raw(controller.IsEquals("home") ? ("class=\"active\"") : "\"\"")>
                             <a href="/"><span>网站首页</span></a>
                         </li>
-                        <li @(controller.IsEquals("article")?"class=\"active\"":"")>
-                            <a href="@Url.Action("index","skincare")"><span>关于护肤</span></a>
+                        <li @Html.Raw(controller.IsEquals("skincare")?"class=\"active\"":"")>
+                            <a href="@Url.Action("page","skincare")"><span>关于护肤</span></a>
                         </li>
-                        <li @(controller.IsEquals("product")?"class=\"active\"":"")>
+                        <li @Html.Raw(controller.IsEquals("product")?"class=\"active\"":"")>
                             <a href="@Url.Action("index","product")"><span>产品中心</span></a>
                         </li>
-                        <li @(controller.IsEquals("join")?"class=\"active\"":"")>
+                        <li @Html.Raw(controller.IsEquals("join")?"class=\"active\"":"")>
                             <a href="@Url.Action("index","join")"><span>微商加盟</span></a>
                         </li>
-                        <li @(controller.IsEquals("material") ? "class=\"active\"" : "")>
+                        <li @Html.Raw(controller.IsEquals("material") ? "class=\"active\"" : "")>
                             <a href="@Url.Action("index","material")"><span>素材中心</span></a>
                         </li>
                         @*<li class="dropdown">
@@ -93,10 +93,10 @@
                                 <li><a href="terms.html"><span>Terms of Use</span></a></li>
                             </ul>
                         </li>*@
-                        <li @(controller.IsEquals("team") ? "class=\"active\"" : "")>
+                        <li @Html.Raw(controller.IsEquals("team") ? "class=\"active\"" : "")>
                             <a href="@Url.Action("index","team")"><span>团队中心</span></a>
                         </li>
-                        <li @(controller.IsEquals("contactus") ? "class=\"active\"" : "")>
+                        <li @Html.Raw(controller.IsEquals("contactus") ? "class=\"active\"" : "")>
                             <a href="@Url.Action("index","contactus")"><span>联系我们</span></a></li>
                         <li class="login">
                             <a data-toggle="modal" href="#loginForm"><i class="icon-lock"></i></a>

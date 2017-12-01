@@ -1044,7 +1044,7 @@
     <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Account\Reg.cshtml" />
     <Content Include="Views\Shared\Banner.cshtml" />
-    <Content Include="Views\SkinCare\Index.cshtml" />
+    <Content Include="Views\SkinCare\Page.cshtml" />
     <Content Include="Views\Product\Index.cshtml" />
     <Content Include="Views\Material\Index.cshtml" />
     <Content Include="Views\Join\Index.cshtml" />

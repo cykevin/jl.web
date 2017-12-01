@@ -41,9 +41,12 @@
                     </div>
                 </div>
                 <div class="panel-body">
-                    @Html.TextAreaFor(m => m.Content, new { Style = "Height:500px;" })
+                    <div class="form-group">
+                        <label for="brief">简介</label>
+                        @Html.TextAreaFor(a=>a.Brief, new { @class = "form-control", placeholder = "请输入简介",rows=3 })
+                    </div>
                 </div>
-
+                @Html.TextAreaFor(m => m.Content, new { Style = "Height:500px;" })
             </div>
             <button type="submit" class="btn btn-success">保存</button>
         </div>

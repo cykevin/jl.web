@@ -50,6 +50,7 @@ namespace JL.Web.Areas.backend.Controllers
                 var article = new JL.Core.Models.Article();
                 article.AddTime = model.AddTime ?? DateTime.Now;
                 article.Content = model.Content;
+                article.Brief = model.Brief;
                 article.Title = model.Title;
                 article.Status = model.IsPublished ? 0 : 1;
                 // picture
@@ -73,6 +74,7 @@ namespace JL.Web.Areas.backend.Controllers
             ArticleModel model = new ArticleModel();
             model.AddTime = article.AddTime;
             model.Content = article.Content;
+            model.Brief = article.Brief;
             model.Title = article.Title;
             model.Picture = article.Picture;
             model.IsPublished = article.Status == 0;
@@ -89,8 +91,10 @@ namespace JL.Web.Areas.backend.Controllers
                 var article = jlService.GetArticle(id);
                 article.AddTime = model.AddTime ?? article.AddTime;
                 article.Title = model.Title;
+                article.Brief = model.Brief;
                 article.Content = model.Content;
                 article.Status = model.IsPublished ? 0 : 1;
+
                 // picture
                 if (Request.Files != null
                     && Request.Files.Count > 0

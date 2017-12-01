@@ -8,6 +8,7 @@ namespace JL.Web.Areas.backend.Models
     public class ArticleModel
     {
         public string Title { get; set; }
+        public string Brief { get; set; }
         public string Content { get; set; }
         public string Picture { get; set; }
         public DateTime? AddTime { get; set; }

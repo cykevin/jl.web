@@ -4,6 +4,7 @@ using JL.Core.Filters;
 using JL.Core.Models;
 using JL.Infrastructure;
 using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Text;
@@ -11,14 +12,14 @@ using System.Text;
 namespace JL.Core.Repositories.DapperRepository
 {
     public partial class ArticleRepository : IArticleRepository
-    {        
+    {
         #region methodes from t4
 
         public int Insert(Article model)
         {
             var connection = DbConnectionFactory.CreateConnection();
-            var id=connection.Query<int>(@"Insert into Article(Title,Content,Picture,AddTime,Tags,PageViews,SortIndex,Status)
-values (@Title,@Content,@Picture,@AddTime,@Tags,@PageViews,@SortIndex,@Status);SELECT LAST_INSERT_ID()",
+            var id = connection.Query<int>(@"Insert into Article(Title,Brief,Content,Picture,AddTime,Tags,PageViews,SortIndex,Status)
+values (@Title,@Brief,@Content,@Picture,@AddTime,@Tags,@PageViews,@SortIndex,@Status);SELECT LAST_INSERT_ID()",
                 model).FirstOrDefault();
             return id;
         }
@@ -34,7 +35,7 @@ values (@Title,@Content,@Picture,@AddTime,@Tags,@PageViews,@SortIndex,@Status);S
 
         public void Update(Article model)
         {
-            var sql = "update Article set Title=@Title,Content=@Content,Picture=@Picture,AddTime=@AddTime,Tags=@Tags,PageViews=@PageViews,SortIndex=@SortIndex,Status=@Status where AutoId=@AutoId";
+            var sql = "update Article set Title=@Title,Brief=@Brief,Content=@Content,Picture=@Picture,AddTime=@AddTime,Tags=@Tags,PageViews=@PageViews,SortIndex=@SortIndex,Status=@Status where AutoId=@AutoId";
             var conn = DbConnectionFactory.CreateConnection();
             conn.Execute(sql, model);
         }
@@ -75,6 +76,14 @@ values (@Title,@Content,@Picture,@AddTime,@Tags,@PageViews,@SortIndex,@Status);S
 
             return PageData<Article>.Create(pageReq.PageIndex, pageReq.PageSize, pages, total, data);
         }
+
+        public IEnumerable<Article> GetList()
+        {
+            var conn = DbConnectionFactory.CreateConnection();
+            var sql = "select * from Article";
+            var data = conn.Query<Article>(sql);
+            return data;
+        }       
 
         public PageData<Article> ArticlePage(PageReq<ArticleFilter> pageReq)
         {
