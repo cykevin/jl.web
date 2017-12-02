@@ -20,6 +20,14 @@ namespace JL.Web
                 constraints: new { page = @"\d+" },
                 namespaces: new string[] { "JL.Web.Controllers" }
             );
+            // productcenter
+            routes.MapRoute(
+                name: "productcenter",
+                url: "product/{id}",
+                defaults: new { controller = "product", action = "index" },
+                constraints: new { id = @"\d+" },
+                namespaces: new string[] { "JL.Web.Controllers" }
+            );
 
             routes.MapRoute(
                 name: "Default",
