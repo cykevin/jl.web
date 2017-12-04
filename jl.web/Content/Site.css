@@ -68,3 +68,13 @@
     padding-left: 0px;
     padding-right: 0px;
 }
+
+/**/
+.margin-b-15{
+    margin-bottom:15px;
+}
+
+/*text*/
+.text-category {
+    color: #42BCDB
+}

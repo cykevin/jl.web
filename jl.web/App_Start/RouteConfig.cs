@@ -12,23 +12,22 @@ namespace JL.Web
         public static void RegisterRoutes(RouteCollection routes)
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
-
+            
             routes.MapRoute(
-                name: "SkinCarePage",
-                url: "skincare/page-{page}",
-                defaults: new { controller = "skincare", action = "page" },
+                name: "page",
+                url: "{controller}/page-{page}",
+                defaults: new { controller = "home", action = "page" },
                 constraints: new { page = @"\d+" },
                 namespaces: new string[] { "JL.Web.Controllers" }
             );
-            // productcenter
             routes.MapRoute(
-                name: "productcenter",
-                url: "product/{id}",
-                defaults: new { controller = "product", action = "index" },
+                name: "detail",
+                url: "{controller}/{id}",
+                defaults: new { controller = "home", action = "detail" },
                 constraints: new { id = @"\d+" },
                 namespaces: new string[] { "JL.Web.Controllers" }
             );
-
+            
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",

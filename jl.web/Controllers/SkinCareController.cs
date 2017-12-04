@@ -18,7 +18,17 @@ namespace JL.Web.Controllers
             this.jlService = jlService;
         }
 
-        // GET: SkinCare
+        public ActionResult Index()
+        {
+            ArticleFilter af = new ArticleFilter();
+            af.Status = Consts.ArticleStatus_Published;
+
+            var pager = PageReq<ArticleFilter>.Create(af, 1);
+            var article = jlService.ArticlePage(pager);
+            return View(article);
+        }
+
+        // GET: SkinCare/page-1
         public ActionResult Page(int page = 1)
         {
             ArticleFilter af = new ArticleFilter();
@@ -28,8 +38,9 @@ namespace JL.Web.Controllers
             var article = jlService.ArticlePage(pager);
             return View(article);
         }
-
-        public ActionResult Index(int id)
+        
+        // skincare/1
+        public ActionResult Detail(int id)
         {
             ArticleFilter af = new ArticleFilter();
             af.Status = Consts.ArticleStatus_Published;

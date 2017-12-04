@@ -67,7 +67,7 @@
                             <a href="/"><span>网站首页</span></a>
                         </li>
                         <li @Html.Raw(controller.IsEquals("skincare")?"class=\"active\"":"")>
-                            <a href="@Url.Action("page","skincare")"><span>关于护肤</span></a>
+                            <a href="@Url.Action("index","skincare")"><span>关于护肤</span></a>
                         </li>
                         <li @Html.Raw(controller.IsEquals("product")?"class=\"active\"":"")>
                             <a href="@Url.Action("index","product")"><span>产品中心</span></a>

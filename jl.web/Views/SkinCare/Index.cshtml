@@ -1,0 +1,82 @@
+﻿@using JL.Infrastructure;
+@using MVCPaging;
+@model JL.Core.Common.PageData<JL.Core.Models.Article>
+
+@{
+    ViewBag.Title = "关于护肤";
+}
+
+<div class="container">
+    @foreach (var article in Model.Data)
+    {
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="media">
+                    <a href="#" class="media-left">
+                        <img src="@JL.Web.Helpers.ImageHelper.GenPictureUrlBig(article.Picture, PictureEnums.Article)" />
+                    </a>
+
+                    <div class="media-body">
+                        <h4 class="media-heading">
+                            @article.Title
+                        </h4>
+                        <hr />
+                        <p>
+                            @{
+                                var tmp = "";
+                                if (article.Brief != null)
+                                {
+                                    tmp = System.Text.RegularExpressions.Regex.Replace(article.Brief, "\n", "</br>");
+                                }
+                            }
+                            @Html.Raw(tmp.Intercept(400))
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+                                }
+
+    @if (Model.TotalPage > 1)
+    {
+        <div class="row">
+            <div class="col-lg-12">
+                @Html.Pager(Model.PageSize, Model.PageIndex, Model.TotalCount).Options(o => o.Action("page"))
+
+            </div>
+        </div>
+    }
+</div>
+
+@section styles{
+    <style type="text/css">
+        .media {
+            margin: 10px 0 10px 0;
+            padding: 17px 0;
+        }
+
+            .media:first-child {
+                margin-top: 10px;
+            }
+
+        .media-body {
+            padding: 0 0 0 17px;
+        }
+
+            .media-body h4 {
+                margin-bottom: 14px;
+                font-weight: normal;
+                font-size: 17px;
+                color: #42BCDB;
+            }
+
+            .media-body p {
+                line-height: 2;
+                font-size: 14px;
+            }
+
+        .media-left {
+            padding: 0 17px 0 0;
+        }
+    </style>
+}
