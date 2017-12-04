@@ -2,20 +2,21 @@
 .qrcodes img{
     height:80px;
 }
+
+/*menu*/
 .nav-line {
     border-top: 1px solid #d9d9d9;
     border-bottom: 1px solid #d9d9d9;
 }
 
-.nav > li {
+.menu-nav > li {
     height: inherit;
-    /*display: inline-block;*/
     position: relative;
     padding: 0 !important;
     vertical-align: top;
 }
 
-    .nav > li > a:after {
+    .menu-nav > li > a:after {
         content: "";
         height: 2px;
         width: 100%;
@@ -24,12 +25,29 @@
         opacity: 0;
         transition: all 0.3s;
     }
-.nav > li.active >a:after{opacity: 1;}
-.nav > li:hover a:after{opacity: 1;}
-.nav > li >a span{padding:8px 15px; line-height: 50px;}
-.nav > li >a{ padding:0; }
-.nav > li > a {color: rgb(1, 1, 1);font-size: 14px;    }
+    .menu-nav > li.active > a:after {
+        opacity: 1;
+    }
 
+    .menu-nav > li:hover a:after {
+        opacity: 1;
+    }
+
+    .menu-nav > li > a span {
+        padding: 8px 15px;
+        line-height: 50px;
+    }
+
+    .menu-nav > li > a {
+        padding: 0;
+    }
+
+    .menu-nav > li > a {
+        color: rgb(1, 1, 1);
+        font-size: 14px;
+    }
+
+/*footer*/
 .icon-modal {
     display: inline-block;
     vertical-align: top;
@@ -72,6 +90,12 @@
 /**/
 .margin-b-15{
     margin-bottom:15px;
+}
+.margin-b-2 {
+    margin-bottom: 2px;
+}
+.margin-0{
+    margin:0;
 }
 
 /*text*/

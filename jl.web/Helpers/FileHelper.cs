@@ -101,12 +101,15 @@ namespace JL.Web.Helpers
             return virtualPath + "/" + fileName;
         }        
 
-        public static string SaveMaterial(HttpPostedFileBase file,int materialType)
+        public static bool SaveMaterial(HttpPostedFileBase file,int materialType,out string fileNamePath,out string picturePath)
         {
-            // 保存文件到目录/material/2017xxxx/
+            fileNamePath = null;
+            picturePath = null;
+
             if (file.ContentLength < 1)
-                return null;
-            
+                return false;
+
+            // 保存文件到目录/material/2017xxxx/
             var dirName = DateTime.Now.ToString("yyyyMMdd");
             var virtualPath = "~/materials/" + dirName;
 
@@ -123,11 +126,14 @@ namespace JL.Web.Helpers
             // 保存源文件
             var newFilePath = System.IO.Path.Combine(dir, fileName);
             file.SaveAs(newFilePath);
+
+            fileNamePath = virtualPath + "/" + fileName;
+            picturePath = SaveMaterialImage(fileNamePath, materialType);
             
-            return virtualPath + "/" + fileName;
+            return true;
         }
 
-        public static string SaveMaterialImage(string fileVirtualPath, int materialType)
+        private static string SaveMaterialImage(string fileVirtualPath, int materialType)
         {
             var dirName = DateTime.Now.ToString("yyyyMMdd");
             var virtualPath = "~/materials/" + dirName;

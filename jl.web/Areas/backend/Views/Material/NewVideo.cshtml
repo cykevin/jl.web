@@ -50,7 +50,7 @@
 
                     <div class="form-group">
                         <label for="Description">描述</label>
-                        @Html.TextAreaFor(m => m.Description, new { Style = "Height:200px;" })
+                        @Html.TextAreaFor(m => m.Description, new { @class = "form-control", rows = 5 })
                     </div>
 
                     <div class="form-group">
@@ -88,20 +88,7 @@
     <script type="text/javascript">
 
         // jquery validate
-        $(document).ready(function () {
-            var ue = UE.getEditor('Description', {
-                toolbars: [
-                    [
-                        'fullscreen',
-                        'bold', 'italic', 'underline', '|', 'fontsize', '|', 'kityformula', 'preview', 'insertimage'
-                    ]
-                ],
-                autoHeightEnabled: false,
-                //initialFrameHeight: height,
-                initialFrameWidth: '100%',
-                wordCount: false,
-                elementPathEnabled: false
-            });
+        $(document).ready(function () {            
 
             $('#AddTime').datetimepicker({
                 language: 'zh-CN',

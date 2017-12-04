@@ -7,8 +7,8 @@
     <div class="row">
         <div class="col-lg-12">
             <ul class="nav nav-tabs margin-b-15">
-                <li role="presentation" class="active"><a href="@Url.Action("index","material")">全部</a></li>
-                <li role="presentation"><a href="@Url.Action("picture","material")">图片</a></li>
+                <li role="presentation"><a href="@Url.Action("index","material")">全部</a></li>
+                <li role="presentation" class="active"><a href="@Url.Action("picture","material")">图片</a></li>
                 <li role="presentation"><a href="@Url.Action("video","material")">视频</a></li>
             </ul>
         </div>
@@ -20,7 +20,7 @@
             <div class="col-lg-3">
                 <div class="thumbnail">
                     <a href="#" class="thumbnail margin-b-2">
-                        <img src="@JL.Web.Helpers.ImageHelper.GenMaterailPicture(material.FileName, (JL.Web.MaterialType)material.MaterialType,PictureSize.Middle)" alt="">
+                        <img src="@JL.Web.Helpers.ImageHelper.GenMaterailPicture(material.Picture,MaterialType.Picture,PictureSize.Middle)" alt="">
                     </a>
                     <div class="caption clearfix">
                         <h4 class="margin-0">@material.Title</h4>
@@ -36,7 +36,7 @@
 
     <div class="row">
         <div class="col-lg-12">
-            @Html.Pager(Model.PageSize, Model.PageIndex, Model.TotalCount).Options(o => o.Action("Index"))
+            @Html.Pager(Model.PageSize, Model.PageIndex, Model.TotalCount).Options(o => o.Action("Picture"))
         </div>
     </div>
 

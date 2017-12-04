@@ -85,15 +85,25 @@ namespace JL.Web.Areas.backend.Controllers
                 material.Title = model.Title;
                 material.MaterialType = model.FileType;
                 material.Description = model.Description;
-                material.FileName = model.FileName;
-                material.Url = model.FileName;
 
                 material.Status = model.Status ? 0 : 1;
                 material.AddTime = model.AddTime ?? DateTime.Now;
 
                 // 生成缩略图
-                var thumbLink = FileHelper.SaveMaterialImage(model.FileName, material.MaterialType);
-                material.Picture = thumbLink;
+                if (Request.Files != null
+                    && Request.Files.Count > 0
+                    && Request.Files[0].ContentLength > 0)
+                {
+                    string picture, filename;
+                    var success = FileHelper.SaveMaterial(Request.Files[0], material.MaterialType, out filename, out picture);
+
+                    if (success)
+                    {
+                        material.Picture = picture;
+                        material.FileName = filename;
+                        material.Url = model.FileName;
+                    }
+                }
 
                 jlService.AddMaterial(material);                
 
@@ -120,15 +130,30 @@ namespace JL.Web.Areas.backend.Controllers
                 material.Title = model.Title;
                 material.MaterialType = (int)MaterialType.Picture;
                 material.Description = model.Description;
-                material.FileName = model.FileName;
-                material.Url = model.FileName;
 
                 material.Status = model.Status ? 0 : 1;
                 material.AddTime = model.AddTime ?? DateTime.Now;
 
                 // 生成缩略图
-                var thumbLink = FileHelper.SaveMaterialImage(model.FileName, material.MaterialType);
-                material.Picture = thumbLink;
+                if (Request.Files != null
+                    && Request.Files.Count > 0
+                    && Request.Files[0].ContentLength > 0)
+                {
+                    string picture, filename;
+                    var success = FileHelper.SaveMaterial(Request.Files[0], material.MaterialType, out filename, out picture);
+
+                    if (success)
+                    {
+                        material.Picture = picture;
+                        material.FileName = filename;
+                        material.Url = model.FileName;
+                    }
+
+                    //for show
+                    model.Picture = picture;
+                    model.FileName = filename;
+                    model.Url = filename;
+                }
 
                 jlService.AddMaterial(material);
                 ViewData.Add("ResultObject", ResultObject.Succeed());
@@ -153,15 +178,32 @@ namespace JL.Web.Areas.backend.Controllers
                 material.Title = model.Title;
                 material.MaterialType = (int)MaterialType.Video;
                 material.Description = model.Description;
-                material.FileName = model.FileName;
-                material.Url = model.FileName;
+                
 
                 material.Status = model.Status ? 0 : 1;
                 material.AddTime = model.AddTime ?? DateTime.Now;
 
                 // 生成缩略图
-                var thumbLink = FileHelper.SaveMaterialImage(model.FileName, material.MaterialType);
-                material.Picture = thumbLink;
+                // picture
+                if (Request.Files != null
+                    && Request.Files.Count > 0
+                    && Request.Files[0].ContentLength > 0)
+                {
+                    string picture, filename;
+                    var success = FileHelper.SaveMaterial(Request.Files[0], material.MaterialType, out filename, out picture);
+
+                    if (success)
+                    {
+                        material.Picture = picture;
+                        material.FileName = filename;
+                        material.Url = model.FileName;
+                    }
+
+                    //for show
+                    model.Picture = picture;
+                    model.FileName = filename;
+                    model.Url = filename;
+                }
 
                 jlService.AddMaterial(material);
 
@@ -201,10 +243,29 @@ namespace JL.Web.Areas.backend.Controllers
                 material.Title = model.Title;
                 material.MaterialType = model.FileType;
                 material.Description = model.Description;
-                material.FileName = model.FileName;
-                material.Url = model.FileName;
-                material.Picture = model.Picture;
+
                 material.Status = model.Status ? 0 : 1;
+
+                // picture
+                if (Request.Files != null
+                    && Request.Files.Count > 0
+                    && Request.Files[0].ContentLength > 0)
+                {
+                    string picture, filename;
+                    var success = FileHelper.SaveMaterial(Request.Files[0], material.MaterialType, out filename, out picture);
+
+                    if (success)
+                    {
+                        material.Picture = picture;
+                        material.FileName = filename;
+                        material.Url = model.FileName;
+                    }
+
+                    //for show
+                    model.Picture = picture;
+                    model.FileName = filename;
+                    model.Url = filename;
+                }
 
                 jlService.UpdateMaterial(material);
                 ViewData.Add("ResultObject", ResultObject.Succeed());
@@ -224,8 +285,8 @@ namespace JL.Web.Areas.backend.Controllers
                 string fileLink = "";
                 try
                 {
-                    // 保存文件
-                    fileLink = FileHelper.SaveMaterial(Request.Files[0], fileType);                    
+                    string picture, filename;
+                    var success = FileHelper.SaveMaterial(Request.Files[0], fileType, out filename, out picture);                    
                 }
                 catch (Exception e)
                 {
