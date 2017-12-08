@@ -404,6 +404,14 @@
     <Content Include="Content\sbadmin2\css\sb-admin-2.min.css" />
     <Content Include="Content\sbadmin2\js\sb-admin-2.js" />
     <Content Include="Content\sbadmin2\js\sb-admin-2.min.js" />
+    <Content Include="Content\swiper\css\swiper.css" />
+    <Content Include="Content\swiper\css\swiper.min.css" />
+    <Content Include="Content\swiper\js\swiper.jquery.js" />
+    <Content Include="Content\swiper\js\swiper.jquery.min.js" />
+    <Content Include="Content\swiper\js\swiper.jquery.umd.js" />
+    <Content Include="Content\swiper\js\swiper.jquery.umd.min.js" />
+    <Content Include="Content\swiper\js\swiper.js" />
+    <Content Include="Content\swiper\js\swiper.min.js" />
     <Content Include="Content\ueditor\dialogs\anchor\anchor.html" />
     <Content Include="Content\ueditor\dialogs\attachment\attachment.css" />
     <Content Include="Content\ueditor\dialogs\attachment\attachment.html" />
@@ -1004,6 +1012,9 @@
     <Content Include="Areas\backend\Views\Banner\New.cshtml" />
     <Content Include="Areas\backend\Views\Banner\Edit.cshtml" />
     <Content Include="Areas\backend\Views\Setting\Index.cshtml" />
+    <Content Include="Content\swiper\js\maps\swiper.jquery.min.js.map" />
+    <Content Include="Content\swiper\js\maps\swiper.jquery.umd.min.js.map" />
+    <Content Include="Content\swiper\js\maps\swiper.min.js.map" />
     <None Include="Scripts\jquery-3.2.1.intellisense.js" />
     <Content Include="Images\search1.png" />
     <Content Include="Images\tick1.png" />
@@ -1058,6 +1069,8 @@
     <Content Include="Views\Product\Detail.cshtml" />
     <Content Include="Views\Material\Picture.cshtml" />
     <Content Include="Views\Material\Video.cshtml" />
+    <Content Include="Views\Team\Detail.cshtml" />
+    <Content Include="Views\Shared\Members.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

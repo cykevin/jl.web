@@ -23,7 +23,7 @@ namespace JL.Web.Controllers
             ArticleFilter af = new ArticleFilter();
             af.Status = Consts.ArticleStatus_Published;
 
-            var pager = PageReq<ArticleFilter>.Create(af, 1);
+            var pager = PageReq<ArticleFilter>.Create(af, 1,10);
             var article = jlService.ArticlePage(pager);
             return View(article);
         }
@@ -34,7 +34,7 @@ namespace JL.Web.Controllers
             ArticleFilter af = new ArticleFilter();
             af.Status = Consts.ArticleStatus_Published;
 
-            var pager = PageReq<ArticleFilter>.Create(af, page);
+            var pager = PageReq<ArticleFilter>.Create(af, page,10);
             var article = jlService.ArticlePage(pager);
             return View(article);
         }

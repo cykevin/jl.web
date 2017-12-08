@@ -1,4 +1,5 @@
-﻿using System;
+﻿using JL.Core;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -8,10 +9,33 @@ namespace JL.Web.Controllers
 {
     public class TeamController : Controller
     {
-        // GET: Team
-        public ActionResult Index()
+        private IJLService jlService;
+
+        public TeamController(IJLService jlService)
         {
-            return View();
+            this.jlService = jlService;
+        }
+
+        // GET: Team
+        public ActionResult Index(int id = 0)
+        {
+            var pager = JL.Core.Common.PageReq.Create();
+            var page = jlService.MemberPage(pager);
+
+            if(id>0)
+            {
+                var member = jlService.GetMember(id);
+                ViewBag.member = member;
+            }
+
+            return View(page.Data);
+        }
+
+        public ActionResult Detail(int id = 0)
+        {
+            var member = jlService.GetMember(id);
+
+            return View(member);
         }
     }
 }
