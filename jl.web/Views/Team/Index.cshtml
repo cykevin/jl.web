@@ -1,8 +1,8 @@
 ﻿@model IEnumerable<JL.Core.Models.Member>
 
 
-<div class="container">
-    <div class="swiper-container">
+
+<div class="swiper-container">
         <div class="swiper-wrapper">
             @foreach (var member in Model)
             {
@@ -26,37 +26,41 @@
         <div class="swiper-scrollbar"></div>
     </div>
 
+<div class="container">
     @if (ViewBag.member != null)
     {
         JL.Core.Models.Member m = ViewBag.member;
         <div class="row">
             <div class="col-lg-6">
-                <a href="@Url.Action("index", "member", new {id=m.AutoId})">
-                    <img class="img-responsive" src="@JL.Web.Helpers.ImageHelper.GenPictureUrlBig(m.Picture,PictureEnums.Member)" />
-                </a>
+
+                    <a href="@Url.Action("index", "member", new {id=m.AutoId})">
+                        <img class="img-responsive" src="@JL.Web.Helpers.ImageHelper.GenPictureUrlBig(m.Picture,PictureEnums.Member)" />
+                    </a>
+                
+                <h4>基本资料</h4>
 
                 <ul class="list-group">
-                    <li class="list-group-item border-bottomonly">                        
+                    <li class="list-group-item border-none">
                         <span class="fa fa-user" aria-hidden="true"></span>
                         @m.NickName
                     </li>
-                    <li class="list-group-item border-bottomonly">
+                    <li class="list-group-item border-none">
                         <span class="fa fa-qq" aria-hidden="true"></span>
                         @m.QQ
                     </li>
-                    <li class="list-group-item border-bottomonly">
+                    <li class="list-group-item border-none">
                         <span class="fa fa-envelope" aria-hidden="true"></span>
                         @m.Email
                     </li>
-                    <li class="list-group-item border-bottomonly">
+                    <li class="list-group-item border-none">
                         <span class="fa fa-phone" aria-hidden="true"></span>
                         @m.Phone
                     </li>
-                    <li class="list-group-item border-bottomonly">
+                    <li class="list-group-item border-none">
                         <span class="fa fa-home" aria-hidden="true"></span>
                         @m.Address
                     </li>
-                    
+
                 </ul>
 
 
@@ -67,12 +71,11 @@
         </div>
 
         <div class="row">
-            
+
         </div>
     }
-    
-</div>
 
+</div>
 
 @section styles{
     @Styles.Render("~/content/swiper/css/swiper.css")
@@ -118,7 +121,7 @@
             // 如果需要前进后退按钮
             nextButton: '.swiper-button-next',
             prevButton: '.swiper-button-prev',
-            slidesPerView: 3,
+            slidesPerView: 5,
             // 如果需要滚动条
             scrollbar: '.swiper-scrollbar'
         });
