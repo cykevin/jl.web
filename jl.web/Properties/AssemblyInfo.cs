@@ -18,7 +18,7 @@ using System.Runtime.InteropServices;
 // 对 COM 组件不可见。如果需要
 // 从 COM 访问此程序集中的某个类型，请针对该类型将 ComVisible 特性设置为 true。
 [assembly: ComVisible(false)]
-
+[assembly: log4net.Config.XmlConfigurator(Watch = true)]
 // 如果此项目向 COM 公开，则下列 GUID 用于 typelib 的 ID
 [assembly: Guid("6403ec08-9a44-4163-95bb-e1dec20d2cf3")]
 

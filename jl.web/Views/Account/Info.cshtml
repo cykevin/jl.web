@@ -1,0 +1,132 @@
+﻿@model JL.Web.Models.UserInfoViewModel
+@{
+    Layout = "~/Views/Shared/_LayoutNLI.cshtml";
+    ViewBag.Title = "注册";
+}
+
+<div class="container">
+
+    @using (Html.BeginForm("Info", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+    {
+        <ol class="steps">
+            <li>
+                <div class="media">
+                    <div class="media-left">
+                        <i class="fa fa-user"></i>
+                    </div>
+                    <div class="media-body">
+                        <h4 class="media-heading">Step 1</h4>
+                        <p>填写注册信息</p>
+                    </div>
+                </div>
+            </li>
+            <li class="current">
+                <div class="media">
+                    <div class="media-left">
+                        <i class="fa fa-edit"></i>
+                    </div>
+                    <div class="media-body">
+                        <h4 class="media-heading">Step 2</h4>
+                        <p>填写基本信息</p>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="media">
+                    <div class="media-left">
+                        <i class="fa fa-subway"></i>
+                    </div>
+                    <div class="media-body">
+                        <h4 class="media-heading">Step 2</h4>
+                        <p>填写基本信息</p>
+                    </div>
+                </div>
+            </li>
+        </ol>
+        <hr />
+
+        <div class="row">
+            <div class="col-lg-8">
+                <div class="form-group">
+                    <label for="RealName" class="col-md-2 control-label">真实姓名</label>
+                    <div class="col-md-10">
+                        @Html.TextBoxFor(m => m.RealName, new { @class = "form-control" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="Phone" class="col-md-2 control-label">手机号</label>
+                    <div class="col-md-10">
+                        @Html.TextBoxFor(m => m.Phone, new { @class = "form-control" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="QQ" class="col-md-2 control-label">QQ</label>
+                    <div class="col-md-10">
+                        @Html.TextBoxFor(m => m.QQ, new { @class = "form-control" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="Address" class="col-md-2 control-label">联系地址</label>
+                    <div class="col-md-10">
+                        @Html.TextBoxFor(m => m.Address, new { @class = "form-control" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" class="btn btn-default" value="保存" />
+
+                        <a class="col-md-offset-1" href="#">>>跳过</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4">
+                
+            </div>
+        </div>
+    }
+</div>
+
+@section Styles{
+    @Styles.Render("~/Content/font-awesome/css/font-awesome.min.css")
+
+    <style type="text/css">
+        .steps {
+            display: table;
+            width: 100%;
+            padding: 0;
+            margin: 30px auto 0;
+            overflow: hidden;
+            list-style: none;
+            border: 1px solid #dfe2e5;
+            border-radius: 3px;
+            box-shadow: 0 1px 3px rgba(27,31,35,0.05);
+        }
+
+            .steps li:first-child {
+                border-left: 0;
+            }
+
+            .steps li.current {
+                color: #24292e;
+                background-color: #fff;
+            }
+
+            .steps li {
+                display: table-cell;
+                width: 33.3%;
+                padding: 10px 15px;
+                color: #c6cbd1;
+                cursor: default;
+                background-color: #fafbfc;
+                border-left: 1px solid #dfe2e5;
+            }
+    </style>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+
+

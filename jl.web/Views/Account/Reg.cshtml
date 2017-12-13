@@ -1,39 +1,141 @@
 ﻿@model JL.Web.Models.UserRegViewModel
 @{
+    Layout = "~/Views/Shared/_LayoutNLI.cshtml";
     ViewBag.Title = "注册";
 }
 
-<h2>@ViewBag.Title。</h2>
+<div class="container">
 
-@using (Html.BeginForm("Reg", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
-{
-    @Html.AntiForgeryToken()
-    <h4>创建新帐户。</h4>
-    <hr />
-    @Html.ValidationSummary("", new { @class = "text-danger" })
-    <div class="form-group">
-        @Html.LabelFor(m => m.UserName, new { @class = "col-md-2 control-label" })
-        <div class="col-md-10">
-            @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+    @using (Html.BeginForm("Reg", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+    {
+        <ol class="steps">
+            <li class="current">
+                <div class="media">
+                    <div class="media-left">
+                        <span class="fa fa-user"></span>
+                    </div>
+                    <div class="media-body">
+                        <h4 class="media-heading">Step 1</h4>
+                        <p>填写基本信息</p>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="media">
+                    <div class="media-left">
+                        <img class="media-object" src="..." alt="...">
+                    </div>
+                    <div class="media-body">
+                        <h4 class="media-heading">Step 2</h4>
+                        <p>填写基本信息</p>
+                    </div>
+                </div>                
+            </li>
+            <li>
+                <div class="media">
+                    <div class="media-left">
+                        <img class="media-object" src="..." alt="...">
+                    </div>
+                    <div class="media-body">
+                        <h4 class="media-heading">Step 2</h4>
+                        <p>填写基本信息</p>
+                    </div>
+                </div>
+            </li>
+        </ol>
+        <hr />
+
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="form-group">
+                    <label for="UserName" class="col-md-2 control-label">用户名</label>
+                    <div class="col-md-10">
+                        @Html.TextBoxFor(m => m.UserName, new { @class = "form-control" })
+                        
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="Email" class="col-md-2 control-label">Email</label>
+                    <div class="col-md-10">
+                        @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+                        <p class="note">用于证明您的身份信息，同时接收本站邮件。</p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="Password" class="col-md-2 control-label">密码</label>
+                    <div class="col-md-10">
+                        @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
+                        <p class="note">不得少于6个字符长度。</p>
+                    </div>
+                </div>
+                <p class="tos-info text-center">点击下方注册按钮，我们将视您已同意本站<a href="#">服务协议</a>与<a href="#">隐私条款</a></p>
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" class="btn btn-default" value="注册" />
+                        
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-6">
+                <ul class="list-group">
+                    <li class="list-group-item">
+                        已有账号，直接 @Html.ActionLink("登录","login")
+                    </li>
+                </ul>
+            </div>
         </div>
-    </div>
-    <div class="form-group">
-        @Html.LabelFor(m => m.Password, new { @class = "col-md-2 control-label" })
-        <div class="col-md-10">
-            @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
-        </div>
-    </div>
-    <div class="form-group">
-        @Html.LabelFor(m => m.ConfirmPassword, new { @class = "col-md-2 control-label" })
-        <div class="col-md-10">
-            @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control" })
-        </div>
-    </div>
-    <div class="form-group">
-        <div class="col-md-offset-2 col-md-10">
-            <input type="submit" class="btn btn-default" value="注册" />
-        </div>
-    </div>
+    }
+</div>
+
+@section Styles{
+@Styles.Render("~/Content/font-awesome/css/font-awesome.min.css")
+   
+    <style type="text/css">
+        .steps {
+            display: table;
+            width: 100%;
+            padding: 0;
+            margin: 30px auto 0;
+            overflow: hidden;
+            list-style: none;
+            border: 1px solid #dfe2e5;
+            border-radius: 3px;
+            box-shadow: 0 1px 3px rgba(27,31,35,0.05);
+        }
+        .steps li:first-child {
+                border-left: 0;
+            }
+        .steps li.current {
+            color: #24292e;
+            background-color: #fff;
+        }
+        .steps li {
+            display: table-cell;
+            width: 33.3%;
+            padding: 10px 15px;
+            color: #c6cbd1;
+            cursor: default;
+            background-color: #fafbfc;
+            border-left: 1px solid #dfe2e5;
+        }
+
+        .tos-info {
+            padding: 15px 0;
+        }
+
+        .tos-info {
+            margin: 15px 0;
+            border-top: 1px solid #eee;
+            border-bottom: 1px solid #eee;
+        }
+        .note {
+            min-height: 17px;
+            margin: 4px 0 2px;
+            font-size: 12px;
+            color: #586069;
+        }
+    </style>    
 }
 
 @section Scripts {

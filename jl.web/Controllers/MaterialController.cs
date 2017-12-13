@@ -9,6 +9,7 @@ using System.Web.Mvc;
 
 namespace JL.Web.Controllers
 {
+    [Authorize]
     public class MaterialController : Controller
     {
         private IJLService jlService;

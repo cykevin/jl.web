@@ -1,4 +1,5 @@
 ﻿using JL.Web.Models;
+using System;
 using System.Web.Mvc;
 using System.Web.Security;
 using WebMatrix.WebData;
@@ -7,6 +8,8 @@ namespace JL.Web.Controllers
 {
     public class AccountController : Controller
     {
+        private static readonly log4net.ILog logger = log4net.LogManager.GetLogger("AccountController");
+
         // GET: Account
         public ActionResult Login()
         {
@@ -17,46 +20,27 @@ namespace JL.Web.Controllers
 
         [HttpPost]
         [AllowAnonymous]
-        [ValidateAntiForgeryToken]
-        public ActionResult Login(LoginModel model, string returnUrl)
+        public ActionResult Login(LoginViewModel model, string returnUrl)
         {
             if (ModelState.IsValid)
             {
                 bool flag = Membership.ValidateUser(model.UserName, model.Password);
                 if (flag)
                 {
-                    //var user = _userProfileService.GetByUsername(model.UserName);
-
-                    //if (user != null)
-                    //{
-                    //    if (user.Status.HasValue &&
-                    //        !user.Status.Value.Equals(JobStatus.Quit))
-                    //    {
                     FormsAuthentication.SetAuthCookie(model.UserName, model.RememberMe);
 
-                    //    if (Roles.IsUserInRole(model.UserName, BnuxqCRM.Common.Enums.RoleType.Sales.ToString()))
-                    //    {
-                    //        return RedirectToLocal(returnUrl, "Index", "Home", null);
-                    //    }
-
-                    //    if (Roles.IsUserInRole(model.UserName, BnuxqCRM.Common.Enums.RoleType.Boss.ToString()))
-                    //    {
-                    //        return RedirectToLocal(returnUrl, "Index", "Home", new { area = "Boss" });
-                    //    }
-
-                    //    if (Roles.IsUserInRole(model.UserName, BnuxqCRM.Common.Enums.RoleType.Manager.ToString()))
-                    //    {
-                    //        return RedirectToLocal(returnUrl, "Index", "Home", new { area = "Manager" });
-                    //    }
-                    //}
-                    //}
+                    return RedirectToLocal(returnUrl);
                 }
             }
-
 
             // 如果我们进行到这一步时某个地方出错，则重新显示表单
             ModelState.AddModelError("", "提供的用户名或密码不正确。");
             return View(model);
+        }
+
+        public ActionResult Reg()
+        {
+            return View();
         }
 
         [HttpPost]
@@ -66,16 +50,31 @@ namespace JL.Web.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    var token = WebSecurity.CreateUserAndAccount(model.UserName, model.Password, requireConfirmationToken: true);
-                    Roles.AddUserToRole(model.UserName, JL.Core.Consts.Role_Admin);
+                    var existed = WebSecurity.UserExists(model.UserName);
+
+                    var token = WebSecurity.CreateUserAndAccount(model.UserName, model.Password, new { Email = model.Email }, requireConfirmationToken: false);
+
+                    Roles.AddUserToRole(model.UserName, JL.Core.Consts.Role_User);
                 }
 
-                return RedirectToAction("Index");
+                return RedirectToAction("Info");
             }
-            catch
+            catch(Exception e)
             {
+                logger.Error(JL.Utils.JsonHelper.ObjectToString(model), e);
                 return View();
             }
+        }
+
+        public ActionResult Info()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult Info(UserInfoViewModel model)
+        {
+            return View();
         }
 
         // GET: Account/Details/5
@@ -90,64 +89,19 @@ namespace JL.Web.Controllers
             return View();
         }
 
-        // POST: Account/Create
-        [HttpPost]
-        public ActionResult Create(FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add insert logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
         // GET: Account/Edit/5
         public ActionResult Edit(int id)
         {
             return View();
         }
 
-        // POST: Account/Edit/5
-        [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        private ActionResult RedirectToLocal(string returnUrl, string action = "index", string controller = "home")
         {
-            try
+            if (Url.IsLocalUrl(returnUrl))
             {
-                // TODO: Add update logic here
-
-                return RedirectToAction("Index");
+                return Redirect(returnUrl);
             }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: Account/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
-        // POST: Account/Delete/5
-        [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add delete logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
+            return RedirectToAction("Index", "Home");
         }
     }
 }

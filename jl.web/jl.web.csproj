@@ -210,7 +210,9 @@
     <Compile Include="Helpers\TimeHelper.cs" />
     <Compile Include="Helpers\VideoHelper.cs" />
     <Compile Include="Helpers\ViewDataHelper.cs" />
+    <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\LoginModel.cs" />
+    <Compile Include="Models\UserInfoViewModel.cs" />
     <Compile Include="Models\UserRegViewModel.cs" />
     <Compile Include="MVCPaging\IPagedList.cs" />
     <Compile Include="MVCPaging\PagedList.cs" />
@@ -1071,6 +1073,8 @@
     <Content Include="Views\Material\Video.cshtml" />
     <Content Include="Views\Team\Detail.cshtml" />
     <Content Include="Views\Shared\Members.cshtml" />
+    <Content Include="Views\Shared\_LayoutNLI.cshtml" />
+    <Content Include="Views\Account\Info.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
