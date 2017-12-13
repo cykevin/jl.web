@@ -31,7 +31,7 @@ namespace JL.Web.Controllers
         }
 
         // 
-        public ActionResult Picture(int page=1)
+        public ActionResult Picture(int page = 1)
         {
             MaterialFilter filter = new MaterialFilter();
             filter.MaterialType = (int)MaterialType.Picture;
@@ -42,7 +42,7 @@ namespace JL.Web.Controllers
             return View(data);
         }
 
-        public ActionResult Video(int page=1)
+        public ActionResult Video(int page = 1)
         {
             MaterialFilter filter = new MaterialFilter();
             filter.MaterialType = (int)MaterialType.Video;
@@ -51,6 +51,32 @@ namespace JL.Web.Controllers
             var data = jlService.MaterialPage(pager);
 
             return View(data);
+        }
+
+        public ActionResult Download(int id)
+        {
+            var material = jlService.GetMaterial(id);
+
+            if (material != null)
+            {
+                var filePath = Server.MapPath(material.FileName);
+                var mime = MimeMapping.GetMimeMapping(filePath);
+
+                var bytes = GetFile(filePath);
+                return File(bytes, mime);
+            }
+
+            return HttpNotFound();
+        }
+
+        private byte[] GetFile(string s)
+        {
+            System.IO.FileStream fs = System.IO.File.OpenRead(s);
+            byte[] data = new byte[fs.Length];
+            int br = fs.Read(data, 0, data.Length);
+            if (br != fs.Length)
+                throw new System.IO.IOException(s);
+            return data;
         }
     }
 }

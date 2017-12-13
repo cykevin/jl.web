@@ -1,6 +1,6 @@
 ﻿@model IEnumerable<JL.Core.Models.Banner>
 
-<div class="container margin-b-15">
+@*<div class="container margin-b-15">
     <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
         <!-- Indicators -->
         <ol class="carousel-indicators">
@@ -43,4 +43,29 @@
             <span class="sr-only">Next</span>
         </a>
     </div>
+</div>*@
+
+<div class="swiper-container">
+    <div class="swiper-wrapper">
+        @{
+            foreach (var banner in Model)
+            {
+                <div class="swiper-slide">
+                    <img src="@JL.Web.Helpers.ImageHelper.GenPictureUrlSource(banner.Picture)" alt="@banner.Title">
+                    <div class="carousel-caption">
+                        <h3>@banner.Title</h3>
+                        <p>@banner.Desctiption</p>
+                    </div>
+                </div>
+            }
+        }        
+    </div>
+
+    <div class="swiper-pagination">
+
+    </div>
+    <div class="swiper-button-prev"></div>
+    <div class="swiper-button-next"></div>
+
+    <div class="swiper-scrollbar"></div>
 </div>
