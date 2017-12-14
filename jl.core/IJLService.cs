@@ -22,6 +22,7 @@ namespace JL.Core
         Material GetMaterial(int id);
         PageData<Material> MaterialPage(PageReq pageReq);
         PageData<Material> MaterialPage(PageReq<MaterialFilter> pageReq);
+        void IncrementPageViews(int id);
 
         // member
         int AddMember(Member model);

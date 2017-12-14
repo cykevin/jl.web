@@ -55,15 +55,21 @@ namespace JL.Web.Controllers
 
         public ActionResult Download(int id)
         {
-            var material = jlService.GetMaterial(id);
-
-            if (material != null)
+            if (id>0)
             {
-                var filePath = Server.MapPath(material.FileName);
-                var mime = MimeMapping.GetMimeMapping(filePath);
+                var material = jlService.GetMaterial(id);                
 
-                var bytes = GetFile(filePath);
-                return File(bytes, mime);
+                if (material != null)
+                {
+                    // 下载量加1
+                    jlService.IncrementPageViews(id);
+
+                    var filePath = Server.MapPath(material.FileName);
+                    var mime = MimeMapping.GetMimeMapping(filePath);
+
+                    var bytes = GetFile(filePath);
+                    return File(bytes, mime);
+                }
             }
 
             return HttpNotFound();

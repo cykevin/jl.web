@@ -136,6 +136,12 @@ values (@Title,@Description,@Picture,@FileName,@MaterialType,@PageViews,@SortInd
             conn.Execute(sql, new { AutoId = id });
         }
 
+        public void IncrementPageVies(int id)
+        {
+            var sql = "update Material set pageviews=pageviews+1 where AutoId=@AutoId";
+            var conn = DbConnectionFactory.CreateConnection();
+            conn.Execute(sql, new { AutoId = id });
+        }
 
         #endregion
     }

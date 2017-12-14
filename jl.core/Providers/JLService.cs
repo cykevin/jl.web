@@ -34,12 +34,7 @@ namespace JL.Core.Providers
             this.franchiseeRepository = franchiseeRepository;
             this.materialRepository = materialRepository;
             this.bannerRepository = bannerRepository;
-        }
-
-        static JLService()
-        {
-
-        }
+        }        
 
         #region userprofile
 
@@ -134,6 +129,11 @@ namespace JL.Core.Providers
         public Material GetMaterial(int id)
         {
             return materialRepository.GetById(id);
+        }
+
+        public void IncrementPageViews(int id)
+        {
+            materialRepository.IncrementPageVies(id);
         }
 
         #endregion

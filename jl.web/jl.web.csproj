@@ -210,6 +210,7 @@
     <Compile Include="Helpers\VideoHelper.cs" />
     <Compile Include="Helpers\ViewDataHelper.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\FranchiseeViewModel.cs" />
     <Compile Include="Models\LoginModel.cs" />
     <Compile Include="Models\UserInfoViewModel.cs" />
     <Compile Include="Models\UserRegViewModel.cs" />
@@ -1073,7 +1074,7 @@
     <Content Include="Views\Material\Video.cshtml" />
     <Content Include="Views\Team\Detail.cshtml" />
     <Content Include="Views\Shared\Members.cshtml" />
-    <Content Include="Views\Shared\_LayoutNLI.cshtml" />
+    <Content Include="Views\Shared\_LayoutNB.cshtml" />
     <Content Include="Views\Account\Info.cshtml" />
     <Content Include="Views\Account\ChangePassword.cshtml" />
   </ItemGroup>

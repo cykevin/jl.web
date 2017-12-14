@@ -18,5 +18,7 @@ namespace JL.Core.Repositories
         PageData<Material> MaterialPage(PageReq<MaterialFilter> pageReq);
         void Delete(int id);
         void Delete(Material model);
+
+        void IncrementPageVies(int id);
     }
 }

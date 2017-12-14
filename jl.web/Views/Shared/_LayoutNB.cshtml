@@ -8,7 +8,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title </title>
     @Styles.Render("~/Content/css")
-    @Scripts.Render("~/bundles/modernizr")
+    @Styles.Render("~/Content/font-awesome/css/font-awesome.min.css")
+    
     @RenderSection("styles", required: false)
 </head>
 <body>
@@ -98,7 +99,7 @@
                             <a href="@Url.Action("index","team")"><span>团队中心</span></a>
                         </li>
                         <li @Html.Raw(controller.IsEquals("home")&&action.IsEquals("contact") ? "class=\"active\"" : "")>
-                            <a href="@Url.Action("index","contactus")"><span>联系我们</span></a>
+                            <a href="@Url.Action("contact","home")"><span>联系我们</span></a>
                         </li>
                         <li class="login">
                             <a data-toggle="modal" href="#loginForm"><i class="icon-lock"></i></a>
