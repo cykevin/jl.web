@@ -10,6 +10,7 @@ using WebMatrix.WebData;
 
 namespace JL.Web.Areas.backend.Controllers
 {
+    [Authorize(Roles = Consts.Role_Admin)]
     public class UserController : Controller
     {
         private readonly IJLService jlService;

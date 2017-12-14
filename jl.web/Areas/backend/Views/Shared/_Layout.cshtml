@@ -37,15 +37,15 @@
                         <i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-user">
+                        @*<li>
+                            <a href="@Url.Action("Index","Setting")"><i class="fa fa-user fa-fw"></i> 人个设置</a>
+                        </li>*@
                         <li>
-                            <a href="@Url.Action("Setting","Backend")"><i class="fa fa-user fa-fw"></i> 人个设置</a>
-                        </li>
-                        <li>
-                            <a href="@Url.Action("ChangePassword","Backend")"><i class="fa fa-gear fa-fw"></i> 修改密码</a>
+                            <a href="@Url.Action("ChangePassword","Setting")"><i class="fa fa-gear fa-fw"></i> 修改密码</a>
                         </li>
                         <li class="divider"></li>
                         <li>
-                            <a href="@Url.Action("Logoff", "Backend")"><i class="fa fa-sign-out fa-fw"></i> 退出</a>
+                            <a href="@Url.Action("Logout", "Account",new { area = "" })"><i class="fa fa-sign-out fa-fw"></i> 退出</a>
                         </li>
                     </ul>
                     <!-- /.dropdown-user -->

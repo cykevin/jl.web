@@ -4,23 +4,29 @@ using JL.Infrastructure;
 using JL.Core;
 using System.Linq;
 using JL.Web.Common;
+using JL.Web.Models;
+using WebMatrix.WebData;
+using System;
 
 namespace JL.Web.Areas.backend.Controllers
 {
+    [Authorize(Roles = Consts.Role_Admin)]
     public class SettingController : Controller
     {
-        private IJLService jlService;
+        private static readonly log4net.ILog logger = log4net.LogManager.GetLogger("SettingController");
 
-        public SettingController(IJLService jlService)
+        private ISettingService settingService;
+
+        public SettingController(ISettingService settingService)
         {
-            this.jlService = jlService;
+            this.settingService = settingService;
         }
 
         // GET: backend/Setting
         [HttpGet]
         public ActionResult Index()
         {
-            var settings = jlService.GetSettingList();
+            var settings = settingService.GetSettingList();
             SettingModel model = new SettingModel();
 
             if(settings!=null)
@@ -54,27 +60,27 @@ namespace JL.Web.Areas.backend.Controllers
             {
                 if(!model.Keywords.IsNullOrEmpty())
                 {
-                    jlService.SaveSetting(Consts.SettingItem_Keywords, model.Keywords);
+                    settingService.SaveSetting(Consts.SettingItem_Keywords, model.Keywords);
                 }
                 if(!model.Description.IsNullOrEmpty())
                 {
-                    jlService.SaveSetting(Consts.SettingItem_Description, model.Description);
+                    settingService.SaveSetting(Consts.SettingItem_Description, model.Description);
                 }
                 if(!model.Address.IsNullOrEmpty())
                 {
-                    jlService.SaveSetting(Consts.SettingItem_Address, model.Address);
+                    settingService.SaveSetting(Consts.SettingItem_Address, model.Address);
                 }
                 if (!model.Copyright.IsNullOrEmpty())
                 {
-                    jlService.SaveSetting(Consts.SettingItem_Copyright, model.Copyright);
+                    settingService.SaveSetting(Consts.SettingItem_Copyright, model.Copyright);
                 }
                 if (!model.IcpNO.IsNullOrEmpty())
                 {
-                    jlService.SaveSetting(Consts.SettingItem_Icpno, model.IcpNO);
+                    settingService.SaveSetting(Consts.SettingItem_Icpno, model.IcpNO);
                 }
                 if (!model.Phone.IsNullOrEmpty())
                 {
-                    jlService.SaveSetting(Consts.SettingItem_Phone, model.Phone);
+                    settingService.SaveSetting(Consts.SettingItem_Phone, model.Phone);
                 }
 
                 ViewData.Add("ResultObject", ResultObject.Succeed());
@@ -82,5 +88,50 @@ namespace JL.Web.Areas.backend.Controllers
             return View(model);
         }
 
+
+        [Authorize]
+        [HttpGet]
+        public ActionResult ChangePassword()
+        {
+            return View();
+        }
+
+        [Authorize]
+        public ActionResult ChangePassword(ChangePasswordViewModel model)
+        {
+            var username = WebSecurity.CurrentUserName;
+            var userid = WebSecurity.CurrentUserId;
+
+            try
+            {
+                var success = WebSecurity.ChangePassword(username, model.OldPassword, model.NewPassword);
+                ViewBag.Success = success;
+            }
+            catch (Exception e)
+            {
+                logger.Error("ChangePassword", e);
+            }
+
+            return View();
+        }
+
+        [HttpGet]
+        public ActionResult Contact()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateInput(false)]
+        public ActionResult Contact(ContactModel model)
+        {
+            if(!string.IsNullOrEmpty(model.Content))
+            {
+                settingService.SaveSetting(Consts.SettingItem_Contact, model.Content);
+
+                ViewData.Add("ResultObject", ResultObject.Succeed());
+            }
+            return View();
+        }
     }
 }

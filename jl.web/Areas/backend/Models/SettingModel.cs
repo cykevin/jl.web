@@ -14,4 +14,9 @@ namespace JL.Web.Areas.backend.Models
         public string Address { get; set; }
         public string Phone { get; set; }
     }
+
+    public class ContactModel
+    {
+        public string Content { get; set; }
+    }
 }

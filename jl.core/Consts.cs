@@ -19,6 +19,7 @@ namespace JL.Core
         public const string SettingItem_Copyright = "copyright";
         public const string SettingItem_Icpno = "icpno";
         public const string SettingItem_Phone = "phone";
+        public const string SettingItem_Contact = "contact";
 
         #endregion
 

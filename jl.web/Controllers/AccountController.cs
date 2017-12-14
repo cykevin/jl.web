@@ -77,22 +77,37 @@ namespace JL.Web.Controllers
             return View();
         }
 
-        // GET: Account/Details/5
-        public ActionResult Details(int id)
+        [Authorize]
+        [HttpGet]
+        public ActionResult ChangePassword()
         {
             return View();
         }
 
-        // GET: Account/Create
-        public ActionResult Create()
+        [Authorize]
+        public ActionResult ChangePassword(ChangePasswordViewModel model)
         {
+            var username = WebSecurity.CurrentUserName;
+            var userid = WebSecurity.CurrentUserId;
+
+            try
+            {
+                var success = WebSecurity.ChangePassword(username, model.OldPassword, model.NewPassword);
+                ViewBag.Success = success;
+            }
+            catch (Exception e)
+            {
+                logger.Error("ChangePassword", e);
+            }
+            
             return View();
         }
 
-        // GET: Account/Edit/5
-        public ActionResult Edit(int id)
+        public ActionResult Logout()
         {
-            return View();
+            WebSecurity.Logout();
+
+            return RedirectToAction("index", "home");
         }
 
         private ActionResult RedirectToLocal(string returnUrl, string action = "index", string controller = "home")

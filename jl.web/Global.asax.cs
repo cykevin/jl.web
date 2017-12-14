@@ -35,10 +35,10 @@ namespace JL.Web
                 var adminUsers = Roles.GetUsersInRole(Consts.Role_Admin);
                 if (adminUsers == null || adminUsers.Length < 1)
                 {
-                    if (!WebSecurity.UserExists("admin"))
+                    if (!WebSecurity.UserExists("qssgadmin"))
                     {
-                        WebSecurity.CreateUserAndAccount("admin", "666666");
-                        Roles.AddUserToRole("admin", Consts.Role_Admin);
+                        WebSecurity.CreateUserAndAccount("qssgadmin", "fqmzwmhx");
+                        Roles.AddUserToRole("qssgadmin", Consts.Role_Admin);
                     }   
                 }
             }

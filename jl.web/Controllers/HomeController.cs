@@ -11,10 +11,13 @@ namespace JL.Web.Controllers
 {
     public class HomeController : Controller
     {
+        private ISettingService settingService;
         private IJLService jlService;
 
-        public HomeController(IJLService jlService)
+        public HomeController(ISettingService settingService,
+            IJLService jlService)
         {
+            this.settingService = settingService;
             this.jlService = jlService;
         }
 
@@ -57,8 +60,9 @@ namespace JL.Web.Controllers
 
         public ActionResult Contact()
         {
-            ViewBag.Message = "Your contact page.";
+            var setting = settingService.GetSetting(Consts.SettingItem_Contact);
 
+            ViewBag.content = setting.Value;
             return View();
         }
     }

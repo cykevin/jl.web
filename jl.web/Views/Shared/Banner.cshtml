@@ -45,12 +45,12 @@
     </div>
 </div>*@
 
-<div class="swiper-container">
+<div class="swiper-container container">
     <div class="swiper-wrapper">
         @{
             foreach (var banner in Model)
             {
-                <div class="swiper-slide">
+                <div class="swiper-slide" style="background-color:@banner.BackgroundColor">
                     <img src="@JL.Web.Helpers.ImageHelper.GenPictureUrlSource(banner.Picture)" alt="@banner.Title">
                     <div class="carousel-caption">
                         <h3>@banner.Title</h3>
@@ -67,5 +67,4 @@
     <div class="swiper-button-prev"></div>
     <div class="swiper-button-next"></div>
 
-    <div class="swiper-scrollbar"></div>
 </div>

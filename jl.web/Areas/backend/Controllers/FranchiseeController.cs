@@ -10,6 +10,7 @@ using System.Web.Mvc;
 
 namespace JL.Web.Areas.backend.Controllers
 {
+    [Authorize(Roles = Consts.Role_Admin)]
     public class FranchiseeController : Controller
     {
         private IJLService jlService;

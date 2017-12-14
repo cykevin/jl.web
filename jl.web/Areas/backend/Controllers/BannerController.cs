@@ -12,6 +12,7 @@ using System.Web.Mvc;
 
 namespace JL.Web.Areas.backend.Controllers
 {
+    [Authorize(Roles = Consts.Role_Admin)]
     public class BannerController : Controller
     {
         private IJLService jlService;
@@ -45,8 +46,9 @@ namespace JL.Web.Areas.backend.Controllers
             if (ModelState.IsValid)
             {
                 // file
-                if (Request.Files != null &&
-                    Request.Files.Count > 0)
+                if (Request.Files != null
+                    && Request.Files.Count > 0
+                    && Request.Files[0].ContentLength > 0)
                 {
                     var picture = FileHelper.SaveBannerImage(Request.Files[0]);
                     model.Picture = picture;

@@ -90,8 +90,9 @@
                     <ul class="nav menu-nav navbar-nav navbar-right">
                         @{ 
                             var controller = ViewContext.RouteData.Values["controller"].ToString();
+                            var action= ViewContext.RouteData.Values["action"].ToString();
                         }
-                        <li @Html.Raw(controller.IsEquals("home") ? ("class=\"active\"") : "\"\"")>
+                        <li @Html.Raw(controller.IsEquals("home")&&action.IsEquals("index") ? ("class=\"active\"") : "\"\"")>
                             <a href="/"><span>网站首页</span></a>
                         </li>
                         <li @Html.Raw(controller.IsEquals("skincare")?"class=\"active\"":"")>
@@ -124,8 +125,8 @@
                         <li @Html.Raw(controller.IsEquals("team") ? "class=\"active\"" : "")>
                             <a href="@Url.Action("index","team")"><span>团队中心</span></a>
                         </li>
-                        <li @Html.Raw(controller.IsEquals("contactus") ? "class=\"active\"" : "")>
-                            <a href="@Url.Action("index","contactus")"><span>联系我们</span></a></li>
+                        <li @Html.Raw(controller.IsEquals("home")&&action.IsEquals("contact") ? "class=\"active\"" : "")>
+                            <a href="@Url.Action("contact", "home")"><span>联系我们</span></a></li>
                         <li class="login">
                             <a data-toggle="modal" href="#loginForm"><i class="icon-lock"></i></a>
                         </li>
@@ -176,7 +177,7 @@
     @Scripts.Render("~/Content/swiper/js/swiper.jquery.min.js")
 
     <script type="text/javascript">
-        var swiper = new Swiper('.swiper-container', {
+        var bannerSwiper = new Swiper('.swiper-container', {
             loop:true,
             pagination: '.swiper-pagination',
             nextButton: '.swiper-button-next',

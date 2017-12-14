@@ -1,0 +1,55 @@
+﻿@model JL.Web.Areas.backend.Models.ContactModel
+@{
+    ViewBag.Title = "Contact";
+}
+
+<div class="row">
+    <div class="col-lg-12">
+        <h3 class="page-header">联系我们</h3>
+    </div>
+</div>
+
+@using (Html.BeginForm("Contact", "Setting", FormMethod.Post, new { id = "contactForm", enctype = "multipart/form-data" }))
+{
+    if (ViewData.ContainsKey("ResultObject"))
+    {
+        var obj = ViewData["ResultObject"] as JL.Web.Common.ResultObject;
+        if (obj.Success)
+        {
+            <div class="alert alert-success navbar-fixed-top container" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <strong>操作成功！</strong> 点击<a href="@Url.Action("Index", "Product")" class="alert-link">这里</a>跳转到宝贝列表。
+            </div>
+        }
+        else
+        {
+            <div class="alert alert-danger navbar-fixed-top container" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <strong>操作失败！</strong> @obj.Message
+            </div>
+        }
+    }
+
+    <div class="row">
+
+    <div class="col-lg-12">
+
+        <div class="form-group">
+            <label for="Description">内容</label>
+            @Html.TextAreaFor(m => m.Content, new { Style = "Height:360px;" })
+        </div>
+
+        <button type="submit" class="btn btn-success">发布</button>
+    </div>
+    
+    </div>
+}
+
+@section scripts{
+@Scripts.Render("~/bundles/ueditor/")
+<script type="text/javascript">
+    var ue = UE.getEditor('Content');
+</script>    
+    
+}
+

@@ -71,10 +71,6 @@ namespace JL.Core
         PageData<Models.Banner> BannerPage(PageReq pageReq);
         IEnumerable<Models.Banner> Banners();
 
-        // setting
-        IEnumerable<Models.Setting> GetSettingList();
-        Models.Setting GetSetting(string key);
-        Models.Setting SaveSetting(Models.Setting setting);
-        Models.Setting SaveSetting(string key,string value);
+
     }
 }

@@ -13,6 +13,7 @@ using JL.Core.Common;
 
 namespace JL.Web.Areas.backend.Controllers
 {
+    [Authorize(Roles = Consts.Role_Admin)]
     public class MemberController : Controller
     {
         private IJLService jlService;

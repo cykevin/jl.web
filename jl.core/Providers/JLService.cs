@@ -17,8 +17,7 @@ namespace JL.Core.Providers
         private readonly IMemberRepository memberRepository;
         private readonly IFranchiseeRepository franchiseeRepository;
         private readonly IMaterialRepository materialRepository;
-        private readonly IBannerRepository bannerRepository;
-        private readonly ISettingRepository settingRepository;
+        private readonly IBannerRepository bannerRepository;        
 
         public JLService(IUserRepository userRepository,
             IArticleRepository articleRepository,
@@ -26,8 +25,7 @@ namespace JL.Core.Providers
             IMemberRepository memberRepository,
             IFranchiseeRepository franchiseeRepository,
             IMaterialRepository materialRepository,
-            IBannerRepository bannerRepository,
-            ISettingRepository settingRepository)
+            IBannerRepository bannerRepository)
         {
             this.userRepository = userRepository;
             this.articleRepository = articleRepository;
@@ -36,7 +34,11 @@ namespace JL.Core.Providers
             this.franchiseeRepository = franchiseeRepository;
             this.materialRepository = materialRepository;
             this.bannerRepository = bannerRepository;
-            this.settingRepository = settingRepository;
+        }
+
+        static JLService()
+        {
+
         }
 
         #region userprofile
@@ -323,94 +325,5 @@ namespace JL.Core.Providers
 
         #endregion
 
-        #region setting
-
-        private static IList<Setting> settings;
-
-        public Models.Setting GetSetting(string key)
-        {
-            if (!string.IsNullOrEmpty(key))
-                return null;
-
-            // 更新
-            var oldOne = settings.FirstOrDefault(s => string.Equals(key, s.Key));
-            return oldOne;
-        }
-
-        public IEnumerable<Models.Setting> GetSettingList()
-        {
-            if (settings != null)
-            {
-                return settings;
-            }
-            else
-            {
-                settings = settingRepository.GetList().ToList();
-            }
-            return settings;
-        }
-
-        public Models.Setting SaveSetting(Models.Setting setting)
-        {
-            if (setting == null)
-                return null;
-
-            if (settings != null)
-            {
-                // 更新
-                var oldOne = settings.FirstOrDefault(s => string.Equals(setting.Key, s.Key));
-                if (oldOne != null)
-                {
-                    setting.AutoId = oldOne.AutoId;
-                    if(!string.Equals(setting.Value,oldOne.Value))
-                    {
-                        settingRepository.Update(setting);
-                        settings.Remove(oldOne);
-                        settings.Add(setting);
-                    }
-                    return setting;
-                }
-            }
-
-            // 新增
-            var id = settingRepository.Insert(setting);
-            setting.AutoId = id;
-            settings.Add(setting);
-            return setting;
-        }
-
-        public Models.Setting SaveSetting(string key,string value)
-        {
-            if (key.IsNullOrEmpty())
-                return null;
-
-            if (settings != null)
-            {
-                // 更新
-                var oldOne = settings.FirstOrDefault(s => string.Equals(key, s.Key));
-                if (oldOne != null)
-                {
-                    if (!string.Equals(value, oldOne.Value))
-                    {
-                        oldOne.Value = value;
-                        settingRepository.Update(oldOne);
-                    }
-                    return oldOne;
-                }
-            }
-
-            // 新增
-            var newSetting = new Models.Setting();
-            newSetting.Key = key;
-            newSetting.Value = value;
-
-            var id = settingRepository.Insert(newSetting);
-            newSetting.AutoId = id;
-            settings.Add(newSetting);
-            return newSetting;
-        }
-
-
-        #endregion
     }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using JL.Core;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -6,6 +7,7 @@ using System.Web.Mvc;
 
 namespace JL.Web.Areas.backend.Controllers
 {
+    [Authorize(Roles = Consts.Role_Admin)]
     public class HomeController : Controller
     {
         // GET: backend
