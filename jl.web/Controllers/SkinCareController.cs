@@ -25,6 +25,8 @@ namespace JL.Web.Controllers
 
             var pager = PageReq<ArticleFilter>.Create(af, 1,10);
             var article = jlService.ArticlePage(pager);
+
+
             return View(article);
         }
 
@@ -36,17 +38,24 @@ namespace JL.Web.Controllers
 
             var pager = PageReq<ArticleFilter>.Create(af, page,10);
             var article = jlService.ArticlePage(pager);
+
+
             return View(article);
         }
         
         // skincare/1
         public ActionResult Detail(int id)
         {
-            ArticleFilter af = new ArticleFilter();
-            af.Status = Consts.ArticleStatus_Published;
+            var article=jlService.GetArticle(id);
 
-            var pager = PageReq<ArticleFilter>.Create(af, id);
-            var article = jlService.ArticlePage(pager);
+
+            // 热门文章
+            var hotest = jlService.GetHotestArticle(10);
+            var latest = jlService.GetLatestArticle(10);
+
+            ViewBag.Hotest = hotest;
+            ViewBag.Latest = latest;
+
             return View(article);
         }
     }

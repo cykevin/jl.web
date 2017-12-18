@@ -1,5 +1,7 @@
 ﻿using JL.Core.Common;
 using JL.Core.Filters;
+using JL.Core.Models;
+using System.Collections.Generic;
 
 namespace JL.Core.Repositories
 {
@@ -12,5 +14,7 @@ namespace JL.Core.Repositories
         void Delete(int id);
         void Delete(Models.Article model);
         PageData<Models.Article> ArticlePage(PageReq<ArticleFilter> pageReq);
+        IEnumerable<Article> GetHotestArticle(int count);
+        IEnumerable<Article> GetLatestArticle(int count);
     }
 }

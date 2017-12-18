@@ -13,6 +13,30 @@ namespace JL.Core.Repositories.DapperRepository
 {
     public partial class ArticleRepository : IArticleRepository
     {
+        public IEnumerable<Article> GetHotestArticle(int count)
+        {
+            var sqlBuilder = new StringBuilder();
+            sqlBuilder.Append(" select * from Article ");
+            sqlBuilder.Append(" where status=" + Consts.ArticleStatus_Published + " ");
+            sqlBuilder.Append(" order by pageviews desc ");
+            sqlBuilder.Append(" limit " + count);
+
+            var conn = DbConnectionFactory.CreateConnection();
+            return conn.Query<Article>(sqlBuilder.ToString());
+        }
+
+        public IEnumerable<Article> GetLatestArticle(int count)
+        {
+            var sqlBuilder = new StringBuilder();
+            sqlBuilder.Append(" select * from Article ");
+            sqlBuilder.Append(" where status=" + Consts.ArticleStatus_Published + " ");
+            sqlBuilder.Append(" order by addtime desc ");
+            sqlBuilder.Append(" limit " + count);
+
+            var conn = DbConnectionFactory.CreateConnection();
+            return conn.Query<Article>(sqlBuilder.ToString());
+        }
+
         #region methodes from t4
 
         public int Insert(Article model)

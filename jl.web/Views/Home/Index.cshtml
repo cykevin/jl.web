@@ -14,7 +14,7 @@
         @foreach (var product in ViewBag.RecommendProducts)
         {
             <div class="col-sm-4 col-md-3">
-                <a href="#" class="thumbnail">
+                <a href="@Url.Action("detail","product",new { id = product.AutoId })" class="thumbnail">
                     <img src="@JL.Web.Helpers.ImageHelper.GenPictureUrlMiddle(product.Picture,PictureEnums.Product)" alt="">
                 </a>
             </div>
@@ -44,11 +44,11 @@
 
     <div class="row">
         @foreach (JL.Core.Models.Product product in ViewBag.ProductCenter)
-        {
+                    {
             <div class="col-sm-6 col-md-6">
                 <div class="media margin-box">
                     <div class="media-left media-img-box" style="">
-                        <a href="#" class="pull-left">
+                        <a href="@Url.Action("detail","product",new { id = product.AutoId })" class="pull-left">
                             <img src="@JL.Web.Helpers.ImageHelper.GenPictureUrlSmall(product.Picture,PictureEnums.Product)" alt="">
                         </a>
                     </div>
@@ -136,7 +136,7 @@
 <!--关于我们-->
 <div class="text-center">
     <h3 class="text-moduletitle">团队中心</h3>
-    <p>Members</p>
+    <p>Team</p>
 </div>
 
 <div class="jumbotron">
@@ -146,7 +146,7 @@
             {
                 <div class="col-sm-3 col-md-3">
                     <div class="thumbnail">
-                        <a href="#">
+                        <a href="@Url.Action("detail","member",new { id = member.AutoId })">
                             <img src="@JL.Web.Helpers.ImageHelper.GenPictureUrlMiddle(member.Picture,PictureEnums.Member)" alt="">
                         </a>
                         <div class="caption">
@@ -172,7 +172,7 @@
         {
             <div class="col-sm-3 col-md-3">
                 
-                    <a href="#" class="thumbnail">
+                    <a href="@Url.Action("detail","skincare",new { id = article.AutoId })" class="thumbnail">
                         <img src="@JL.Web.Helpers.ImageHelper.GenPictureUrlMiddle(article.Picture,PictureEnums.Article)" alt="">
                     </a>                
             </div>

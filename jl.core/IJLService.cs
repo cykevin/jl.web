@@ -14,6 +14,8 @@ namespace JL.Core
         void DeleteArticle(Article article);
         void UpdateArticle(Article model);
         Article GetArticle(int id);
+        IEnumerable<Article> GetHotestArticle(int top);
+        IEnumerable<Article> GetLatestArticle(int top);
 
         // material
         int AddMaterial(Material model);

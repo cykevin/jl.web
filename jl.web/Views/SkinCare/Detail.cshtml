@@ -1,1 +1,45 @@
-﻿
+﻿@using JL.Infrastructure
+@using MVCPaging;
+@model JL.Core.Models.Article
+
+@{
+    ViewBag.Title = "护肤小常识";
+}
+
+<div class="container">
+    <div class="col-lg-4">
+        <div class="panel panel-default">
+            <div class="panel-heading" style="background-color:#fff">
+                <h4>热门</h4>
+            </div>
+            <div class="list-group">
+                @foreach (var article in ViewBag.Hotest)
+                {
+                    string title = article.Title;
+                    <a href="@Url.Action("detail","skincare",new { id = article.AutoId })" class="list-group-item">@title.Intercept(20)</a>
+                }
+            </div>
+        </div>
+
+        <div class="panel panel-default">
+            <div class="panel-heading" style="background-color:#fff">
+                <h4>最新</h4>
+            </div>
+            <div class="list-group">
+                @foreach (var article in ViewBag.Latest)
+                {
+                    string title = article.Title;
+                    <a href="@Url.Action("detail","skincare",new { id = article.AutoId })" class="list-group-item">@title.Intercept(20)</a>
+                }
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-8">
+        <h2>@Model.Title</h2>
+        @Model.PageViews
+
+        <hr />
+        @Html.Raw(Model.Content)
+    </div>
+</div>

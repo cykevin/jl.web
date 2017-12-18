@@ -96,6 +96,17 @@ namespace JL.Core.Providers
         {
             return articleRepository.ArticlePage(pageReq);
         }
+        
+        public IEnumerable<Article> GetHotestArticle(int top)
+        {
+            return articleRepository.GetHotestArticle(top);
+        }
+
+        public IEnumerable<Article> GetLatestArticle(int top)
+        {
+            return articleRepository.GetLatestArticle(top);
+        }
+
 
         #endregion
 
