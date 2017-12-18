@@ -16,6 +16,12 @@ namespace JL.Web.Controllers
             this.jlService = jlService;
         }
 
+        [HttpGet]
+        public ActionResult Index()
+        {
+            return View();
+        }
+
         [HttpPost]
         [ValidateInput(false)]
         public ActionResult Index(Models.FranchiseeViewModel model)

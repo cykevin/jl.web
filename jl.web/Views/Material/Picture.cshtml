@@ -25,7 +25,7 @@
                     <div class="caption clearfix">
                         <h4 class="margin-0">@material.Title</h4>
                         <p>@material.Description.Intercept(20)</p>
-                        <a href="@Url.Action("download",new { id = material.AutoId })" target="_blank" class="btn btn-primary">下载</a>
+                        <a href="@Url.Action("download",new { id = material.AutoId })" target="_blank"><i class="fa fa-download"></i></a>   
                         <span class="pull-right">下载数：@material.PageViews</span>
                     </div>
                 </div>

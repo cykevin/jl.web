@@ -31,13 +31,13 @@
             <div class="form-group">
                 <label for="Name" class="col-md-2 control-label">真实姓名</label>
                 <div class="col-md-10">
-                    @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+                    @Html.TextBoxFor(m => m.Name, new { @class = "form-control" })
                 </div>
             </div>
             <div class="form-group">
                 <label for="Phone" class="col-md-2 control-label">手机号</label>
                 <div class="col-md-10">
-                    @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+                    @Html.TextBoxFor(m => m.Phone, new { @class = "form-control" })
                 </div>
             </div>
             
@@ -78,4 +78,45 @@
     </div>
 
 </div>
+}
+
+@section scripts{
+@Scripts.Render("~/bundles/jqueryval")
+
+<script type="text/javascript">
+        
+    $('#joinForm').validate({
+        rules: {
+            Name: "required",
+            Phone: "required",
+            QQ: "required",
+            Address: "required",
+        },
+        messages: {
+            Name: "请输入姓名",
+            Phone: "请输入联系电话",
+            QQ: "请输入联系QQ",
+            Address: "请输入联系地址",
+        },
+        errorElement: "em",
+        errorPlacement: function (error, element) {
+            // Add the `help-block` class to the error element
+            error.addClass("help-block");
+            if (element.prop("type") === "checkbox") {
+                error.insertAfter(element.parent("label"));
+            } else {
+                error.insertAfter(element);
+            }
+        },
+        highlight: function (element, errorClass, validClass) {
+            $(element).parents(".form-group").addClass("has-error").removeClass("has-success");
+        },
+        unhighlight: function (element, errorClass, validClass) {
+            $(element).parents(".form-group").addClass("has-success").removeClass("has-error");
+        }
+
+    });
+
+</script>    
+
 }
