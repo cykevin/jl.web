@@ -11,8 +11,9 @@ namespace JL.Web.Controllers
         private static readonly log4net.ILog logger = log4net.LogManager.GetLogger("AccountController");
 
         // GET: Account
-        public ActionResult Login()
+        public ActionResult Login(string returnUrl)
         {
+            ViewBag.ReturnUrl = returnUrl;
             return View();
         }
 

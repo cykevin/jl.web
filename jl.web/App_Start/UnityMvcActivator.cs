@@ -1,7 +1,6 @@
 using System.Linq;
 using System.Web.Mvc;
-
-using Unity.Mvc;
+using Unity.AspNet.Mvc;
 
 [assembly: WebActivatorEx.PreApplicationStartMethod(typeof(JL.Web.UnityMvcActivator), nameof(JL.Web.UnityMvcActivator.Start))]
 [assembly: WebActivatorEx.ApplicationShutdownMethod(typeof(JL.Web.UnityMvcActivator), nameof(JL.Web.UnityMvcActivator.Shutdown))]
@@ -14,7 +13,7 @@ namespace JL.Web
     public static class UnityMvcActivator
     {
         /// <summary>
-        /// Integrates Unity when the application starts.
+        /// 程序启动时执行
         /// </summary>
         public static void Start() 
         {
@@ -28,7 +27,7 @@ namespace JL.Web
         }
 
         /// <summary>
-        /// Disposes the Unity container when the application is shut down.
+        /// 程序结束时执行
         /// </summary>
         public static void Shutdown()
         {

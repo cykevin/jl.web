@@ -55,5 +55,6 @@ namespace JL.Web.Helpers
                 viewData[key ?? "categories"] = new SelectList(categories.Data,"AutoId","Name", category);
             }            
         }
+        
     }
 }

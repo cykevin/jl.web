@@ -6,7 +6,7 @@ using Unity;
 namespace JL.Web
 {
     /// <summary>
-    /// Specifies the Unity configuration for the main container.
+    /// 从配置文件中加载Unity容器
     /// </summary>
     public static class UnityConfig
     {
