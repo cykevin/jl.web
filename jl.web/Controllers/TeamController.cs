@@ -17,7 +17,7 @@ namespace JL.Web.Controllers
         }
 
         // GET: Team
-        public ActionResult Index(int id = 0)
+        public ActionResult Detail(int id = 0)
         {
             var pager = JL.Core.Common.PageReq.Create();
             var page = jlService.MemberPage(pager);
@@ -31,11 +31,18 @@ namespace JL.Web.Controllers
             return View(page.Data);
         }
 
-        public ActionResult Detail(int id = 0)
+        public ActionResult Index(int id = 0)
         {
-            var member = jlService.GetMember(id);
+            var pager = JL.Core.Common.PageReq.Create();
+            var page = jlService.MemberPage(pager);
 
-            return View(member);
+            if (id > 0)
+            {
+                var member = jlService.GetMember(id);
+                ViewBag.member = member;
+            }
+
+            return View(page.Data);
         }
     }
 }

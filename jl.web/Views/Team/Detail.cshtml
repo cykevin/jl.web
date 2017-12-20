@@ -1,1 +1,131 @@
 ﻿
+@model IEnumerable<JL.Core.Models.Member>
+@{
+    Layout = "~/Views/Shared/_LayoutNB.cshtml";
+}
+
+<div class="swiper-container">
+    <div class="swiper-wrapper">
+        @foreach (var member in Model)
+            {
+            <div class="swiper-slide">
+                <a href="@Url.Action("detail","team",new { id = member.AutoId })" class="thumbnail">
+                    <img src="@JL.Web.Helpers.ImageHelper.GenPictureUrlMiddle(member.Picture, PictureEnums.Member)" class="img-responsive" alt="@member.NickName">
+                </a>
+                <div class="carousel-caption">
+                    <h3>@member.NickName</h3>
+                    <p>@member.Description</p>
+                </div>
+            </div>
+        }
+    </div>
+    <div class="swiper-pagination">
+
+    </div>
+    <div class="swiper-button-prev"></div>
+    <div class="swiper-button-next"></div>
+
+    <div class="swiper-scrollbar"></div>
+</div>
+
+<div class="container">
+    @if (ViewBag.member != null)
+    {
+        JL.Core.Models.Member m = ViewBag.member;
+        <div class="row">
+            <div class="col-lg-6">
+
+                <a href="@Url.Action("index", "member", new {id=m.AutoId})">
+                    <img class="img-responsive" src="@JL.Web.Helpers.ImageHelper.GenPictureUrlBig(m.Picture,PictureEnums.Member)" />
+                </a>
+
+                <h4>基本资料</h4>
+
+                <ul class="list-group">
+                    <li class="list-group-item border-none">
+                        <span class="fa fa-user" aria-hidden="true"></span>
+                        @m.NickName
+                    </li>
+                    <li class="list-group-item border-none">
+                        <span class="fa fa-qq" aria-hidden="true"></span>
+                        @m.QQ
+                    </li>
+                    <li class="list-group-item border-none">
+                        <span class="fa fa-envelope" aria-hidden="true"></span>
+                        @m.Email
+                    </li>
+                    <li class="list-group-item border-none">
+                        <span class="fa fa-phone" aria-hidden="true"></span>
+                        @m.Phone
+                    </li>
+                    <li class="list-group-item border-none">
+                        <span class="fa fa-home" aria-hidden="true"></span>
+                        @m.Address
+                    </li>
+
+                </ul>
+
+
+            </div>
+            <div class="col-lg-6">
+                @Html.Raw(ViewBag.member.Words)
+            </div>
+        </div>
+
+        <div class="row">
+
+        </div>
+    }
+
+</div>
+
+@section styles{
+    @Styles.Render("~/content/swiper/css/swiper.css")
+    @Styles.Render("~/content/font-awesome/css/font-awesome.css")
+
+    <style type="text/css">
+        .swiper-container {
+            width: 100%;
+            height: 300px;
+            margin: 20px auto;
+        }
+
+        .swiper-slide {
+            text-align: center;
+            font-size: 18px;
+            background: #fff;
+            /* Center slide text vertically */
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: -webkit-flex;
+            display: flex;
+            -webkit-box-pack: center;
+            -ms-flex-pack: center;
+            -webkit-justify-content: center;
+            justify-content: center;
+            -webkit-box-align: center;
+            -ms-flex-align: center;
+            -webkit-align-items: center;
+            align-items: center;
+        }
+    </style>
+}
+@section scripts{
+    @Scripts.Render("~/Content/swiper/js/swiper.jquery.min.js")
+
+    <script type="text/javascript">
+        var mySwiper=new Swiper('.swiper-container',{
+            direction:'horizontal',
+            loop:true,
+            // 如果需要分页器
+            pagination: '.swiper-pagination',
+
+            // 如果需要前进后退按钮
+            nextButton: '.swiper-button-next',
+            prevButton: '.swiper-button-prev',
+            slidesPerView: 5,
+            // 如果需要滚动条
+            scrollbar: '.swiper-scrollbar'
+        });
+    </script>
+}

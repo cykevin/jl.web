@@ -8,7 +8,7 @@
             @foreach (var member in Model)
             {
                 <div class="swiper-slide">
-                    <a href="@Url.Action("index","team",new { id = member.AutoId })" class="thumbnail">
+                    <a href="@Url.Action("detail","team",new { id = member.AutoId })" class="thumbnail">
                         <img src="@JL.Web.Helpers.ImageHelper.GenPictureUrlMiddle(member.Picture, PictureEnums.Member)" class="img-responsive" alt="@member.NickName">
                     </a>
                     <div class="carousel-caption">
