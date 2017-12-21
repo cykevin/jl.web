@@ -140,24 +140,28 @@
 </div>
 
 <div class="jumbotron">
-    <div class="container">        
-        <div class="row">
-            @foreach (JL.Core.Models.Member member in ViewBag.Members)
+    <div id="teamcontainer" class="swiper-container container">
+    <div class="swiper-wrapper">
+        @{
+            foreach (JL.Core.Models.Member member in ViewBag.Members)
             {
-                <div class="col-sm-3 col-md-3">
-                    <div class="thumbnail">
-                        <a href="@Url.Action("detail","team",new { id = member.AutoId })">
-                            <img src="@JL.Web.Helpers.ImageHelper.GenPictureUrlMiddle(member.Picture,PictureEnums.Member)" alt="">
-                        </a>
-                        <div class="caption">
-                            <h4 class="text-moduletitle text-center">@member.NickName</h4>
-                            <p class="text-center">@member.Description.Intercept(20)</p>
-                        </div>
-                    </div>
+            <div class="swiper-slide">
+                <img src="@JL.Web.Helpers.ImageHelper.GenPictureUrlMiddle(member.Picture,PictureEnums.Member)" alt="@member.NickName">
+                <div class="carousel-caption">
+                    <h3>@member.NickName</h3>
+                    <p>@member.Description.Intercept(20)</p>
                 </div>
+            </div>
             }
-        </div>
+        }
     </div>
+
+    <div class="swiper-pagination">
+
+    </div>
+    <div class="swiper-button-prev"></div>
+    <div class="swiper-button-next"></div>
+</div>
 </div>
 
 <!--资讯中心-->
@@ -209,4 +213,17 @@
             padding-bottom:28%;
         }
     </style>
+}
+
+@section scripts{
+    <script type="text/javascript">
+        var teamSwiper = new Swiper('#teamcontainer', {
+            loop: true,
+            slidesPerView: 5,
+            pagination: '#teamcontainer .swiper-pagination',
+            nextButton: '#teamcontainer .swiper-button-next',
+            prevButton: '#teamcontainer .swiper-button-prev'
+        });
+    </script>
+ 
 }
