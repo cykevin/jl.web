@@ -1,4 +1,5 @@
 ﻿@using JL.Infrastructure;
+@using JL.Web.Helpers;
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,9 +10,11 @@
     <meta name="description" content="@JL.Web.Helpers.SettingHelper.GetDescription()" />
     <meta name="Keywords" content="@JL.Web.Helpers.SettingHelper.GetKey()" />
     <title>@ViewBag.Title </title>
-    @Styles.Render("~/Content/font-awesome/css/font-awesome.min.css")    
-    @Styles.Render("~/Content/css")    
-    @Styles.Render("~/content/swiper/css/swiper.css")
+    @StylesHelper.Render("~/static/Content/font-awesome/css/font")
+    @StylesHelper.Render("~/Static/Content/bs")
+    @StylesHelper.Render("~/Static/Content/site")    
+    @StylesHelper.Render("~/Content/swiper")
+
     @RenderSection("styles", required: false)
 
 </head>
@@ -148,16 +151,16 @@
         </div>
     </div>
 
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
-    @Scripts.Render("~/Content/swiper/js/swiper.jquery.min.js")
+    @ScriptsHelper.Render("~/bundles/jquery")
+    @ScriptsHelper.Render("~/bundles/bootstrap")
+    @ScriptsHelper.Render("~/bundles/swiper")
 
     <script type="text/javascript">
-        var bannerSwiper = new Swiper('.swiper-container', {
+        var bannerSwiper = new Swiper('#banner-swiper-container', {
             loop:true,
-            pagination: '.swiper-pagination',
-            nextButton: '.swiper-button-next',
-            prevButton: '.swiper-button-prev'
+            pagination: '#banner-pagination',
+            nextButton: '#banner-next',
+            prevButton: '#banner-prev'
         });
     </script>
     

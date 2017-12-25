@@ -73,8 +73,8 @@
 
 
 @section styles{
-    @Styles.Render("~/Content/datepicker")
-    @Styles.Render("~/Content/fileinput")
+@Styles.Render("~/Content/datepicker")
+@Styles.Render("~/Static/Content/bootstrap-fileinput/fileinput")
 <style type="text/css">
     .file-preview-image {
         width: 100%;
@@ -82,11 +82,12 @@
 </style>
 }
 @section scripts{
-    @Scripts.Render("~/bundles/ueditor/")
-    @Scripts.Render("~/bundles/datepicker/")
-    @Scripts.Render("~/bundles/fileinput")
+@Scripts.Render("~/Static/Content/ueditor/ue")
 
-    @Scripts.Render("~/bundles/jqueryval")
+@Scripts.Render("~/bundles/datepicker")
+@Scripts.Render("~/bundles/fileinput")
+
+@Scripts.Render("~/bundles/jqueryval")
 
     <script type="text/javascript">
 

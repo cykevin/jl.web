@@ -75,15 +75,16 @@
 
 
 @section styles{
-    @Styles.Render("~/Content/datepicker")
-    @Styles.Render("~/Content/fileinput")
+@Styles.Render("~/Static/Content/bootstrap-datetimepicker/css/bootstrap-datetimepicker")
+@Styles.Render("~/Static/Content/bootstrap-fileinput/fileinput")
 }
 @section scripts{
-    @Scripts.Render("~/bundles/ueditor/")
-    @Scripts.Render("~/bundles/datepicker/")
-    @Scripts.Render("~/bundles/fileinput")
+@Scripts.Render("~/Static/Content/ueditor/ue")
 
-    @Scripts.Render("~/bundles/jqueryval")
+@Scripts.Render("~/bundles/datepicker")
+@Scripts.Render("~/bundles/fileinput")
+
+@Scripts.Render("~/bundles/jqueryval")
 
     <script type="text/javascript">
 
@@ -106,11 +107,11 @@
                 showUpload: false,
                 showCaption: false,
                 browseClass: "btn btn-primary",
-                previewFileIcon: "<i class='glyphicon glyphicon-king'></i>",
-                uploadUrl: '/material/upload',
-                uploadExtraData: function () {
-                    return { fileType: 2 };
-                }
+                previewFileIcon: "<i class='glyphicon glyphicon-king'></i>"
+                //uploadUrl: '/material/upload',
+                //uploadExtraData: function () {
+                //    return { fileType: 2 };
+                //}
             });
             $('#fileInput').on('fileuploaded', function (event, data, previewId, index) {
                 var form = data.form, files = data.files, extra = data.extra,
@@ -127,11 +128,11 @@
                 ignore:[],
                 rules: {
                     Title: "required",
-                    FileName:"required"
+                    fileInput:"required"
                 },
                 messages: {
                     Title: "请输入素材名称",
-                    FileName:"请选择文件"
+                    fileInput: "请选择文件"
                 },
                 errorElement: "em",
                 errorPlacement: function (error, element) {

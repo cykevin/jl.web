@@ -139,14 +139,16 @@
     <p>Team</p>
 </div>
 
-<div class="jumbotron">
-    <div id="teamcontainer" class="swiper-container container">
+<div class="jumbotron team">
+    <div class="swiper-container container teamcontainer">
     <div class="swiper-wrapper">
         @{
             foreach (JL.Core.Models.Member member in ViewBag.Members)
             {
             <div class="swiper-slide">
-                <img src="@JL.Web.Helpers.ImageHelper.GenPictureUrlMiddle(member.Picture,PictureEnums.Member)" alt="@member.NickName">
+                <a href="@Url.Action("detail","team",new { id = member.AutoId })">
+                    <img src="@JL.Web.Helpers.ImageHelper.GenPictureUrlMiddle(member.Picture,PictureEnums.Member)" alt="@member.NickName">
+                </a>
                 <div class="carousel-caption">
                     <h3>@member.NickName</h3>
                     <p>@member.Description.Intercept(20)</p>
@@ -156,12 +158,10 @@
         }
     </div>
 
-    <div class="swiper-pagination">
+    <div class="swiper-pagination" id="teampagination">
 
     </div>
-    <div class="swiper-button-prev"></div>
-    <div class="swiper-button-next"></div>
-</div>
+    </div>
 </div>
 
 <!--资讯中心-->
@@ -217,12 +217,10 @@
 
 @section scripts{
     <script type="text/javascript">
-        var teamSwiper = new Swiper('#teamcontainer', {
+        var teamSwiper = new Swiper('.team .swiper-container', {
             loop: true,
-            slidesPerView: 5,
-            pagination: '#teamcontainer .swiper-pagination',
-            nextButton: '#teamcontainer .swiper-button-next',
-            prevButton: '#teamcontainer .swiper-button-prev'
+            slidesPerView: 4,
+            pagination: '#teampagination'
         });
     </script>
  

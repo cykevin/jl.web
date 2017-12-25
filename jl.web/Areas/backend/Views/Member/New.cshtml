@@ -116,8 +116,8 @@
 
 @section styles{
     @Styles.Render("~/Content/datepicker")
-@Styles.Render("~/Content/fileinput")
-    @Styles.Render("~/Content/cropperjs-1.1.3/cropper.css")
+    @Styles.Render("~/Content/fileinput")
+    @Styles.Render("~/Static/Content/cropper")
 <style type="text/css">    
 .img-container,
 .preview {
@@ -146,11 +146,11 @@
 }
 
 @section scripts{
-@Scripts.Render("~/bundles/ueditor/")
-    @Scripts.Render("~/bundles/datepicker/")
+@Scripts.Render("~/Static/Content/ueditor/ue")
+    @Scripts.Render("~/bundles/datepicker")
     @Scripts.Render("~/bundles/jqueryval")
-@Scripts.Render("~/bundles/fileinput")
-    @Scripts.Render("~/Content/cropperjs-1.1.3/cropper.js")
+    @Scripts.Render("~/bundles/fileinput")
+    @Scripts.Render("~/bundles/cropper")
 
     <script type="text/javascript">
 

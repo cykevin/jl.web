@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "jl.infrastructure", "jl.inf
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "jl.core.repositories", "jl.core.repositories\jl.core.repositories.csproj", "{21D9E691-96B1-457B-BA70-8AB0CF679E03}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "static.jl.web", "static.jl.web\static.jl.web.csproj", "{5E349F1E-C20B-4066-8D9C-01AA441952F7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{21D9E691-96B1-457B-BA70-8AB0CF679E03}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{21D9E691-96B1-457B-BA70-8AB0CF679E03}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{21D9E691-96B1-457B-BA70-8AB0CF679E03}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5E349F1E-C20B-4066-8D9C-01AA441952F7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5E349F1E-C20B-4066-8D9C-01AA441952F7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5E349F1E-C20B-4066-8D9C-01AA441952F7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5E349F1E-C20B-4066-8D9C-01AA441952F7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

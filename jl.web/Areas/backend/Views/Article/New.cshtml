@@ -1,4 +1,5 @@
-﻿@model JL.Web.Areas.backend.Models.ArticleModel
+﻿@using JL.Web.Helpers;
+@model JL.Web.Areas.backend.Models.ArticleModel
 @{
     ViewBag.Title = "发布文章";
 }
@@ -73,12 +74,13 @@
 
 
 @section styles{
-    @Styles.Render("~/Content/datepicker")
-    @Styles.Render("~/Content/fileinput")
+    @Styles.Render("~/Static/Content/bootstrap-datetimepicker/css/bootstrap-datetimepicker")
+    @Styles.Render("~/Static/Content/bootstrap-fileinput/fileinput")
 }
 @section scripts{
-    @Scripts.Render("~/bundles/ueditor/")
-    @Scripts.Render("~/bundles/datepicker/")
+    @ScriptsHelper.Render("~/Static/Content/ueditor/ue")
+
+    @Scripts.Render("~/bundles/datepicker")
     @Scripts.Render("~/bundles/fileinput")
 
     @Scripts.Render("~/bundles/jqueryval")

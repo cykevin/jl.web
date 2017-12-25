@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+﻿@using JL.Web.Helpers
+
+<!DOCTYPE html>
 <html lang="zh">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -6,18 +8,14 @@
     <title>@ViewBag.Title - chenye</title>
     <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
     <meta name="viewport" content="width=device-width" />
-
-    @*@Styles.Render("~/Content/sbadmin2/bower_components/bootstrap/dist/css/bootstrap.min.css")*@
-    @Styles.Render("~/Content/bootstrap/css/bootstrap.css")
-    @Styles.Render("~/Content/metisMenu/metisMenu.css")
-    @Styles.Render("~/Content/sbadmin2/css/sb-admin-2.css")
-    @Styles.Render("~/Content/morrisjs/morris.css")
-    @Styles.Render("~/Content/font-awesome/css/font-awesome.min.css")   
+    @StylesHelper.Render("~/Static/Content/bs")
+    @StylesHelper.Render("~/Content/backend")
+    @StylesHelper.Render("~/static/Content/font-awesome/css/font")
+    
     @RenderSection("styles", required: false)
 </head>
 
 <body>
-
     <div id="wrapper">
         <!-- Navigation -->
         <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
@@ -179,10 +177,8 @@
     </div>
 
     <!-- jQuery -->
-    @Scripts.Render("~/Content/jquery/jquery.js")
-    @Scripts.Render("~/Content/bootstrap/js/bootstrap.js")
-    @Scripts.Render("~/Content/metisMenu/metisMenu.js")
-    @Scripts.Render("~/Content/sbadmin2/js/sb-admin-2.js")
+    @ScriptsHelper.Render("~/bundles/backend")
+
     @RenderSection("scripts", required: false)
 </body>
 

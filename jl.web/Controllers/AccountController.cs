@@ -30,7 +30,13 @@ namespace JL.Web.Controllers
                 {
                     FormsAuthentication.SetAuthCookie(model.UserName, model.RememberMe);
 
-                    return RedirectToLocal(returnUrl);
+                    if (!string.IsNullOrEmpty(returnUrl))
+                        return RedirectToLocal(returnUrl);
+
+                    if (Roles.IsUserInRole(model.UserName, JL.Core.Consts.Role_Admin))
+                        return Redirect("~/backend");
+
+                    return Redirect("~/");
                 }
             }
 

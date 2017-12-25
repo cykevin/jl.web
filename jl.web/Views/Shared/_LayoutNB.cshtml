@@ -1,4 +1,5 @@
-﻿@using JL.Infrastructure;
+﻿@using JL.Web.Helpers;
+@using JL.Infrastructure;
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,8 +10,9 @@
     <meta name="description" content="@JL.Web.Helpers.SettingHelper.GetDescription()" />
     <meta name="Keywords" content="@JL.Web.Helpers.SettingHelper.GetKey()" />
     <title>@ViewBag.Title </title>
-    @Styles.Render("~/Content/css")
-    @Styles.Render("~/Content/font-awesome/css/font-awesome.min.css")
+    @StylesHelper.Render("~/static/Content/font-awesome/css/font")
+    @StylesHelper.Render("~/Static/Content/bs")
+    @StylesHelper.Render("~/Static/Content/site")
     
     @RenderSection("styles", required: false)
 </head>
@@ -146,8 +148,9 @@
         </div>
     </div>
 
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
+    @ScriptsHelper.Render("~/bundles/jquery")
+    @ScriptsHelper.Render("~/bundles/bootstrap")
+
     @RenderSection("scripts", required: false)
 </body>
 </html>

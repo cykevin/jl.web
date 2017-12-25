@@ -1,4 +1,4 @@
-﻿
+﻿@using JL.Web.Helpers;
 @model IEnumerable<JL.Core.Models.Member>
 @{
     Layout = "~/Views/Shared/_LayoutNB.cshtml";
@@ -80,8 +80,8 @@
 </div>
 
 @section styles{
-    @Styles.Render("~/content/swiper/css/swiper.css")
-    @Styles.Render("~/content/font-awesome/css/font-awesome.css")
+@StylesHelper.Render("~/bnudles/swipercss")
+@StylesHelper.Render("~/Content/font-awesome/css/font")
 
     <style type="text/css">
         .swiper-container {
@@ -111,7 +111,7 @@
     </style>
 }
 @section scripts{
-    @Scripts.Render("~/Content/swiper/js/swiper.jquery.min.js")
+@ScriptsHelper.Render("~/bundles/swiperjs")
 
     <script type="text/javascript">
         var mySwiper=new Swiper('.swiper-container',{

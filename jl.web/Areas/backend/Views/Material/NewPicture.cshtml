@@ -74,15 +74,16 @@
 
 
 @section styles{
-    @Styles.Render("~/Content/datepicker")
-    @Styles.Render("~/Content/fileinput")
+@Styles.Render("~/Static/Content/bootstrap-datetimepicker/css/bootstrap-datetimepicker")
+@Styles.Render("~/Static/Content/bootstrap-fileinput/fileinput")
 }
 @section scripts{
-    @Scripts.Render("~/bundles/ueditor/")
-    @Scripts.Render("~/bundles/datepicker/")
-    @Scripts.Render("~/bundles/fileinput")
+@Scripts.Render("~/Static/Content/ueditor/ue")
 
-    @Scripts.Render("~/bundles/jqueryval")
+@Scripts.Render("~/bundles/datepicker")
+@Scripts.Render("~/bundles/fileinput")
+
+@Scripts.Render("~/bundles/jqueryval")
 
     <script type="text/javascript">
 
@@ -126,7 +127,7 @@
                 ignore:[],
                 rules: {
                     Title: "required",
-                    FileName:"required"
+                    fileInput:"required"
                 },
                 messages: {
                     Title: "请输入素材名称",

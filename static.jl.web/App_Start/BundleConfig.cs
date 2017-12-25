@@ -52,8 +52,8 @@ namespace JL.Web
                 "~/static/Content/font-awesome/css/font-awesome.min.css"));
 
             // bootstrap-fileinput
-            bundles.Add(new StyleBundle("~/Content/fileinput",
-                domain + "Content/fileinput").Include(
+            bundles.Add(new StyleBundle("~/Static/Content/bootstrap-fileinput/fileinput",
+                domain + "Static/Content/bootstrap-fileinput/fileinput").Include(
                 "~/Static/Content/bootstrap-fileinput/fileinput.css"));
 
             bundles.Add(new ScriptBundle("~/bundles/fileinput",
@@ -69,9 +69,9 @@ namespace JL.Web
                 "~/Static/Content/ueditor/ueditor.all.min.js",
                 "~/Static/Content/ueditor/lang/zh-cn/zh-cn.js"));
 
-            // datapicker
-            bundles.Add(new StyleBundle("~/Content/datepicker",
-                domain + "/Static/Content/bootstrap-datetimepicker/css/bootstrap-datetimepicker.css").Include(
+            // datepicker
+            bundles.Add(new StyleBundle("~/Static/Content/bootstrap-datetimepicker/css/bootstrap-datetimepicker",
+                domain + "Static/Content/bootstrap-datetimepicker/css/bootstrap-datetimepicker").Include(
                 "~/Static/Content/bootstrap-datetimepicker/css/bootstrap-datetimepicker.css"));
 
             bundles.Add(new ScriptBundle("~/bundles/datepicker",
@@ -93,7 +93,7 @@ namespace JL.Web
                 "~/Static/Content/metisMenu/metisMenu.js",
                 "~/Static/Content/sbadmin2/js/sb-admin-2.js"));
 
-            // cropper
+            // cropper/Content/cropperjs-1.1.3/cropper.css
             bundles.Add(new StyleBundle("~/Static/Content/cropper",
                domain + "Static/Content/cropper").Include(
                "~/Static/Content/cropperjs-1.1.3/cropper.css"));
@@ -102,7 +102,7 @@ namespace JL.Web
                 "~/Static/Content/cropperjs-1.1.3/cropper.js"));
 
             BundleTable.EnableOptimizations = true;
-            BundleTable.Bundles.UseCdn = true;
+            bundles.UseCdn = true;
         }
     }
 }
