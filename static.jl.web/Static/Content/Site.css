@@ -1,0 +1,132 @@
+﻿/*header*/
+.qrcodes img{
+    height:80px;
+}
+
+/*menu*/
+.nav-line {
+    border-top: 1px solid #d9d9d9;
+    border-bottom: 1px solid #d9d9d9;
+}
+
+.menu-nav > li {
+    height: inherit;
+    position: relative;
+    padding: 0 !important;
+    vertical-align: top;
+}
+
+    .menu-nav > li > a:after {
+        content: "";
+        height: 2px;
+        width: 100%;
+        background-color: #42BCDB;/*#2BA1F3*/
+        display: block;
+        opacity: 0;
+        transition: all 0.3s;
+    }
+    .menu-nav > li.active > a:after {
+        opacity: 1;
+    }
+
+    .menu-nav > li:hover a:after {
+        opacity: 1;
+    }
+
+    .menu-nav > li > a span {
+        padding: 8px 15px;
+        line-height: 50px;
+    }
+
+    .menu-nav > li > a {
+        padding: 0;
+    }
+
+    .menu-nav > li > a {
+        color: rgb(1, 1, 1);
+        font-size: 14px;
+    }
+
+/*footer*/
+.icon-modal {
+    display: inline-block;
+    vertical-align: top;
+    background-image: url(../images/login-icons.png);
+    background-size: 200px 200px;
+    background-repeat: no-repeat;
+}
+.icon-login-qq {
+    background-position: 4px -39px;
+}
+.icon-login-wx {
+    background-position: -2px -97px;
+}
+.icon-login-wb {
+    background-position: -2px -147px;
+}
+.icon-login-zfb {
+    background-position: -67px -40px;
+}
+.third-box {
+    margin:20px 0px;
+}
+.third-box i {
+    width: 46px;
+    height: 38px;
+}
+.third-box a {
+    margin-right:40px;
+}
+
+.footer {
+    border-top: 1px solid #d9d9d9;
+}
+
+.col-no-padding div.col-sm-3, .col-no-padding div.col-md-3 {
+    padding-left: 0px;
+    padding-right: 0px;
+}
+
+/**/
+.margin-b-15{
+    margin-bottom:15px;
+}
+.margin-b-2 {
+    margin-bottom: 2px;
+}
+.margin-0{
+    margin:0;
+}
+
+.border-none {
+    border:none;
+}
+/*text*/
+.text-category {
+    color: #42BCDB
+}
+
+.swiper-container {
+    width: 100%;
+    height: 300px;
+    margin: 20px auto;
+}
+
+.swiper-slide {
+    text-align: center;
+    font-size: 18px;
+    background: #fff;
+    /* Center slide text vertically */
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    -webkit-justify-content: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    -webkit-align-items: center;
+    align-items: center;
+}
