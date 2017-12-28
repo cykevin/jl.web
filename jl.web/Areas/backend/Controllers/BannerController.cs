@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using JL.Infrastructure;
 
 namespace JL.Web.Areas.backend.Controllers
 {
@@ -29,7 +30,7 @@ namespace JL.Web.Areas.backend.Controllers
 
             // search page 
             var data = jlService.BannerPage(pager);
-            
+            ViewBag.ReturnUrl = Request.Url.PathAndQuery;
             return View(data);
         }
 
@@ -117,8 +118,28 @@ namespace JL.Web.Areas.backend.Controllers
 
             return View(model);
         }
-             
 
+        public ActionResult Delete(string banners, string returnUrl)
+        {
+            var idArray = banners.Split(',')
+                .Where(a => !string.IsNullOrEmpty(a))
+                .Select(a => a.ToInt32()).Distinct();
+
+            foreach (var id in idArray)
+            {
+                var article = jlService.GetBanner(id);
+                if (article != null)
+                {
+                    jlService.DeleteBanner(id);
+                }
+            }
+
+            if (Url.IsLocalUrl(returnUrl))
+            {
+                return Redirect(returnUrl);
+            }
+            return RedirectToAction("index");
+        }
 
     }
 }

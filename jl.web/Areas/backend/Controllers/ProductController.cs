@@ -9,6 +9,7 @@ using System.Web.Mvc;
 using JL.Web.Helpers;
 using JL.Web.Common;
 using JL.Core.Common;
+using JL.Infrastructure;
 
 namespace JL.Web.Areas.backend.Controllers
 {
@@ -35,6 +36,7 @@ namespace JL.Web.Areas.backend.Controllers
             var data = jlService.ProductPage(pager);
             new ViewDataHelper(jlService).InitializeCategories(ViewData, 0, "categoryid");
             ViewBag.productQuery = searchTo;
+            ViewBag.ReturnUrl = Request.Url.PathAndQuery;
             return View(data);
         }
 
@@ -152,6 +154,28 @@ namespace JL.Web.Areas.backend.Controllers
         public ActionResult Categories()
         {
             return View();
+        }
+        
+        public ActionResult Delete(string products, string returnUrl)
+        {
+            var idArray = products.Split(',')
+                .Where(a => !string.IsNullOrEmpty(a))
+                .Select(a => a.ToInt32()).Distinct();
+
+            foreach (var id in idArray)
+            {
+                var article = jlService.GetProduct(id);
+                if (article != null)
+                {
+                    jlService.DeleteProduct(article);
+                }
+            }
+
+            if (Url.IsLocalUrl(returnUrl))
+            {
+                return Redirect(returnUrl);
+            }
+            return RedirectToAction("index");
         }
     }
 }

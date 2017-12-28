@@ -172,5 +172,27 @@ namespace JL.Web.Areas.backend.Controllers
 
             return View(model);
         }
+
+        public ActionResult Delete(string members, string returnUrl)
+        {
+            var idArray = members.Split(',')
+                .Where(a => !string.IsNullOrEmpty(a))
+                .Select(a => a.ToInt32()).Distinct();
+
+            foreach (var id in idArray)
+            {
+                var member = jlService.GetMember(id);
+                if (member != null)
+                {
+                    jlService.DeleteMember(member);
+                }
+            }
+
+            if (Url.IsLocalUrl(returnUrl))
+            {
+                return Redirect(returnUrl);
+            }
+            return RedirectToAction("index");
+        }
     }
 }
