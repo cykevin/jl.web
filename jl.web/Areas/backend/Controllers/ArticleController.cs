@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using JL.Infrastructure;
 
 namespace JL.Web.Areas.backend.Controllers
 {
@@ -33,6 +34,7 @@ namespace JL.Web.Areas.backend.Controllers
             
             var data = jlService.ArticlePage(pager);
             ViewBag.articleQuery = filter;
+            ViewBag.ReturnUrl=Request.Url.PathAndQuery;
             return View(data);
         }
 
@@ -113,5 +115,28 @@ namespace JL.Web.Areas.backend.Controllers
             }
             return View(model);
         }
+
+        public ActionResult Delete(string articles, string returnUrl)
+        {
+            var idArray = articles.Split(',')
+                .Where(a => !string.IsNullOrEmpty(a))
+                .Select(a => a.ToInt32()).Distinct();
+
+            foreach (var id in idArray)
+            {
+                var article = jlService.GetArticle(id);
+                if (article != null)
+                {
+                    jlService.DeleteArticle(article);
+                }
+            }
+
+            if (Url.IsLocalUrl(returnUrl))
+            {
+                return Redirect(returnUrl);
+            }
+            return RedirectToAction("index");
+        }
+
     }
 }

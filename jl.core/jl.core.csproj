@@ -72,6 +72,7 @@
     <Compile Include="Repositories\IMemberRepository.cs" />
     <Compile Include="Repositories\IProductRepository.cs" />
     <Compile Include="Repositories\IUserRepository.cs" />
+    <Compile Include="WechatMessage\WXTemplate.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\jl.infrastructure\jl.infrastructure.csproj">

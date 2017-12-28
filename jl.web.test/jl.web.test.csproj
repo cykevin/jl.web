@@ -87,6 +87,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\jl.infrastructure\jl.infrastructure.csproj">
+      <Project>{208c9f8d-b9ee-4bbb-b4a8-454caf09bd95}</Project>
+      <Name>jl.infrastructure</Name>
+    </ProjectReference>
     <ProjectReference Include="..\jl.web\jl.web.csproj">
       <Project>{c80ca482-46f6-4485-a026-88c26b90625e}</Project>
       <Name>jl.web</Name>

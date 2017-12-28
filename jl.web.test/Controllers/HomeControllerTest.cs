@@ -5,7 +5,7 @@ using System.Text;
 using System.Web.Mvc;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using jl.web;
-using jl.web.Controllers;
+using JL.Infrastructure.WechatMessage;
 
 namespace jl.web.test.Controllers
 {
@@ -13,42 +13,17 @@ namespace jl.web.test.Controllers
     public class HomeControllerTest
     {
         [TestMethod]
-        public void Index()
+        public void TemplateTest()
         {
-            // Arrange
-            HomeController controller = new HomeController();
+            WXTemplateInfo wxinfo = new WXTemplateInfo();
+            wxinfo.TemplateId = "bmdLCp745NMy5tV_b3VyG9tia05Iv-IPwHKT0XC8FJA";
+            wxinfo.Items.Add(new WXTemplateItem { Name = "first" });
+            wxinfo.Items.Add(new WXTemplateItem { Name = "keyword1" });
+            wxinfo.Items.Add(new WXTemplateItem { Name = "keyword2" });
+            wxinfo.Items.Add(new WXTemplateItem { Name = "keyword3" });
+            wxinfo.Items.Add(new WXTemplateItem { Name = "remark" });
 
-            // Act
-            ViewResult result = controller.Index() as ViewResult;
-
-            // Assert
-            Assert.IsNotNull(result);
-        }
-
-        [TestMethod]
-        public void About()
-        {
-            // Arrange
-            HomeController controller = new HomeController();
-
-            // Act
-            ViewResult result = controller.About() as ViewResult;
-
-            // Assert
-            Assert.AreEqual("Your application description page.", result.ViewBag.Message);
-        }
-
-        [TestMethod]
-        public void Contact()
-        {
-            // Arrange
-            HomeController controller = new HomeController();
-
-            // Act
-            ViewResult result = controller.Contact() as ViewResult;
-
-            // Assert
-            Assert.IsNotNull(result);
+            wxinfo.SaveXml();
         }
     }
 }
