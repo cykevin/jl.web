@@ -80,8 +80,8 @@
 </div>
 
 @section styles{
-@StylesHelper.Render("~/bnudles/swipercss")
-@StylesHelper.Render("~/Content/font-awesome")
+@StylesHelper.Render("~/Content/swiper")
+@StylesHelper.Render("~/static/Content/font-awesome/css/font")
     <style type="text/css">
         .swiper-container {
             width: 100%;
@@ -110,7 +110,7 @@
     </style>
 }
 @section scripts{
-@ScriptsHelper.Render("~/bundles/swiperjs")
+@ScriptsHelper.Render("~/bundles/swiper")
 
     <script type="text/javascript">
         var mySwiper=new Swiper('.swiper-container',{

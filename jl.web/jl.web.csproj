@@ -186,6 +186,7 @@
     <Compile Include="Areas\backend\Models\SettingModel.cs" />
     <Compile Include="Common\Enums.cs" />
     <Compile Include="Common\ResultObject.cs" />
+    <Compile Include="Controllers\ExtLoginController.cs" />
     <Compile Include="Static\Content\ueditor\net\App_Code\Config.cs" />
     <Compile Include="Static\Content\ueditor\net\App_Code\ConfigHandler.cs" />
     <Compile Include="Static\Content\ueditor\net\App_Code\CrawlerHandler.cs" />
@@ -1088,6 +1089,7 @@
     <Folder Include="Areas\agent\Models\" />
     <Folder Include="Areas\agent\Views\Shared\" />
     <Folder Include="Views\Article\" />
+    <Folder Include="Views\ExtLogin\" />
     <Folder Include="Views\Hi\" />
   </ItemGroup>
   <ItemGroup>

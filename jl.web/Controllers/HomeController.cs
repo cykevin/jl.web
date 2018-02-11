@@ -45,7 +45,9 @@ namespace JL.Web.Controllers
             // 资讯中心
             ArticleFilter af = new ArticleFilter();
             af.Status = Consts.ArticleStatus_Published;
-            var articles = jlService.ArticlePage(PageReq<ArticleFilter>.Create(af, pageSize: 8));
+            var articlePager = PageReq<ArticleFilter>.Create(af, pageSize: 8);
+            articlePager.OrderBy = " order by addtime desc ";
+            var articles = jlService.ArticlePage(articlePager);
             ViewBag.Articles = articles.Data;
 
             return View();

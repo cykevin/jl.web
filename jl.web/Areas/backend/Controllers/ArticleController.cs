@@ -30,7 +30,7 @@ namespace JL.Web.Areas.backend.Controllers
             filter.Title = model.Title;
             filter.Status = Consts.ArticleStatus_All;
             var pager = PageReq<ArticleFilter>.Create(filter, page);
-            pager.OrderBy = "addtime";
+            pager.OrderBy = "order by addtime";
             
             var data = jlService.ArticlePage(pager);
             ViewBag.articleQuery = filter;

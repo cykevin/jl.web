@@ -17,9 +17,11 @@
                     </a>
 
                     <div class="media-body">
-                        <h4 class="media-heading">
-                            @article.Title
-                        </h4>
+                        <a href="@Url.Action("detail","skincare",new { id = article.AutoId })">
+                            <h4 class="media-heading">
+                                @article.Title
+                            </h4>
+                        </a>
                         <hr />
                         <p>
                             @{

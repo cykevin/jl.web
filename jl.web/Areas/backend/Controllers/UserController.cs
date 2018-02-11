@@ -133,7 +133,7 @@ namespace JL.Web.Areas.backend.Controllers
             JL.Core.Common.PageReq req = new JL.Core.Common.PageReq();
             req.PageIndex = 1;
             req.PageSize = 5;
-            req.OrderBy = "addtime asc";
+            req.OrderBy = "order by addtime asc";
 
             var pages = jlService.UserPage(req);
 

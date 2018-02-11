@@ -100,8 +100,8 @@ namespace JL.Web
                 domain + "bundles/cropper").Include(
                 "~/Static/Content/cropperjs-1.1.3/cropper.js"));
 
-            BundleTable.EnableOptimizations = true;
-            bundles.UseCdn = true;
+            //BundleTable.EnableOptimizations = false;
+            //bundles.UseCdn = false;
         }
     }
 }
