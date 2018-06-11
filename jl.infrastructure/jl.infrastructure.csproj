@@ -49,12 +49,8 @@
   <ItemGroup>
     <Compile Include="Cache\CacheHelper.cs" />
     <Compile Include="DbConnectionFactory.cs" />
-    <Compile Include="Extensons\EncodingExtensions.cs" />
-    <Compile Include="Extensons\StreamExtensions.cs" />
     <Compile Include="Extensons\StringExtension.cs" />
-    <Compile Include="HttpUtil\HttpRequest.cs" />
-    <Compile Include="HttpUtil\HttpResult.cs" />
-    <Compile Include="HttpUtil\HttpSender.cs" />
+    <Compile Include="HttpUtil\Http.cs" />
     <Compile Include="IDbCommandExt.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SqlFilter\SqlFilter.cs" />

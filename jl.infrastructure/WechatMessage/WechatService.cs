@@ -24,13 +24,9 @@ namespace JL.Infrastructure.WechatMessage
 
             string posturl = "https://api.weixin.qq.com/cgi-bin/message/template/send?access_token=" + Access_Token;
 
-            var httpResult=HttpSender.Request(new HttpRequest
-            {
-                Postdata = content,
-                Url = posturl
-            });
+            var result = Http.Post(posturl, content, Encoding.Default);
 
-            return httpResult.Html;
+            return result;
         }
 
         private string GenTemplateData(string templateid,string toUser,string url)
