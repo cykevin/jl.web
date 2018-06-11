@@ -100,6 +100,11 @@ namespace JL.Web
                 domain + "bundles/cropper").Include(
                 "~/Static/Content/cropperjs-1.1.3/cropper.js"));
 
+            // login.js
+            bundles.Add(new ScriptBundle("~/Static/Scripts/login",
+                domain + "Static/Scripts/login").Include(
+                "~/Static/Scripts/login.js"));
+
             //BundleTable.EnableOptimizations = false;
             //bundles.UseCdn = false;
         }
